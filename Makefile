@@ -6,7 +6,7 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/09/29 04:08:01 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/09/29 05:44:08 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ $(M_OBJ) : ./includes/cub3d.h
 	$(CC) $(FLAGS) -c $< -o $@
 $(libft) :
 	make -C ./Libft-1337
-	make -C ./Libft-1337 bonus
 clean:
 	$(RM) $(P_OBJ) $(M_OBJ) $(B_OBJ)
 	make -C ./Libft-1337 clean

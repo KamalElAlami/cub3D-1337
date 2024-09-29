@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/29 03:39:58 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/29 05:41:11 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <fcntl.h>
 // #include <MLX42/MLX42.h>
 
 typedef struct s_params
@@ -32,6 +33,7 @@ typedef struct s_params
     char **map;
 }   t_params;
 
-int check_path(char *path);
+int		check_path(char *path);
+
 
 #endif

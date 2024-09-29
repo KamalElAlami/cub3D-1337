@@ -4,3 +4,9 @@
 [submodule "MLX42"]
 	path = MLX42
 	url = https://github.com/codam-coding-college/MLX42.git
+[submodule "get_next_line-1337"]
+	path = get_next_line-1337
+	url = https://github.com/KamalElAlami/get_next_line-1337.git
+[submodule "gnl"]
+	path = gnl
+	url = https://github.com/KamalElAlami/get_next_line-1337.git
