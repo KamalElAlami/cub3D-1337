@@ -6,22 +6,22 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/09/29 05:44:08 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/10/01 00:40:16 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g 
 RM = rm -f
 
 
-M_FILES = ./src/main.c ./src/parse.c
+M_FILES = ./src/main.c ./src/parse.c 
 
-INCS = ./Libft-1337/libft.h
+INCS = ./libft/libft.h
 
-libft = ./Libft-1337/libft.a
+libft = ./libft/libft.a
 
 M_OBJ = $(M_FILES:.c=.o)
 
@@ -35,11 +35,11 @@ $(M_OBJ) : ./includes/cub3d.h
 %.o : %.c $(INCS)
 	$(CC) $(FLAGS) -c $< -o $@
 $(libft) :
-	make -C ./Libft-1337
+	make -C ./libft
 clean:
 	$(RM) $(P_OBJ) $(M_OBJ) $(B_OBJ)
-	make -C ./Libft-1337 clean
+	make -C ./libft clean
 fclean: clean
 	$(RM) $(P_OBJ) $(M_OBJ) $(B_OBJ) $(NAME) $(BNAME)
-	make -C ./Libft-1337 fclean
+	make -C ./libft fclean
 re: fclean all
