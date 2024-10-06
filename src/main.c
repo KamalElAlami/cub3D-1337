@@ -6,54 +6,76 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/05 16:48:49 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/06 02:14:02 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int is_map(char *line)
+int check_player(char *line, int *player)
 {
     int i = 0;
-    if (ft_strlen(line) == 1 && line[i] == '\n')
-        return (1);
     while (line[i])
     {
-        if (line[i] != '1' && line[i] != '0' && line[i] != ' '  && line[i] != 'S' && line[i] != 'N'  && line[i] != 'E' && line[i] != 'W' && line[i] != '\n')
-            return (1);
+        if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+            *player += 1;
         i++;
     }
     return (0);
 }
-int count_map(char *line)
-{
-    int count;
 
-    count = 0;
-    while (*line)
-    {
-        if (*line == '1')
-            count++;
-        line++;
-    }
-    return (count);
+int map_size(char **map)
+{
+    int i = 0;
+    while (map[i])
+        i++;
+    return (i);
 }
-int get_map_size(char *path)
-{
-    int fd;
-    int size;
-    char *line;
 
-    fd = open(path, O_RDONLY);
-    size = 0;
-    while ((line = get_next_line(fd)))
+int check_map(char **map)
+{
+    int i = 0;
+    int player = 0;
+    
+    if (!map)
+        return (1);
+    while (map[0][i])
     {
-        if(!is_map(line))
-            size++;
-        free(line);
+        if (map[0][i] != '1' && map[0][i] != '\n')
+            return (1);
+        i++;
     }
-    close(fd);
-    return (size);
+    i = 0;
+    while (map[map_size(map) - 1][i])
+    {
+        if (map[map_size(map) - 1][i] != '1')
+            return (1);
+        i++;
+    }
+    i = 0;
+    while (map[i])
+    {
+        if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 2] != '1')
+            return (1);
+        check_player(map[i], &player);
+        i++;
+    }
+    if (player > 1 || player <= 0)
+        return (1);
+    return (0);
+}
+
+int validate_inputs(t_params *params)
+{
+    if (!params->north || !params->south || !params->west || !params->east)
+        return (1);
+    if (params->ciel[0] < 0 || params->ciel[0] > 255 || params->ciel[1] < 0 || params->ciel[1] > 255 || params->ciel[2] < 0 || params->ciel[2] > 255)
+        return (1);
+    if (params->floor[0] < 0 || params->floor[0] > 255 || params->floor[1] < 0 || params->floor[1] > 255 || params->floor[2] < 0 || params->floor[2] > 255)
+        return (1);
+    if (check_map(params->map))
+        return (1);
+    return (0);
 }
 
 int check_sheet(char *path, t_params **parameters)
@@ -66,7 +88,7 @@ int check_sheet(char *path, t_params **parameters)
     fd = open(path, O_RDONLY);
     if (fd == -1)
         return (1);
-    (*parameters)->map = malloc(sizeof(char *) * get_map_size(path));
+    (*parameters)->map = malloc(sizeof(char *) * get_map_size(path) + 1);
     if (!(*parameters)->map)
         return (1);
     while ((line = get_next_line(fd)))
@@ -96,6 +118,7 @@ int check_sheet(char *path, t_params **parameters)
         else if (!is_map(line))
             (*parameters)->map[i++] = ft_strdup(line);
     }
+    (*parameters)->map[i] = NULL;
     return (0);
 }
 
@@ -106,6 +129,6 @@ int main(int ac, char **av)
     params = malloc(sizeof(t_params));
     if (ac != 2 || check_path(av[1]))
         return (1);
-    if (check_sheet(av[1], &params))
+    if (check_sheet(av[1], &params) || validate_inputs(params))
         return (1);
 }
