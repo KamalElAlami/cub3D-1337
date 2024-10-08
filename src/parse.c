@@ -6,11 +6,42 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/06 02:14:32 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:12:03 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void stock_map(char *path, t_params **parameters)
+{
+    int fd;
+    char *line;
+    int i;
+    
+    i = 0;
+    fd = open(path, O_RDONLY);
+    if (fd == -1)
+        return ;
+    (*parameters)->map = malloc(sizeof(char *) * get_map_size(path) + 1);
+    if (!(*parameters)->map)
+        return ;
+    line = get_next_line(fd);
+    while (line)
+    {
+        if (!is_map(line))
+        {
+            while (line)
+            {
+                (*parameters)->map[i++] = ft_strdup(line);
+                line = get_next_line(fd);
+                if (!line)
+                    break ;
+            }
+        }
+        line = get_next_line(fd);
+    }
+    (*parameters)->map[i] = NULL;
+}
 
 int check_path(char *path)
 {

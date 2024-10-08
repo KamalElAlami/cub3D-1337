@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/05 18:14:11 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:11:39 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ typedef struct s_params
 int		check_path(char *path);
 int     is_map(char *line);
 int     get_map_size(char *path);
+void    stock_map(char *path, t_params **parameters);
 
 #endif

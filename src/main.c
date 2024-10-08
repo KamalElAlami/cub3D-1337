@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/06 02:14:02 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/07 22:51:40 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int map_size(char **map)
 int check_map(char **map)
 {
     int i = 0;
+    int j;
     int player = 0;
     
     if (!map)
@@ -55,6 +56,13 @@ int check_map(char **map)
     i = 0;
     while (map[i])
     {
+        j = 0;
+        while (map[i][j])
+        {
+            if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' '  && map[i][j] != 'S' && map[i][j] != 'N'  && map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != '\n')
+                return (1);
+            j++;
+        }
         if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 2] != '1')
             return (1);
         check_player(map[i], &player);
@@ -68,13 +76,13 @@ int check_map(char **map)
 int validate_inputs(t_params *params)
 {
     if (!params->north || !params->south || !params->west || !params->east)
-        return (1);
+        return (write(1, "Something is wrong with Tex Path\n", 34), 1);
     if (params->ciel[0] < 0 || params->ciel[0] > 255 || params->ciel[1] < 0 || params->ciel[1] > 255 || params->ciel[2] < 0 || params->ciel[2] > 255)
-        return (1);
+        return (write(1, "Something is wrong with Ciel RGB Colors\n", 42), 1);
     if (params->floor[0] < 0 || params->floor[0] > 255 || params->floor[1] < 0 || params->floor[1] > 255 || params->floor[2] < 0 || params->floor[2] > 255)
-        return (1);
+        return (write(1, "Something is wrong with Floor RGB Colors\n", 42), 1);
     if (check_map(params->map))
-        return (1);
+        return (write(1, "map error\n", 11),1);
     return (0);
 }
 
@@ -83,15 +91,12 @@ int check_sheet(char *path, t_params **parameters)
     int fd;
     char *line;
     char **degits;
-    int i = 0;
 
     fd = open(path, O_RDONLY);
     if (fd == -1)
         return (1);
-    (*parameters)->map = malloc(sizeof(char *) * get_map_size(path) + 1);
-    if (!(*parameters)->map)
-        return (1);
-    while ((line = get_next_line(fd)))
+    line = get_next_line(fd);
+    while (line)
     {
         if (ft_strncmp(line, "NO ", 3) == 0)
             (*parameters)->north = ft_strdup(line + 3);
@@ -115,10 +120,9 @@ int check_sheet(char *path, t_params **parameters)
             (*parameters)->ciel[1] = ft_atoi(degits[1]);
             (*parameters)->ciel[2] = ft_atoi(degits[2]);
         }
-        else if (!is_map(line))
-            (*parameters)->map[i++] = ft_strdup(line);
+        line = get_next_line(fd);
     }
-    (*parameters)->map[i] = NULL;
+    stock_map(path, parameters);
     return (0);
 }
 
@@ -131,4 +135,5 @@ int main(int ac, char **av)
         return (1);
     if (check_sheet(av[1], &params) || validate_inputs(params))
         return (1);
+    
 }
