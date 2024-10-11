@@ -6,40 +6,59 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/10/06 01:43:33 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/10/09 18:52:43 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
-
+NAME = cub3D
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
-RM = rm -f
+CFLAGS = -Wall -Wextra -Werror
 
+# MLX42
+MLX42_PATH = ./MLX42
+MLX42_BUILD = $(MLX42_PATH)/build
+MLX42_LIB = $(MLX42_BUILD)/libmlx42.a
 
-M_FILES = ./src/main.c ./src/parse.c 
+# LIBFT
+LIBFT_PATH = ./libft
+LIBFT = $(LIBFT_PATH)/libft.a
 
-INCS = ./libft/libft.h
+# Includes
+INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 
-libft = ./libft/libft.a
+# Sources
+SRCS = src/main.c src/parse.c src/parse_utilities.c
 
-M_OBJ = $(M_FILES:.c=.o)
+# Objects
+OBJS = $(SRCS:.c=.o)
 
-all : $(NAME)
+# Libraries
+LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L"/Users/kael-ala/.brew/Cellar/glfw/3.4/lib/"
 
-$(NAME) :  $(P_OBJ) $(M_OBJ) $(libft)
-	$(CC) $(FLAGS) $(libft) $^ -o $(NAME)
+all: $(NAME)
 
-$(M_OBJ) : ./includes/cub3d.h
+$(NAME): $(MLX42_LIB) $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
-%.o : %.c $(INCS)
-	$(CC) $(FLAGS) -c $< -o $@
-$(libft) :
-	make -C ./libft
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(MLX42_LIB):
+	cmake $(MLX42_PATH) -B $(MLX42_BUILD)
+	make -C $(MLX42_BUILD) -j4
+
+$(LIBFT):
+	make -C $(LIBFT_PATH)
+
 clean:
-	$(RM) $(P_OBJ) $(M_OBJ) $(B_OBJ)
-	make -C ./libft clean
+	rm -f $(OBJS)
+	make -C $(LIBFT_PATH) clean
+	rm -rf $(MLX42_BUILD)
+
 fclean: clean
-	$(RM) $(P_OBJ) $(M_OBJ) $(B_OBJ) $(NAME) $(BNAME)
-	make -C ./libft fclean
+	rm -f $(NAME)
+	make -C $(LIBFT_PATH) fclean
+
 re: fclean all
+
+.PHONY: all clean fclean re

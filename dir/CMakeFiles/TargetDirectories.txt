@@ -1,0 +1,7 @@
+/Users/kael-ala/Desktop/cub3D-1337/dir/CMakeFiles/mlx42.dir
+/Users/kael-ala/Desktop/cub3D-1337/dir/CMakeFiles/edit_cache.dir
+/Users/kael-ala/Desktop/cub3D-1337/dir/CMakeFiles/rebuild_cache.dir
+/Users/kael-ala/Desktop/cub3D-1337/dir/CMakeFiles/list_install_components.dir
+/Users/kael-ala/Desktop/cub3D-1337/dir/CMakeFiles/install.dir
+/Users/kael-ala/Desktop/cub3D-1337/dir/CMakeFiles/install/local.dir
+/Users/kael-ala/Desktop/cub3D-1337/dir/CMakeFiles/install/strip.dir
