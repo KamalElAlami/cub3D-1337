@@ -6,13 +6,13 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/14 07:59:37 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/14 08:30:31 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-#define MOVE_SPEED 0.05
+#define MOVE_SPEED 0.01
 #define ROTATE_SPEED 0.05
 
 void render_player(t_graphics *graphic, t_player *player)
@@ -46,9 +46,9 @@ void key_hook(void *player)
     t_player *p = player;
 
     if (mlx_is_key_down(p->graph->mlx, MLX_KEY_W))
-        p->posy += p->posy * MOVE_SPEED;
-    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_S))
         p->posy -= p->posy * MOVE_SPEED;
+    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_S))
+        p->posy += p->posy * MOVE_SPEED;
     if (mlx_is_key_down(p->graph->mlx, MLX_KEY_D))
         p->posx += p->posx * MOVE_SPEED;
     if (mlx_is_key_down(p->graph->mlx, MLX_KEY_A))
