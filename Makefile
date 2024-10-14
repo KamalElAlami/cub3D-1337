@@ -6,7 +6,7 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/10/14 02:54:36 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/10/14 08:04:22 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MLX42_BUILD = $(MLX42_PATH)/build
 MLX42_LIB = $(MLX42_BUILD)/libmlx42.a
 
 # LIBFT
-LIBFT_PATH = ./libft
+LIBFT_PATH = ./lib
 LIBFT = $(LIBFT_PATH)/libft.a
 
 # Includes
