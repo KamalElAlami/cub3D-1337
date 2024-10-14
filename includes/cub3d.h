@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/11 22:48:42 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/14 05:39:05 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@
 # include <fcntl.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_player
-{
-    double posx;
-    double posy;
-} t_player;
 
 typedef struct s_graphics {
     mlx_t* mlx;
@@ -42,8 +37,23 @@ typedef struct s_params
     int ciel[3];
     int floor[3];
     char **map;
+    t_graphics *graph;
 }   t_params;
 
+typedef struct s_player
+{
+    double posx;
+    double posy;
+    double dirx;
+    double diry;
+    double planex;
+    double planey;
+    int    speed;
+    t_graphics *graph;
+} t_player;
+
+// parse 
+void draw_map(void *ptr);
 int		check_path(char *path);
 int     is_map(char *line);
 int     get_map_size(char *path);
@@ -53,5 +63,14 @@ int     map_size(char **map);
 int     check_map(char **map);
 int     validate_inputs(t_params *params);
 int     check_sheet(char *path, t_params **parameters);
+
+// graph 
+void initialize_graphics(t_graphics *graphics, t_params *para);
+void mlxdrawmap(t_graphics *graphic, t_params *parameters);
+
+// utils 
+int *hidenseek(char **map);
+int *get_size(char **map);
+char get_player(char **map);
 
 #endif

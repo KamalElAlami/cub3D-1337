@@ -6,77 +6,114 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/11 22:43:34 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/14 07:59:37 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int *get_size(char **map)
-{
-    int count;
-    int *size;
-    
-    size = malloc(sizeof(int) * 3);
-    size[0] = ft_strlen(map[0]) - 1;
-    count = 0;
-    while (map[count])
-        count++;
-    size[1] = count;
-    return (size);
-}
+#define MOVE_SPEED 0.05
+#define ROTATE_SPEED 0.05
 
-void initialize_graphics(t_graphics *graphics, t_params *para)
+void render_player(t_graphics *graphic, t_player *player)
 {
-    int *size; 
-    
-    size = get_size(para->map);
-    graphics->mlx = mlx_init(size[0] * 32, size[1] * 32, "New Window", true);
-    graphics->img = mlx_new_image(graphics->mlx, size[0] * 32, size[1] * 32);
-}
+    const int PLAYER_SIZE = 8;
 
-void mlxdrawmap(t_graphics *graphic, t_params *parameters)
-{
-    int i;
-    int j;
-    uint32_t color;
+    int player_x = (int)(player->posx * 32);
+    int player_y = (int)(player->posy * 32);
 
-    i = 0;
-    while (parameters->map[i])
+    uint32_t player_color = 0xFF0000FF;
+    for (int y = -PLAYER_SIZE/2; y < PLAYER_SIZE/2; y++)
     {
-        j = 0;
-        while (parameters->map[i][j])
+        for (int x = -PLAYER_SIZE/2; x < PLAYER_SIZE/2; x++)
         {
-            if (parameters->map[i][j] == '0')
-                color = 0xFFFFFFFF;
-            else if (parameters->map[i][j] == '1')
-                color = 0x000000FF;
-            else if (parameters->map[i][j] == 'N' || parameters->map[i][j] == 'S' || parameters->map[i][j] == 'E' || parameters->map[i][j] == 'W')
-                color = 0xFF0000FF;
-            for (int x = 0; x < 32; x++)
+            if (x*x + y*y <= (PLAYER_SIZE/2)*(PLAYER_SIZE/2))
             {
-                for (int y = 0; y < 32; y++)
-                    mlx_put_pixel(graphic->img, j * 32 + x, i * 32 + y, color);
+                mlx_put_pixel(graphic->img, player_x + x, player_y + y, player_color);
             }
-            j++;
         }
-        i++;
     }
 }
 
+void draw_player(void *ptr)
+{
+    t_player *p = ptr;
+    render_player(p->graph, p);
+}
+
+void key_hook(void *player)
+{
+    t_player *p = player;
+
+    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_W))
+        p->posy += p->posy * MOVE_SPEED;
+    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_S))
+        p->posy -= p->posy * MOVE_SPEED;
+    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_D))
+        p->posx += p->posx * MOVE_SPEED;
+    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_A))
+        p->posx -= p->posx * MOVE_SPEED;
+}
+
+void init_player(t_params *param, t_player *playerrr)
+{
+    int *pos;
+    char p;
+
+    p = get_player(param->map);
+    pos = hidenseek(param->map);
+    playerrr->posx = pos[0];
+    playerrr->posy = pos[1];
+    if (p == 'N')
+    {
+        playerrr->dirx = 0;
+        playerrr->diry = -1;
+        playerrr->planex = 0.66;
+        playerrr->planey = 0;
+    }
+    else if (p == 'S')
+    {
+        playerrr->dirx = 0;
+        playerrr->diry = 1;
+        playerrr->planex = -0.66;
+        playerrr->planey = 0;
+    }
+    else if (p == 'W')
+    {
+        playerrr->dirx = -1;
+        playerrr->diry = 0;
+        playerrr->planex = 0;
+        playerrr->planey = -0.66;
+    }
+    else if (p == 'E')
+    {
+        playerrr->dirx = 1;
+        playerrr->diry = 0;
+        playerrr->planex = 0;
+        playerrr->planey = 0.66;
+    }
+}
 int main(int ac, char **av)
 {
     t_params *params;
     t_graphics *graph;
+    t_player *playerr;
     
     params = malloc(sizeof(t_params));
     graph = malloc(sizeof(t_graphics));
+    playerr = malloc(sizeof(t_player));
     if (ac != 2 || check_path(av[1]))
         return (1);
     if (check_sheet(av[1], &params) || validate_inputs(params))
         return (1);
     initialize_graphics(graph, params);
+    init_player(params, playerr);
     mlxdrawmap(graph, params);
+    params->graph = graph;
+    playerr->graph = graph;
+    mlx_loop_hook(graph->mlx, draw_map, params);
+    mlx_loop_hook(graph->mlx, draw_player, playerr);
+    mlx_loop_hook(graph->mlx, key_hook, playerr);
     mlx_image_to_window(graph->mlx, graph->img, 0, 0);
     mlx_loop(graph->mlx);
 }
