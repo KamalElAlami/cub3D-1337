@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/14 08:04:57 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/16 08:45:02 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,16 @@ typedef struct s_params
 
 typedef struct s_player
 {
+    double angle;
     double posx;
     double posy;
     double dirx;
     double diry;
     double planex;
     double planey;
-    int    speed;
-    t_graphics *graph;
+    double    moveSpeed;
+    double    rotSpeed;
+    t_params *params;
 } t_player;
 
 // parse 

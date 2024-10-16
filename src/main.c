@@ -6,14 +6,41 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/14 08:30:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/16 08:49:28 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-#define MOVE_SPEED 0.01
+#define MOVE_SPEED 0.2
 #define ROTATE_SPEED 0.05
+
+void draw_direction_line(t_graphics *graphic, t_player *player)
+{
+    const int LINE_LENGTH = 20;
+    
+    int player_x = (int)(player->posx * 32);
+    int player_y = (int)(player->posy * 32);
+    
+    int end_x = player_x + (int)(player->dirx * LINE_LENGTH);
+    int end_y = player_y + (int)(player->diry * LINE_LENGTH);
+    int dx = end_x - player_x;
+    int dy = end_y - player_y;
+    int steps = (abs(dx) > abs(dy)) ? abs(dx) : abs(dy);
+
+    float x_inc = dx / (float)steps;
+    float y_inc = dy / (float)steps;
+
+    float x = player_x;
+    float y = player_y;
+
+    for (int i = 0; i <= steps; i++)
+    {
+        mlx_put_pixel(graphic->img, (int)roundf(x), (int)roundf(y), 0xFF0000FF);
+        x += x_inc;
+        y += y_inc;
+    }
+}
 
 void render_player(t_graphics *graphic, t_player *player)
 {
@@ -21,7 +48,7 @@ void render_player(t_graphics *graphic, t_player *player)
 
     int player_x = (int)(player->posx * 32);
     int player_y = (int)(player->posy * 32);
-
+    
     uint32_t player_color = 0xFF0000FF;
     for (int y = -PLAYER_SIZE/2; y < PLAYER_SIZE/2; y++)
     {
@@ -33,26 +60,43 @@ void render_player(t_graphics *graphic, t_player *player)
             }
         }
     }
+    draw_direction_line(graphic, player);
 }
 
 void draw_player(void *ptr)
 {
     t_player *p = ptr;
-    render_player(p->graph, p);
+    render_player(p->params->graph, p);
 }
 
 void key_hook(void *player)
 {
     t_player *p = player;
-
-    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_W))
-        p->posy -= p->posy * MOVE_SPEED;
-    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_S))
-        p->posy += p->posy * MOVE_SPEED;
-    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_D))
-        p->posx += p->posx * MOVE_SPEED;
-    if (mlx_is_key_down(p->graph->mlx, MLX_KEY_A))
-        p->posx -= p->posx * MOVE_SPEED;
+    
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_W) ) {
+        p->posy += MOVE_SPEED * p->diry;
+        p->posx += MOVE_SPEED * p->dirx;
+    }
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_S)){
+        p->posy -= MOVE_SPEED * p->diry;
+        p->posx -= MOVE_SPEED * p->dirx;
+    }
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_D)){
+        p->posx -= MOVE_SPEED * p->planex;
+        p->posy -= MOVE_SPEED * p->planey;
+    }
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_A)){
+        p->posy += MOVE_SPEED * p->planey;
+        p->posx += MOVE_SPEED * p->planex;
+    }
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_LEFT))
+        p->angle -= p->rotSpeed;
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_RIGHT))
+        p->angle += p->rotSpeed;
+    p->dirx = (double)sin(p->angle);
+    p->diry = (double)cos(p->angle);
+    p->planex = (double)sin(p->angle + M_PI / 2) * 0.66;
+    p->planey = (double)cos(p->angle + M_PI / 2) * 0.66;
 }
 
 void init_player(t_params *param, t_player *playerrr)
@@ -64,34 +108,16 @@ void init_player(t_params *param, t_player *playerrr)
     pos = hidenseek(param->map);
     playerrr->posx = pos[0];
     playerrr->posy = pos[1];
+    playerrr->rotSpeed = 0.05;
+    playerrr->moveSpeed = 0.01;
     if (p == 'N')
-    {
-        playerrr->dirx = 0;
-        playerrr->diry = -1;
-        playerrr->planex = 0.66;
-        playerrr->planey = 0;
-    }
+        playerrr->angle = -M_PI;
     else if (p == 'S')
-    {
-        playerrr->dirx = 0;
-        playerrr->diry = 1;
-        playerrr->planex = -0.66;
-        playerrr->planey = 0;
-    }
+        playerrr->angle = M_PI;
     else if (p == 'W')
-    {
-        playerrr->dirx = -1;
-        playerrr->diry = 0;
-        playerrr->planex = 0;
-        playerrr->planey = -0.66;
-    }
+        playerrr->angle = M_PI;
     else if (p == 'E')
-    {
-        playerrr->dirx = 1;
-        playerrr->diry = 0;
-        playerrr->planex = 0;
-        playerrr->planey = 0.66;
-    }
+        playerrr->angle = 0;
 }
 int main(int ac, char **av)
 {
@@ -110,7 +136,7 @@ int main(int ac, char **av)
     init_player(params, playerr);
     mlxdrawmap(graph, params);
     params->graph = graph;
-    playerr->graph = graph;
+    playerr->params = params;
     mlx_loop_hook(graph->mlx, draw_map, params);
     mlx_loop_hook(graph->mlx, draw_player, playerr);
     mlx_loop_hook(graph->mlx, key_hook, playerr);
