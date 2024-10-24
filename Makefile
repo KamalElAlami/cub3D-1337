@@ -6,7 +6,7 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/10/14 08:04:22 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/10/23 14:53:06 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 
 # Sources
-SRCS = src/main.c src/parse.c src/parse_utilities.c src/graphics.c src/utilities.c
+SRCS = src/main.c src/parse.c src/parse_utilities.c src/graphics.c src/utilities.c src/raycasting.c src/raycasting_utils.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)

@@ -1,0 +1,13 @@
+for example ila endna fl field of view : 60 degrees
+donc khaykun endna almost 320 column = 320 ray 
+
+to calculate distance between rays 60 / 320 hadi hiya bach ghan increament rays diali
+ 
+aweel haja kan subtract  fov/2 bach kanakhud 30 degree lee ela left bach kanbda
+
+kan start at column 0
+while (column < 320)
+    cast a ray
+    trace the ray until it intersects with a wall (map[i][j] == 1)
+    record the intersection x,y and the distence (ray length)
+    rayangle += 60/320

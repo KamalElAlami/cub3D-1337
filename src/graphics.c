@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/14 04:35:35 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:49:59 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 void initialize_graphics(t_graphics *graphics, t_params *para)
 {
-    int *size; 
+    int *size;
     
     size = get_size(para->map);
-    graphics->mlx = mlx_init(size[0] * 32, size[1] * 32, "New Window", true);
-    graphics->img = mlx_new_image(graphics->mlx, size[0] * 32, size[1] * 32);
+    para->w_width = size[0] * TILE_SIZE;
+    para->w_height = size[1] * TILE_SIZE;
+    graphics->mlx = mlx_init(para->w_width, para->w_height, "New Window", true);
+    graphics->img = mlx_new_image(graphics->mlx, para->w_width, para->w_height);
 }
 
 
