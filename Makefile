@@ -6,13 +6,13 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/10/23 14:53:06 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/10/28 18:00:21 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 # MLX42
 MLX42_PATH = ./MLX42

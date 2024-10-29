@@ -1,0 +1,322 @@
+ |-includes
+ | |-cub3d.h
+ |-lib
+ | |-ft_atoi.c
+ | |-ft_atoi.o
+ | |-ft_bzero.c
+ | |-ft_bzero.o
+ | |-ft_calloc.c
+ | |-ft_calloc.o
+ | |-ft_isalnum.c
+ | |-ft_isalnum.o
+ | |-ft_isalpha.c
+ | |-ft_isalpha.o
+ | |-ft_isascii.c
+ | |-ft_isascii.o
+ | |-ft_isdigit.c
+ | |-ft_isdigit.o
+ | |-ft_isprint.c
+ | |-ft_isprint.o
+ | |-ft_itoa.c
+ | |-ft_itoa.o
+ | |-ft_memchr.c
+ | |-ft_memchr.o
+ | |-ft_memcmp.c
+ | |-ft_memcmp.o
+ | |-ft_memcpy.c
+ | |-ft_memcpy.o
+ | |-ft_memmove.c
+ | |-ft_memmove.o
+ | |-ft_memset.c
+ | |-ft_memset.o
+ | |-ft_putchar_fd.c
+ | |-ft_putchar_fd.o
+ | |-ft_putendl_fd.c
+ | |-ft_putendl_fd.o
+ | |-ft_putnbr_fd.c
+ | |-ft_putnbr_fd.o
+ | |-ft_putstr_fd.c
+ | |-ft_putstr_fd.o
+ | |-ft_split.c
+ | |-ft_split.o
+ | |-ft_strchr.c
+ | |-ft_strchr.o
+ | |-ft_strdup.c
+ | |-ft_strdup.o
+ | |-ft_striteri.c
+ | |-ft_striteri.o
+ | |-ft_strjoin.c
+ | |-ft_strjoin.o
+ | |-ft_strlcat.c
+ | |-ft_strlcat.o
+ | |-ft_strlcpy.c
+ | |-ft_strlcpy.o
+ | |-ft_strlen.c
+ | |-ft_strlen.o
+ | |-ft_strmapi.c
+ | |-ft_strmapi.o
+ | |-ft_strncmp.c
+ | |-ft_strncmp.o
+ | |-ft_strnstr.c
+ | |-ft_strnstr.o
+ | |-ft_strrchr.c
+ | |-ft_strrchr.o
+ | |-ft_strtrim.c
+ | |-ft_strtrim.o
+ | |-ft_substr.c
+ | |-ft_substr.o
+ | |-ft_tolower.c
+ | |-ft_tolower.o
+ | |-ft_toupper.c
+ | |-ft_toupper.o
+ | |-get_next_line.c
+ | |-get_next_line.o
+ | |-libft.a
+ | |-libft.h
+ | |-Makefile
+ | |-tax_collector.c
+ | |-tax_collector.o
+ |-Makefile
+ |-MLX42
+ | |-.git
+ | | |-config
+ | | |-description
+ | | |-HEAD
+ | | |-hooks
+ | | | |-applypatch-msg.sample
+ | | | |-commit-msg.sample
+ | | | |-fsmonitor-watchman.sample
+ | | | |-post-update.sample
+ | | | |-pre-applypatch.sample
+ | | | |-pre-commit.sample
+ | | | |-pre-merge-commit.sample
+ | | | |-pre-push.sample
+ | | | |-pre-rebase.sample
+ | | | |-pre-receive.sample
+ | | | |-prepare-commit-msg.sample
+ | | | |-update.sample
+ | | |-index
+ | | |-info
+ | | | |-exclude
+ | | |-logs
+ | | | |-HEAD
+ | | | |-refs
+ | | | | |-heads
+ | | | | | |-master
+ | | | | |-remotes
+ | | | | | |-origin
+ | | | | | | |-HEAD
+ | | |-objects
+ | | | |-info
+ | | | |-pack
+ | | | | |-pack-1cc8f1cc85d4ea17d06da06eea52cb7b1b3f6f42.idx
+ | | | | |-pack-1cc8f1cc85d4ea17d06da06eea52cb7b1b3f6f42.pack
+ | | |-packed-refs
+ | | |-refs
+ | | | |-heads
+ | | | | |-master
+ | | | |-remotes
+ | | | | |-origin
+ | | | | | |-HEAD
+ | | | |-tags
+ | |-.gitattributes
+ | |-.github
+ | | |-ISSUE_TEMPLATE
+ | | | |-bug_report.md
+ | | | |-feature_request.md
+ | | |-workflows
+ | | | |-ci.yml
+ | | | |-wasm.yml
+ | |-.gitignore
+ | |-build
+ | | |-cmake_install.cmake
+ | | |-CMakeCache.txt
+ | | |-CMakeFiles
+ | | | |-3.30.4
+ | | | | |-CMakeCCompiler.cmake
+ | | | | |-CMakeCXXCompiler.cmake
+ | | | | |-CMakeDetermineCompilerABI_C.bin
+ | | | | |-CMakeDetermineCompilerABI_CXX.bin
+ | | | | |-CMakeSystem.cmake
+ | | | | |-CompilerIdC
+ | | | | | |-a.out
+ | | | | | |-CMakeCCompilerId.c
+ | | | | | |-tmp
+ | | | | |-CompilerIdCXX
+ | | | | | |-a.out
+ | | | | | |-CMakeCXXCompilerId.cpp
+ | | | | | |-tmp
+ | | | |-cmake.check_cache
+ | | | |-CMakeConfigureLog.yaml
+ | | | |-CMakeDirectoryInformation.cmake
+ | | | |-CMakeRuleHashes.txt
+ | | | |-CMakeScratch
+ | | | |-Makefile.cmake
+ | | | |-Makefile2
+ | | | |-mlx42.dir
+ | | | | |-build.make
+ | | | | |-cmake_clean.cmake
+ | | | | |-cmake_clean_target.cmake
+ | | | | |-compiler_depend.make
+ | | | | |-compiler_depend.ts
+ | | | | |-depend.make
+ | | | | |-DependInfo.cmake
+ | | | | |-flags.make
+ | | | | |-lib
+ | | | | | |-glad
+ | | | | | | |-glad.c.o
+ | | | | | | |-glad.c.o.d
+ | | | | | |-png
+ | | | | | | |-lodepng.c.o
+ | | | | | | |-lodepng.c.o.d
+ | | | | |-link.txt
+ | | | | |-mlx_frag_shader.c.o
+ | | | | |-mlx_frag_shader.c.o.d
+ | | | | |-mlx_vert_shader.c.o
+ | | | | |-mlx_vert_shader.c.o.d
+ | | | | |-progress.make
+ | | | | |-src
+ | | | | | |-font
+ | | | | | | |-mlx_font.c.o
+ | | | | | | |-mlx_font.c.o.d
+ | | | | | |-mlx_cursor.c.o
+ | | | | | |-mlx_cursor.c.o.d
+ | | | | | |-mlx_exit.c.o
+ | | | | | |-mlx_exit.c.o.d
+ | | | | | |-mlx_images.c.o
+ | | | | | |-mlx_images.c.o.d
+ | | | | | |-mlx_init.c.o
+ | | | | | |-mlx_init.c.o.d
+ | | | | | |-mlx_keys.c.o
+ | | | | | |-mlx_keys.c.o.d
+ | | | | | |-mlx_loop.c.o
+ | | | | | |-mlx_loop.c.o.d
+ | | | | | |-mlx_monitor.c.o
+ | | | | | |-mlx_monitor.c.o.d
+ | | | | | |-mlx_mouse.c.o
+ | | | | | |-mlx_mouse.c.o.d
+ | | | | | |-mlx_put_pixel.c.o
+ | | | | | |-mlx_put_pixel.c.o.d
+ | | | | | |-mlx_window.c.o
+ | | | | | |-mlx_window.c.o.d
+ | | | | | |-textures
+ | | | | | | |-mlx_png.c.o
+ | | | | | | |-mlx_png.c.o.d
+ | | | | | | |-mlx_texture.c.o
+ | | | | | | |-mlx_texture.c.o.d
+ | | | | | | |-mlx_xpm42.c.o
+ | | | | | | |-mlx_xpm42.c.o.d
+ | | | | | |-utils
+ | | | | | | |-mlx_compare.c.o
+ | | | | | | |-mlx_compare.c.o.d
+ | | | | | | |-mlx_error.c.o
+ | | | | | | |-mlx_error.c.o.d
+ | | | | | | |-mlx_list.c.o
+ | | | | | | |-mlx_list.c.o.d
+ | | | | | | |-mlx_utils.c.o
+ | | | | | | |-mlx_utils.c.o.d
+ | | | |-pkgRedirects
+ | | | |-progress.marks
+ | | | |-TargetDirectories.txt
+ | | |-libmlx42.a
+ | | |-Makefile
+ | | |-mlx_frag_shader.c
+ | | |-mlx_vert_shader.c
+ | |-cmake
+ | | |-Findglfw3.cmake
+ | | |-LinkGLFW.cmake
+ | |-CMakeLists.txt
+ | |-CODE_OF_CONDUCT.md
+ | |-CONTRIBUTING.md
+ | |-docs
+ | | |-42.md
+ | | |-assets
+ | | | |-demo.gif
+ | | | |-logo.png
+ | | |-Basics.md
+ | | |-Colors.md
+ | | |-Functions.md
+ | | |-Hooks.md
+ | | |-Images.md
+ | | |-index.md
+ | | |-Input.md
+ | | |-Shaders.md
+ | | |-Textures.md
+ | | |-XPM42.md
+ | |-include
+ | | |-glad
+ | | | |-glad.h
+ | | |-KHR
+ | | | |-khrplatform.h
+ | | |-lodepng
+ | | | |-lodepng.h
+ | | |-MLX42
+ | | | |-MLX42.h
+ | | | |-MLX42_Int.h
+ | |-lib
+ | | |-glad
+ | | | |-glad.c
+ | | |-png
+ | | | |-lodepng.c
+ | |-LICENSE
+ | |-README.md
+ | |-SECURITY.md
+ | |-shaders
+ | | |-default.frag
+ | | |-default.vert
+ | |-src
+ | | |-font
+ | | | |-font.h
+ | | | |-mlx_font.c
+ | | |-mlx_cursor.c
+ | | |-mlx_exit.c
+ | | |-mlx_images.c
+ | | |-mlx_init.c
+ | | |-mlx_keys.c
+ | | |-mlx_loop.c
+ | | |-mlx_monitor.c
+ | | |-mlx_mouse.c
+ | | |-mlx_put_pixel.c
+ | | |-mlx_window.c
+ | | |-textures
+ | | | |-mlx_png.c
+ | | | |-mlx_texture.c
+ | | | |-mlx_xpm42.c
+ | | |-utils
+ | | | |-mlx_compare.c
+ | | | |-mlx_error.c
+ | | | |-mlx_list.c
+ | | | |-mlx_utils.c
+ | |-tests
+ | | |-CMakeLists.txt
+ | | |-tests.cpp
+ | | |-WindowFixture.hpp
+ | |-tools
+ | | |-compile_shader.bat
+ | | |-compile_shader.sh
+ | | |-xpm3_conv.py
+ | |-web
+ | | |-coi-serviceworker.js
+ | | |-demo.js
+ | | |-demo.wasm
+ | | |-index.html
+ | | |-README.md
+ |-notes.tldr
+ |-src
+ | |-graphics.c
+ | |-graphics.o
+ | |-main.c
+ | |-main.o
+ | |-maps
+ | | |-file.cub
+ | |-parse.c
+ | |-parse.o
+ | |-parse_utilities.c
+ | |-parse_utilities.o
+ | |-raycasting.c
+ | |-raycasting.o
+ | |-raycasting_utils.c
+ | |-raycasting_utils.o
+ | |-utilities.c
+ | |-utilities.o
+ |-utils

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/24 17:57:09 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:26:41 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,23 +101,30 @@ void draw_player(void *ptr)
     render_player(p->params->graph, p);
 }
 
+int wall_coal(t_player *player, double x, double y)
+{
+    if (player->params->map[(int)round(x)][(int)round(y)] == '1')
+        return (1);
+    return (0);
+}
+
 void key_hook(void *player)
 {
     t_player *p = player;
-    
-    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_W) ) {
+        printf("%f\n", p->posx);
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_W) && !wall_coal(p,  (p->posx + p->dirx * p->moveSpeed) / 32, (p->posy + p->diry * p->moveSpeed) / 32)) {
         p->posx += p->dirx * p->moveSpeed; 
         p->posy += p->diry * p->moveSpeed; 
     }
-    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_S)){
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_S) && !wall_coal(p,  (p->posx - p->dirx * p->moveSpeed) / 32, (p->posy - p->diry * p->moveSpeed) / 32)){
         p->posx -= p->dirx * p->moveSpeed; 
         p->posy -= p->diry * p->moveSpeed; 
     }
-    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_D)){
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_D) && !wall_coal(p, ( p->posx - p->planex * p->moveSpeed) / 32, (p->posy + p->planey * p->moveSpeed) / 32)){
         p->posx -=  p->moveSpeed * p->planex; 
         p->posy -=  p->moveSpeed * p->planey; 
     }
-    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_A)){
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_A) && !wall_coal(p,  (p->posx + p->planex * p->moveSpeed) / 32, (p->posy + p->planey * p->moveSpeed) / 32)){
         p->posx +=  p->moveSpeed * p->planex; 
         p->posy +=  p->moveSpeed * p->planey; 
     }
