@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/28 18:26:41 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:52:03 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void key_hook(void *player)
 {
     t_player *p = player;
         printf("%f\n", p->posx);
-    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_W) && !wall_coal(p,  (p->posx + p->dirx * p->moveSpeed) / 32, (p->posy + p->diry * p->moveSpeed) / 32)) {
+    if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_W)) {
         p->posx += p->dirx * p->moveSpeed; 
-        p->posy += p->diry * p->moveSpeed; 
+        p->posy -= p->diry * p->moveSpeed; 
     }
     if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_S) && !wall_coal(p,  (p->posx - p->dirx * p->moveSpeed) / 32, (p->posy - p->diry * p->moveSpeed) / 32)){
         p->posx -= p->dirx * p->moveSpeed; 
