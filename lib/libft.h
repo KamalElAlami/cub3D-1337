@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 18:49:08 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/07 15:54:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:22:03 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+#include <stdio.h> // to remoe it later
 
 typedef enum e_malloc
 {

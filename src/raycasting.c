@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/10/28 17:25:47 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:03:37 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/cub3d.h>
+#include "../includes/cub3d.h"
 
 double normalize_angle(double angle){
     return fabs(fmod(angle, 2 * M_PI));

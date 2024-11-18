@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
+#    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/10/28 18:00:21 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/11/18 03:20:17 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,20 +27,21 @@ LIBFT = $(LIBFT_PATH)/libft.a
 INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 
 # Sources
-SRCS = src/main.c src/parse.c src/parse_utilities.c src/graphics.c src/utilities.c src/raycasting.c src/raycasting_utils.c
+SRCS = src/main.c src/parse.c src/parse_utilities.c src/graphics.c src/utilities.c src/raycasting.c src/raycasting_utils.c \
+		src/parse_utils.c src/parse_utils1.c src/parse_utils2.c 
 
 # Objects
 OBJS = $(SRCS:.c=.o)
 
 # Libraries
-LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L"/Users/kael-ala/.brew/Cellar/glfw/3.4/lib/"
+LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
 
 all: $(NAME)
 
 $(NAME): $(MLX42_LIB) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
-%.o: %.c
+%.o: %.c Makefile ./includes/cub3d.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX42_LIB):
@@ -61,4 +62,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: clean
