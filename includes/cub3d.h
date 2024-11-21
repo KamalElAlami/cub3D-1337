@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/18 03:41:38 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/21 11:14:38 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,6 @@ int		fill_map(t_params *param, int fd, char *line);
 void	ft_init_data(t_params *param);
 void	adjust_map_size(t_params *p);
 void	check_map_validity(t_params *p);
-void	check_f_l_line(t_params *p);
+int		ft_is_player(char c, int flag);
 
 #endif

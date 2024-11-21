@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/18 03:28:20 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/20 14:57:07 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	adjust_map_size(t_params *p)
 
 int	fill_map(t_params *param, int fd, char *line)
 {
-	int		i;
 	char	*onelinemap;
 
-	i = 0;
 	onelinemap = NULL;
+	if (!line)
+		exit (write (2,"map vide\n",9));
 	line[ft_strlen(line)] = '\n';// to check it later
 	while (line)
 	{

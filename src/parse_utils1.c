@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:50:26 by sarif             #+#    #+#             */
-/*   Updated: 2024/11/17 17:16:34 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/21 10:57:22 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	is_all_blank(char *line)
 int	is_map_ready(char *line)
 {
 	if (!line[0] || is_all_blank(line))
-		return (write(2,"1\n",2),0);
+		return (0);
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3)
 		|| !ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
-		return (write(2,"2\n",2),0);
-	return (write(2,"3\n",2),1);
+		return (0);
+	return (1);
 }
 
 int	check_rgb(char *line, int flag)

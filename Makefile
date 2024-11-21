@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
+#    By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/11/19 03:00:47 by sarif            ###   ########.fr        #
+#    Updated: 2024/11/20 14:51:32 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS = src/main.c src/parse.c src/parse_utilities.c src/graphics.c src/utilities
 OBJS = $(SRCS:.c=.o)
 
 # Libraries
-LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
+#LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
+LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L /opt/homebrew/Cellar/glfw/3.4/lib/
 
 all: $(NAME)
 

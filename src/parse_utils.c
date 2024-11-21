@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:40:34 by sarif             #+#    #+#             */
-/*   Updated: 2024/11/17 15:26:42 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/20 14:51:03 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	ft_store_rgb_norm(char **degits)
 void	ft_store_rgb(t_params *p, char *line)
 {
 	char	**degits;
-	int		i;
 
-	i = 0;
 	if (!ft_strncmp(line, "C ", 2) && ++p->c == 1)
 	{
 		if (check_rgb(line + ft_avoid(line + 2) - 1, 0))
