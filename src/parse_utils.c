@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:40:34 by sarif             #+#    #+#             */
-/*   Updated: 2024/11/20 14:51:03 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/21 12:40:56 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,9 @@ void	ft_init_data(t_params *param)
 	param->c = 0, param->f = 0);
 	(1) && (param->floor[0] = -1, param->floor[1] = -1, param->floor[2] = -1,
 	param->ciel[0] = -1, param->ciel[1] = -1, param->ciel[2] = -1);
+}
+
+int	check_path(char *path)
+{
+	return (ft_strncmp(path + (ft_strlen(path) - 4), ".cub", 4));
 }
