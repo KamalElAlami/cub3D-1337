@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/18 20:39:53 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:52:39 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void render_player(t_graphics *graphic, t_player *player)
         }
     }
     draw_direction_line(graphic, player);
-    raycasting(player, graphic);
 }
 
 void draw_player(void *ptr)
 {
     t_player *p = ptr;
     render_player(p->params->graph, p);
+    raycasting(p, p->params->graph);
 }
 
 int wall_coal(t_player *player, double x, double y)
@@ -107,15 +107,16 @@ void key_hook(void *player)
         wall_coal (p, y, x);
     if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_LEFT))
     {
-        p->dirx = cos((p->angle -= p->rotSpeed));
-        p->diry = sin((p->angle -= p->rotSpeed));
+        p->angle -= p->rotSpeed;
+        p->dirx = cos(p->angle);
+        p->diry = sin(p->angle);
     }
     if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_RIGHT))
     {
-        p->dirx = cos((p->angle += p->rotSpeed));
-        p->diry = sin((p->angle += p->rotSpeed));
+        p->angle += p->rotSpeed;
+        p->dirx = cos(p->angle);
+        p->diry = sin(p->angle);
     }
-
     
 }
 

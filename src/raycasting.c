@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/20 11:56:22 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/22 10:20:02 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ double horizontal_distance(t_player *playerr, double rayangle)
     int lookdown = 0;
     int lookleft = 0;
     int lookright = 0;
-    double xinter, yinter;
-    double stepx, stepy;
+    double xinter = 0, yinter = 0;
+    double stepx = 0, stepy = 0;
     double horx = 0, hory = 0;
     int flag = 0;
-    double yflag;
+    double yflag = 0;
 
     // hna kan check where exaclty direction of the player is 
     rayangle = normalize_angle(rayangle);
@@ -57,16 +57,16 @@ double horizontal_distance(t_player *playerr, double rayangle)
     if (rayangle > 0.5 * M_PI && rayangle < 1.5 * M_PI)
         lookleft = 1;
     // after ma kan set l flags d direction khasni n detect awl intersection
-    yinter = floor(playerr->posy / TILE_SIZE) * TILE_SIZE;
+    yinter = floor(playerr->posy / TILE_SIZE) * TILE_SIZE ;
     // Mathalan: player.y = 150
     // 150/64 = 2.34375
     // floor(2.94375) = 2
     // 2 * 64 = 128  <- had grid line lewla
     if (lookdown) // ila kan direction kaychuf l ta7t 128 + tile_size = 192 donc next grid line lee ta7t
         yinter = yinter + TILE_SIZE;
-    xinter = playerr->posx + (yinter - playerr->posy) / tan(rayangle);
+    xinter = playerr->posx + ((yinter - playerr->posy) / tan(rayangle));
     stepy = TILE_SIZE;
-    if (lookup)
+    if ((lookup && stepy > 0) || (lookdown && stepy < 0))
         stepy = -TILE_SIZE;
     stepx = TILE_SIZE / tan(rayangle);
     if ((lookleft && stepx > 0) || (lookright && stepx < 0))
@@ -74,7 +74,7 @@ double horizontal_distance(t_player *playerr, double rayangle)
     yflag = yinter;
     while (!flag)
     {
-        if (lookup)
+        if (lookup )
             yflag -= 1;
         if (xinter < 0 || xinter >= playerr->params->w_width || yinter < 0 || yinter >= playerr->params->w_height)
             break;
@@ -83,6 +83,7 @@ double horizontal_distance(t_player *playerr, double rayangle)
             flag = 1;
             horx = xinter;
             hory = yinter;
+            break ;
         }
             xinter += stepx;
             yinter += stepy;
@@ -97,11 +98,11 @@ double vertical_distance(t_player *playerr, double rayangle)
     int lookdown = 0;
     int lookleft = 0;
     int lookright = 0;
-    double xinter, yinter;
-    double stepx, stepy;
-    double horx, hory;
+    double xinter = 0, yinter = 0;
+    double stepx = 0, stepy = 0;
+    double horx = 0, hory = 0;
     int flag = 0;
-    double xflag;
+    double xflag = 0;
 
     if (rayangle > 0 && rayangle < M_PI)
         lookdown = 1;
@@ -119,9 +120,9 @@ double vertical_distance(t_player *playerr, double rayangle)
     // 2 * 64 = 128  <- had grid line lewla
     if (lookdown) // ila kan direction kaychuf l ta7t 128 + tile_size = 192 donc next grid line lee ta7t
         xinter = xinter + TILE_SIZE;
-    yinter = playerr->posy + (xinter - playerr->posx) * tan(rayangle);
+    yinter = playerr->posy + ((xinter - playerr->posx) * tan(rayangle));
     stepx = TILE_SIZE;
-    if (lookleft)
+    if ((lookleft && stepx > 0) || (lookright && stepx < 0))
         stepx = -TILE_SIZE;
     stepy = TILE_SIZE * tan(rayangle);
     if ((lookup && stepy > 0) || (lookdown && stepy < 0))
@@ -138,6 +139,7 @@ double vertical_distance(t_player *playerr, double rayangle)
             flag = 1;
             horx = xinter;
             hory = yinter;
+            break;
         }
         xinter += stepx;
         yinter += stepy;
@@ -156,7 +158,7 @@ void    draw_ray(t_graphics *data, t_player *player, double ray_angle, double di
     double start_y = player->posy;
     
     // Length of the ray (you can adjust this)
-    int ray_length = (int)round(distance);
+    int ray_length = (int)floor(distance);
     
     // Calculate end point using cos and sin
     double end_x = start_x + (cos(ray_angle) * ray_length);
@@ -197,11 +199,13 @@ void raycasting(t_player *playerr, t_graphics *graphic)
     double verti;
     double distance;
 
-    rayangle = playerr->angle - (playerr->fov / 2);
+    rayangle = normalize_angle(playerr->angle) - (playerr->fov / 2);
     i = 0;
     while (i < playerr->params->w_width)
     {
         rayangle = normalize_angle(rayangle);
+        if (rayangle == 0 || rayangle == M_PI)  // Avoid division by zero
+            rayangle += 0.0001;
         horiz = horizontal_distance(playerr, rayangle);
         verti = vertical_distance(playerr, rayangle);
         if(horiz < verti)
@@ -211,7 +215,7 @@ void raycasting(t_player *playerr, t_graphics *graphic)
         draw_ray(graphic, playerr, rayangle, distance);
         // printf("posx => %f\nposy => %f\n", playerr->posx, playerr->posy);
         // printf("horizontal distance>>> %f\n vertical distance>>> %f\n rayangle>>> %f\n", horiz, verti, rayangle);
-        rayangle += playerr->fov / (playerr->params->w_width );
+        rayangle += playerr->fov / (playerr->params->w_width - 1);
         i++;
     }
 

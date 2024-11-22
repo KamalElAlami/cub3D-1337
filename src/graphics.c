@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/17 11:18:17 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:46:21 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void mlxdrawmap(t_graphics *graphic, t_params *parameters)
             else
                 color = 0xFFFFFFFF;
             x = 0;
-            while (x < 31)
+            while (x < 32)
             {
                 y = 0;
-                while (y < 31)
+                while (y < 32)
                 {
                     mlx_put_pixel(graphic->img, j * TILE_SIZE + x, i * TILE_SIZE + y, color);
                     y++;
