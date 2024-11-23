@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/23 07:43:40 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:22:52 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,39 @@ double raydistance(t_player *playerr, double rayangle)
         return (vertical);
 }
 
+void render_wall(t_player *player, double distance, int x)
+{
+    double playerdist;
+    double wallheight;
+    double top;
+    double bot;
+    int y;
+
+    playerdist = (player->params->w_width / 2) / tan(player->fov / 2);
+    wallheight = (TILE_SIZE * playerdist) / distance;
+    top = (player->params->w_height -  wallheight) / 2;
+    bot = top + wallheight;
+    y = 0;
+    while (y < top)
+    {
+        if (y >= 0 && y < player->params->w_height)
+            mlx_put_pixel(player->params->graph->img, x, y, 0x000000FF);
+         y++;
+    }
+    while (y < bot)
+    {
+        if (y >= 0 && y < player->params->w_height)
+            mlx_put_pixel(player->params->graph->img, x, y, 0x808080FF);
+        y++;
+    }
+    while (y < player->params->w_height)
+    {
+        if (y >= 0 && y < player->params->w_height)
+            mlx_put_pixel(player->params->graph->img, x, y, 0x404040FF);
+        y++;
+    }
+}
+
 void raycasting(t_player *playerr)
 {
     double distance;
@@ -136,7 +169,8 @@ void raycasting(t_player *playerr)
     {
         rayangle = normalize_angle(rayangle);
         distance = raydistance(playerr, rayangle);
-        draw_ray(playerr->params->graph, playerr, rayangle, distance);
+        // draw_ray(playerr->params->graph, playerr, rayangle, distance);
+        render_wall(playerr, distance, i);
         rayangle += increament;
         i++;
     }
