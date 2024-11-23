@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/22 12:52:39 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:00:47 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void draw_player(void *ptr)
 {
     t_player *p = ptr;
     render_player(p->params->graph, p);
-    raycasting(p, p->params->graph);
+    raycasting(p);
 }
 
 int wall_coal(t_player *player, double x, double y)

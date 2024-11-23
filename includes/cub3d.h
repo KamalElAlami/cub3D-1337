@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/17 09:05:25 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:38:08 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,18 @@ typedef struct s_player
     double posy;
     double dirx;
     double diry;
-    double planex;
-    double planey;
     double    moveSpeed;
     double    rotSpeed;
     t_params *params;
 } t_player;
+
+typedef struct s_looking
+{
+    int up;
+    int down;
+    int left;
+    int right;
+} t_looking;
 
 // parse 
 void draw_map(void *ptr);
@@ -91,7 +97,8 @@ char get_player(char **map);
 //raycast
 void init_player(t_params *param, t_player *playerrr);
 
-void raycasting(t_player *playerr, t_graphics *graphic);
+void raycasting(t_player *playerr);
 double normalize_angle(double angle);
-
+void    draw_ray(t_graphics *data, t_player *player, double ray_angle, double distance);
+int     is_wall(t_params *params, double x, double y);
 #endif
