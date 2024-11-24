@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/23 11:22:52 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/23 16:39:50 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,18 @@ void render_wall(t_player *player, double distance, int x)
     top = (player->params->w_height -  wallheight) / 2;
     bot = top + wallheight;
     y = 0;
+
+    if (top < 0)
+        top = 0;
+    if (bot > player->params->w_height)
+        bot = player->params->w_height;
     while (y < top)
     {
         if (y >= 0 && y < player->params->w_height)
             mlx_put_pixel(player->params->graph->img, x, y, 0x000000FF);
          y++;
     }
+    printf ("top  === %f \n", top);
     while (y < bot)
     {
         if (y >= 0 && y < player->params->w_height)
@@ -154,23 +160,24 @@ void render_wall(t_player *player, double distance, int x)
     }
 }
 
-void raycasting(t_player *playerr)
+void raycasting(void *playerr)
 {
+    t_player *player;
     double distance;
     double rayangle;
     double increament;
     int i;
 
     i = 0;
-    rayangle = playerr->angle - (playerr->fov / 2);
-    increament = playerr->fov / (playerr->params->w_width - 1);
+    player = playerr;
+    rayangle = player->angle - (player->fov / 2);
+    increament = player->fov / (player->params->w_width - 1);
 
-    while (i <= playerr->params->w_width)
+    while (i <= player->params->w_width)
     {
         rayangle = normalize_angle(rayangle);
-        distance = raydistance(playerr, rayangle);
-        // draw_ray(playerr->params->graph, playerr, rayangle, distance);
-        render_wall(playerr, distance, i);
+        distance = raydistance(player, rayangle);
+        render_wall(player, distance, i);
         rayangle += increament;
         i++;
     }

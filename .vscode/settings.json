@@ -14,7 +14,8 @@
         "utility": "c",
         "vector": "c",
         "complex": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "ostream": "c"
     },
     "cmake.ignoreCMakeListsMissing": true
 }

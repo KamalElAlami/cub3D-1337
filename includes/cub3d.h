@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/22 14:38:08 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:25:47 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,23 @@ typedef struct s_rays
 
 typedef struct s_params
 {
-    char *north;
-    char *south;
-    char *west;
-    char *east;
-    int ciel[3];
-    int floor[3];
-    char **map;
-    int w_width;
-    int w_height;
-    t_graphics *graph;
+	char		*north;
+	int			no;
+	char		*south;
+	int			so;
+	char		*west;
+	int			we;
+	char		*east;
+	int			ea;
+	int			f;
+	int			c;
+	int			ciel[3];
+	int			floor[3];
+	char		**map;
+	char		**uni_map;
+	int			w_width;
+	int			w_height;
+	t_graphics *graph;
 }   t_params;
 
 typedef struct s_player
@@ -83,11 +90,26 @@ int     check_player(char *line, int *player);
 int     map_size(char **map);
 int     check_map(char **map);
 int     validate_inputs(t_params *params);
-int     check_sheet(char *path, t_params **parameters);
+int     check_sheet(char *path, t_params *param);
+//soufiix
+void	ft_store_data(t_params *param, char *line);
+void	ft_init_data(t_params *param);
+void	ft_store_rgb(t_params *p, char *line);
+int		check_rgb(char *line, int flag);
+void	ft_store_rgb_norm(char **degits);
+int		ft_isblank(char c);
+int		ft_avoid(char *line);
+int		is_map_ready(char *line);
+int		is_all_blank(char *line);
+int		ft_check_data(t_params *p);
+int		fill_map(t_params *param, int fd, char *line);
+void	ft_init_data(t_params *param);
+void	adjust_map_size(t_params *p);
+void	check_map_validity(t_params *p);
+int		ft_is_player(char c, int flag);
 
 // graph 
 void initialize_graphics(t_graphics *graphics, t_params *para);
-void mlxdrawmap(t_graphics *graphic, t_params *parameters);
 
 // utils 
 int *hidenseek(char **map);
@@ -97,8 +119,7 @@ char get_player(char **map);
 //raycast
 void init_player(t_params *param, t_player *playerrr);
 
-void raycasting(t_player *playerr);
+void raycasting(void *playerr);
 double normalize_angle(double angle);
-void    draw_ray(t_graphics *data, t_player *player, double ray_angle, double distance);
 int     is_wall(t_params *params, double x, double y);
 #endif
