@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/24 20:33:39 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:44:04 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_store_data(t_params *p, char *line)
 		p->east = ft_strdup(line + ft_avoid(line + 3));
 	else
 		ft_store_rgb(p, line);
-	printf("c = %d\nf = %d\nno = %d\nso = %d\nwe = %d\n", p->c, p->f, p->no, p->so, p->we);
 }
 
 void	ft_init_data(t_params *param)

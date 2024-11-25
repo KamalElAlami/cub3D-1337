@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/24 18:36:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:33:44 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int main(int ac, char **av)
     init_player(params, playerr);
     params->graph = graph;
     playerr->params = params;
+    	// mlx_loop_hook(graph->mlx, draw_map, params);
+	// mlx_loop_hook(graph->mlx, draw_player, playerr);
     mlx_loop_hook(graph->mlx, raycasting, playerr);
     mlx_loop_hook(graph->mlx, key_hook, playerr);
     mlx_image_to_window(graph->mlx, graph->img, 0, 0);

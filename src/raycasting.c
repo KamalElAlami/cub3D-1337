@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/23 16:39:50 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:35:39 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void render_wall(t_player *player, double distance, int x)
             mlx_put_pixel(player->params->graph->img, x, y, 0x000000FF);
          y++;
     }
-    printf ("top  === %f \n", top);
     while (y < bot)
     {
         if (y >= 0 && y < player->params->w_height)
@@ -157,6 +156,47 @@ void render_wall(t_player *player, double distance, int x)
         if (y >= 0 && y < player->params->w_height)
             mlx_put_pixel(player->params->graph->img, x, y, 0x404040FF);
         y++;
+    }
+}
+
+void    draw_ray(t_graphics *data, t_player *player, double ray_angle, double distance)
+{
+    // Starting point (player position)
+    double start_x = player->posx;
+    double start_y = player->posy;
+    
+    // Length of the ray (you can adjust this)
+    int ray_length = (int)floor(distance);
+    
+    // Calculate end point using cos and sin
+    double end_x = start_x + (cos(ray_angle) * ray_length);
+    double end_y = start_y + (sin(ray_angle) * ray_length);
+    
+    // Variables for DDA line drawing
+    double dx = end_x - start_x;
+    double dy = end_y - start_y;
+    
+    // Number of steps needed (use the bigger delta)
+    int steps = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
+    
+    // Calculate increment per step
+    double x_inc = dx / (double)steps;
+    double y_inc = dy / (double)steps;
+    
+    // Start drawing from player position
+    double x = start_x;
+    double y = start_y;
+    
+    // Draw the line step by step
+    for (int i = 0; i <= steps; i++)
+    {
+        // Put pixel if it's within window bounds
+        if (x >= 0 && x < player->params->w_width && y >= 0 && y < player->params->w_height)
+            mlx_put_pixel(data->img, (int)x, (int)y, 0xFF0000ff);
+        
+        // Move to next position
+        x += x_inc;
+        y += y_inc;
     }
 }
 
@@ -178,6 +218,7 @@ void raycasting(void *playerr)
         rayangle = normalize_angle(rayangle);
         distance = raydistance(player, rayangle);
         render_wall(player, distance, i);
+        // draw_ray(player->params->graph, player, rayangle, distance);
         rayangle += increament;
         i++;
     }

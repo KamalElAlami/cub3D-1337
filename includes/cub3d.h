@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/24 18:25:47 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:56:28 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,14 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 #define TILE_SIZE 32
+#define WINDOW_WIDTH 1260
+#define WINDOW_HEIGHT 720
 
 
 typedef struct s_graphics {
     mlx_t* mlx;
     mlx_image_t* img;
 } t_graphics;
-
-typedef struct s_rays
-{
-    double rayangle;
-    int isvertical;
-    int ishorizontal;
-    double distance;
-}   t_rays;
 
 typedef struct s_params
 {
@@ -118,8 +112,15 @@ char get_player(char **map);
 
 //raycast
 void init_player(t_params *param, t_player *playerrr);
-
 void raycasting(void *playerr);
 double normalize_angle(double angle);
 int     is_wall(t_params *params, double x, double y);
+
+// helpers remove later 
+void draw_line(t_graphics *graphic, t_player *player);
+void draw_direction_line(t_graphics *graphic, t_player *player);
+void render_player(t_graphics *graphic, t_player *player);
+void draw_player(void *ptr);
+void mlxdrawmap(t_graphics *graphic, t_params *parameters);
+void draw_map(void *ptr);
 #endif

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/23 11:30:18 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:49:43 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void init_player(t_params *param, t_player *playerrr)
     playerrr->posx = (pos[1] * 32) - 16;
     playerrr->posy = (pos[0] * 32) - 16;
     playerrr->rotSpeed = 0.05;
-    playerrr->moveSpeed = 5;
+    playerrr->moveSpeed = 3;
 
     // Set initial angle based on direction
     if (p == 'N')
