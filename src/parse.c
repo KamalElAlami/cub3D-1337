@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/25 17:26:46 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/25 22:48:43 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	adjust_map_size(t_params *p)
 		p->uni_map[i++] = ft_strdup(line);
 	}
 	p->uni_map[i] = NULL;
-	// for (i = 0; p->uni_map[i]; i++)
-	// 	printf("[%s]\n",p->uni_map[i]);
 }
 
 int	fill_map(t_params *param, int fd, char *line)
@@ -68,7 +66,7 @@ int	fill_map(t_params *param, int fd, char *line)
 	while (line)
 	{
 		if (line[0] == '\n')
-			exit(write(2, "empty line in map\n", 18));
+			exit(write(2,"empty line in map\n",18));
 		onelinemap = ft_strjoin(onelinemap, line);
 		line = get_next_line(fd);
 	}
@@ -80,6 +78,7 @@ int	fill_map(t_params *param, int fd, char *line)
 
 int	ft_check_data(t_params *p)
 {
+	
 	if (p->c != 1 || p->f != 1 || p->no != 1
 		|| p->ea != 1 || p->we != 1 || p->so != 1)
 		return (write(2, "map data error\n", 15), 1);

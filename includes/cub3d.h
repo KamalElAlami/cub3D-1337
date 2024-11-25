@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/21 11:14:38 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/25 22:49:31 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,14 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 #define TILE_SIZE 32
+#define WINDOW_WIDTH 1260
+#define WINDOW_HEIGHT 720
 
 
 typedef struct s_graphics {
-	mlx_t* mlx;
-	mlx_image_t* img;
+    mlx_t* mlx;
+    mlx_image_t* img;
 } t_graphics;
-
-typedef struct s_rays
-{
-	long distance;
-	struct s_rays *next;
-}   t_rays;
 
 typedef struct s_params
 {
@@ -59,18 +55,24 @@ typedef struct s_params
 
 typedef struct s_player
 {
-	double fov;
-	double angle;
-	double posx;
-	double posy;
-	double dirx;
-	double diry;
-	double planex;
-	double planey;
-	double    moveSpeed;
-	double    rotSpeed;
-	t_params *params;
+    double fov;
+    double angle;
+    double posx;
+    double posy;
+    double dirx;
+    double diry;
+    double    moveSpeed;
+    double    rotSpeed;
+    t_params *params;
 } t_player;
+
+typedef struct s_looking
+{
+    int up;
+    int down;
+    int left;
+    int right;
+} t_looking;
 
 // parse 
 void draw_map(void *ptr);
@@ -83,20 +85,6 @@ int     map_size(char **map);
 int     check_map(char **map);
 int     validate_inputs(t_params *params);
 int     check_sheet(char *path, t_params *param);
-
-// graph 
-void initialize_graphics(t_graphics *graphics, t_params *para);
-void mlxdrawmap(t_graphics *graphic, t_params *parameters);
-
-// utils 
-int *hidenseek(char **map);
-int *get_size(char **map);
-char get_player(char **map);
-
-//raycast
-void init_player(t_params *param, t_player *playerrr);
-
-
 //soufiix
 void	ft_store_data(t_params *param, char *line);
 void	ft_init_data(t_params *param);
@@ -114,4 +102,25 @@ void	adjust_map_size(t_params *p);
 void	check_map_validity(t_params *p);
 int		ft_is_player(char c, int flag);
 
+// graph 
+void initialize_graphics(t_graphics *graphics, t_params *para);
+
+// utils 
+int *hidenseek(char **map);
+int *get_size(char **map);
+char get_player(char **map);
+
+//raycast
+void init_player(t_params *param, t_player *playerrr);
+void raycasting(void *playerr);
+double normalize_angle(double angle);
+int     is_wall(t_params *params, double x, double y);
+
+// helpers remove later 
+void draw_line(t_graphics *graphic, t_player *player);
+void draw_direction_line(t_graphics *graphic, t_player *player);
+void render_player(t_graphics *graphic, t_player *player);
+void draw_player(void *ptr);
+void mlxdrawmap(t_graphics *graphic, t_params *parameters);
+void draw_map(void *ptr);
 #endif
