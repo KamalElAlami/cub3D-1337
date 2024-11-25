@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:50:26 by sarif             #+#    #+#             */
-/*   Updated: 2024/11/21 10:57:22 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/25 17:30:46 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	is_all_blank(char *line)
 
 int	is_map_ready(char *line)
 {
+	line = ft_strtrim(line, " ");
 	if (!line[0] || is_all_blank(line))
 		return (0);
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/21 12:40:25 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/25 17:26:46 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	adjust_map_size(t_params *p)
 			max = len;
 		i++;
 	}
-	p->uni_map = malloc (sizeof (char *) * i + 1);
+	p->uni_map = malloc (sizeof (char *) * (i + 1));
 	i = 0;
 	while (p->map[i])
 	{
@@ -68,7 +68,7 @@ int	fill_map(t_params *param, int fd, char *line)
 	while (line)
 	{
 		if (line[0] == '\n')
-			exit(write(2,"empty line in map\n",18));
+			exit(write(2, "empty line in map\n", 18));
 		onelinemap = ft_strjoin(onelinemap, line);
 		line = get_next_line(fd);
 	}

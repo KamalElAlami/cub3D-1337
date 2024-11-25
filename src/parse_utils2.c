@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 03:20:19 by sarif             #+#    #+#             */
-/*   Updated: 2024/11/21 11:15:18 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/25 17:18:06 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_is_player(char c, int flag)
 		}
 		else if (c != '1' && c != '0' && c != ' ')
 		{
+			printf("%c",c);
 			exit (write(2, "forbidden charchter\n", 20));
 		}
 		else

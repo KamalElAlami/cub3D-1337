@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:40:34 by sarif             #+#    #+#             */
-/*   Updated: 2024/11/21 12:40:56 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/25 17:40:13 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	ft_store_rgb_norm(char **degits)
 {
 	int	i;
 
-	i = 0;
-	while (degits[i])
-		if (check_rgb(degits[i++], 1))
+	i = -1;
+	while (degits[++i])
+	{
+		if (check_rgb((degits[i] + ft_avoid(degits[i]) - 3), 1))
 			exit(write(2, "rgb error 1 \n", 13));
+	}
 	if (i != 3)
 		exit(write(2, "rgb error 2 \n", 13));
 }
@@ -30,9 +32,9 @@ void	ft_store_rgb(t_params *p, char *line)
 
 	if (!ft_strncmp(line, "C ", 2) && ++p->c == 1)
 	{
-		if (check_rgb(line + ft_avoid(line + 2) - 1, 0))
+		if (check_rgb(line + (ft_avoid(line + 2) - 1), 0))
 			exit (write(2, "rgb error 0 \n", 13));
-		degits = ft_split(line + ft_avoid(line + 3), ',');
+		degits = ft_split(line + (ft_avoid(line + 2) - 1), ',');
 		ft_store_rgb_norm(degits);
 		(1) && (p->ciel[0] = ft_atoi(degits[0]),
 		p->ciel[1] = ft_atoi(degits[1]), p->ciel[2] = ft_atoi(degits[2]));
