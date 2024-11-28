@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/25 15:10:02 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/28 04:26:17 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	fill_map(t_params *param, int fd, char *line)
 
 int	ft_check_data(t_params *p)
 {
-	
 	if (p->c != 1 || p->f != 1 || p->no != 1
 		|| p->ea != 1 || p->we != 1 || p->so != 1)
 		return (write(2, "map data error\n", 15), 1);

@@ -132,3 +132,44 @@ void draw_map(void *ptr) {
 
     mlxdrawmap(p->graph, p);
 }
+
+void    draw_ray(t_graphics *data, t_player *player, double ray_angle, double distance)
+{
+	// Starting point (player position)
+	double start_x = player->posx;
+	double start_y = player->posy;
+	
+	// Length of the ray (you can adjust this)
+	int ray_length = (int)floor(distance);
+	
+	// Calculate end point using cos and sin
+	double end_x = start_x + (cos(ray_angle) * ray_length);
+	double end_y = start_y + (sin(ray_angle) * ray_length);
+	
+	// Variables for DDA line drawing
+	double dx = end_x - start_x;
+	double dy = end_y - start_y;
+	
+	// Number of steps needed (use the bigger delta)
+	int steps = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
+	
+	// Calculate increment per step
+	double x_inc = dx / (double)steps;
+	double y_inc = dy / (double)steps;
+	
+	// Start drawing from player position
+	double x = start_x;
+	double y = start_y;
+	
+	// Draw the line step by step
+	for (int i = 0; i <= steps; i++)
+	{
+		// Put pixel if it's within window bounds
+		if (x >= 0 && x < player->params->w_width && y >= 0 && y < player->params->w_height)
+			mlx_put_pixel(data->img, (int)x, (int)y, 0xFF0000ff);
+		
+		// Move to next position
+		x += x_inc;
+		y += y_inc;
+	}
+}

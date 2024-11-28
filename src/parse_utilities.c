@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/25 11:44:04 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/28 04:26:57 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_store_rgb(t_params *p, char *line)
 		(1) && (p->floor[0] = ft_atoi(degits[0]),
 		p->floor[1] = ft_atoi(degits[1]), p->floor[2] = ft_atoi(degits[2]));
 	}
-} 
+}
 
 void	ft_store_data(t_params *p, char *line)
 {

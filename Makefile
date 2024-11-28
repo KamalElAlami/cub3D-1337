@@ -6,7 +6,7 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/11/25 14:56:43 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/11/27 21:12:19 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 
 # Sources
-SRCS = src/main.c src/parse.c src/parse_utilities.c src/graphics.c src/utilities.c src/raycasting.c src/raycasting_utils.c src/parse_utils1.c src/parse_utils2.c src/debug_helpers.c
+SRCS = src/main.c src/parse.c src/parse_utilities.c src/graphics.c src/utilities.c src/raycasting.c src/raycasting_utils.c src/parse_utils1.c src/parse_utils2.c src/debug_helpers.c src/game_control.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)
@@ -40,7 +40,7 @@ all: $(NAME)
 $(NAME): $(MLX42_LIB) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
-%.o: %.c
+%.o: %.c ./includes/cub3d.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX42_LIB):
