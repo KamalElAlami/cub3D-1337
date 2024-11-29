@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 18:49:08 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/25 22:51:13 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/29 22:04:42 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	*get_next_line(int fd);
+char	*ft_itoa_base(int value, int base);
 void	*ft_malloc(size_t size, t_malloc flag);
 
 #endif

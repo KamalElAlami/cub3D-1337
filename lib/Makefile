@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
+#    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 18:14:53 by kael-ala          #+#    #+#              #
-#    Updated: 2024/09/29 05:46:15 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/11/29 22:04:48 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ FILES = ft_striteri.c ft_memcmp.c  ft_bzero.c ft_putnbr_fd.c ft_strmapi.c ft_ito
 	ft_strlen.c ft_strncmp.c ft_strlcat.c ft_strlcpy.c ft_atoi.c \
 	ft_strchr.c ft_strrchr.c ft_strnstr.c \
 	ft_tolower.c ft_toupper.c ft_memmove.c ft_split.c \
-	ft_substr.c get_next_line.c tax_collector.c
+	ft_substr.c get_next_line.c tax_collector.c ft_itoa_base.c \
 
 OBJ = $(FILES:.c=.o)
 

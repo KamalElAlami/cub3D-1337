@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 04:03:26 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/25 22:47:59 by sarif            ###   ########.fr       */
+/*   Updated: 2024/11/29 21:58:55 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ static void	set_char(char *buffer, int n, int extra)
 char	*ft_itoa(int n)
 {
 	char	*buffer;
+	int		i;
 	int		extra;
 
 	extra = 1;
+	i = 0;
 	if (n == 0)
 		return (ft_strdup("0"));
 	if (n == INT_MIN)
