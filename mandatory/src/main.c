@@ -6,24 +6,32 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/30 13:45:42 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:11:03 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void mouse_event(void *player)
+void	init_player(t_params *param, t_player *playerrr)
 {
-	t_player	*playerr;
-	int32_t		xmouse;
-	int32_t		ymouse;
-	double 		differnce;
+	int		*pos;
+	char	p;
 
-	playerr = (t_player *)player;
-	mlx_get_mouse_pos(playerr->params->graph->mlx, &xmouse, &ymouse);
-	differnce = xmouse - WINDOW_WIDTH / 2;
-	playerr->angle += differnce * playerr->rotspeed;
-	mlx_set_mouse_pos(playerr->params->graph->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	p = get_player(param->map);
+	pos = hidenseek(param->map);
+	playerrr->fov = 60 * (M_PI / 180);
+	playerrr->posx = (pos[1] * TILE_SIZE) - TILE_SIZE / 2;
+	playerrr->posy = (pos[0] * TILE_SIZE) - TILE_SIZE / 2;
+	playerrr->rotspeed = 0.02;
+	playerrr->movespeed = 1.5;
+	if (p == 'N')
+		playerrr->angle = 3 * M_PI / 2;
+	else if (p == 'S')
+		playerrr->angle = M_PI / 2;
+	else if (p == 'W')
+		playerrr->angle = M_PI;
+	else if (p == 'E')
+		playerrr->angle = 0;
 }
 
 int	main(int ac, char **av)
@@ -44,11 +52,8 @@ int	main(int ac, char **av)
 	init_player(params, playerr);
 	params->graph = graph;
 	playerr->params = params;
-	// mlx_loop_hook(graph->mlx, draw_map, params);
-	// mlx_loop_hook(graph->mlx, draw_player, playerr);
 	mlx_loop_hook(graph->mlx, raycasting, playerr);
 	mlx_loop_hook(graph->mlx, key_hook, playerr);
-	mlx_loop_hook(graph->mlx, mouse_event, playerr);
 	mlx_image_to_window(graph->mlx, graph->img, 0, 0);
 	mlx_loop(graph->mlx);
 }

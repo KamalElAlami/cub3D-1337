@@ -6,25 +6,11 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/30 13:45:42 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:43:05 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void mouse_event(void *player)
-{
-	t_player	*playerr;
-	int32_t		xmouse;
-	int32_t		ymouse;
-	double 		differnce;
-
-	playerr = (t_player *)player;
-	mlx_get_mouse_pos(playerr->params->graph->mlx, &xmouse, &ymouse);
-	differnce = xmouse - WINDOW_WIDTH / 2;
-	playerr->angle += differnce * playerr->rotspeed;
-	mlx_set_mouse_pos(playerr->params->graph->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-}
 
 int	main(int ac, char **av)
 {
@@ -44,8 +30,6 @@ int	main(int ac, char **av)
 	init_player(params, playerr);
 	params->graph = graph;
 	playerr->params = params;
-	// mlx_loop_hook(graph->mlx, draw_map, params);
-	// mlx_loop_hook(graph->mlx, draw_player, playerr);
 	mlx_loop_hook(graph->mlx, raycasting, playerr);
 	mlx_loop_hook(graph->mlx, key_hook, playerr);
 	mlx_loop_hook(graph->mlx, mouse_event, playerr);

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/28 04:36:54 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:44:20 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ typedef struct s_player
 	double		angle;
 	double		posx;
 	double		posy;
-	double		dirx;
-	double		diry;
 	double		movespeed;
 	double		rotspeed;
 	t_params	*params;
@@ -108,6 +106,7 @@ int			*hidenseek(char **map);
 int			*get_size(char **map);
 char		get_player(char **map);
 void		key_hook(void *player);
+void 		mouse_event(void *player);
 u_int32_t	rgb_hex(int r, int g, int b);
 
 //raycasting
@@ -117,11 +116,4 @@ double		normalize_angle(double angle);
 int			is_wall(t_params *params, double x, double y);
 t_looking	raydirection(double angle);
 
-// helpers remove later 
-void		draw_line(t_graphics *graphic, t_player *player);
-void		draw_direction_line(t_graphics *graphic, t_player *player);
-void		render_player(t_graphics *graphic, t_player *player);
-void		draw_player(void *ptr);
-void		mlxdrawmap(t_graphics *graphic, t_params *parameters);
-void		draw_map(void *ptr);
 #endif
