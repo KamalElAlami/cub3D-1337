@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/30 16:44:20 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/04 00:45:00 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,19 @@
 # include <fcntl.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define WINDOW_WIDTH 1260
 # define WINDOW_HEIGHT 720
+
+
+typedef struct s_rays
+{
+	double distance;
+	double hity;
+	double hitx;
+	int is_horizontal;
+	int is_vertical;
+} t_rays;
 
 typedef struct s_graphics
 {
@@ -50,6 +60,8 @@ typedef struct s_params
 	char		**uni_map;
 	int			w_width;
 	int			w_height;
+	mlx_texture_t	*t_no;
+	mlx_image_t		*i_no;
 	t_graphics	*graph;
 }	t_params;
 
@@ -62,6 +74,7 @@ typedef struct s_player
 	double		movespeed;
 	double		rotspeed;
 	t_params	*params;
+	t_rays		*ray;
 }	t_player;
 
 typedef struct s_looking
@@ -100,6 +113,7 @@ void		check_map_validity(t_params *p);
 int			ft_is_player(char c, int flag);
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
+// uint32_t	ft_get_pixel(t_player *p, int y, double top);
 
 // utils 
 int			*hidenseek(char **map);

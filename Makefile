@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
+#    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/11/30 16:58:26 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/12/02 20:35:39 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 
 # Sources
-SRCS = mandatory/src/main.c mandatory/parse/parse.c mandatory/parse/parse_utilities.c mandatory/textures/graphics.c mandatory/parse/utilities.c mandatory/src/raycasting.c mandatory/src/raycasting_utils.c mandatory/parse/parse_utils1.c mandatory/parse/parse_utils2.c mandatory/src/game_control.c
+SRCS = mandatory/src/main.c mandatory/parse/parse.c mandatory/parse/parse_utilities.c mandatory/textures/graphics.c mandatory/parse/utilities.c mandatory/src/raycasting.c mandatory/src/raycasting_utils.c mandatory/parse/parse_utils1.c mandatory/parse/parse_utils2.c mandatory/src/game_control.c mandatory/textures/textures.c
 
 # Sources
 BSRCS = bonus/src/main.c bonus/parse/parse.c bonus/parse/parse_utilities.c bonus/textures/graphics.c bonus/parse/utilities.c bonus/src/raycasting.c bonus/src/raycasting_utils.c bonus/parse/parse_utils1.c bonus/parse/parse_utils2.c bonus/src/game_control.c
@@ -39,7 +39,7 @@ OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 
 # Libraries
-LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L"/Users/kael-ala/.brew/Cellar/glfw/3.4/lib/"
+LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
 
 all: $(NAME)
 

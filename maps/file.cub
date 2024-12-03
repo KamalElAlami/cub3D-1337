@@ -1,9 +1,9 @@
 F 220,070,55
 C 225,230,99
-NO ./path_to_the_north_texture
-EA ./path_to_the_east_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
+NO ./assets/eagle.png
+EA ./test.png
+SO ./test.png
+WE ./test.png
 
 
 1111111111111111111

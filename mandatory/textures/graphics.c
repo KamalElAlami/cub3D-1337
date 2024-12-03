@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/28 04:28:20 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:48:51 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,9 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 	para->w_height = size[1] * TILE_SIZE;
 	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "New Window", true);
 	graphics->img = mlx_new_image(graphics->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	para->t_no = mlx_load_png(para->north);
+	if (!para->t_no)
+		exit(1);
+	para->i_no = mlx_texture_to_image(graphics->mlx, para->t_no);
+	mlx_resize_image(para->i_no, TILE_SIZE, TILE_SIZE);
 }
