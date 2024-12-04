@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/04 17:20:16 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/04 17:28:24 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,14 +152,14 @@ void	render_wall(t_player *player, int x)
 	{
 		if (player->ray->is_horizontal)
 		{
-			if (sin(player->angle) < 0)
+			if (sin(player->angle) < 0) // change player angle with ray angel
 				tex = player->params->t_no;
 			else
 				tex = player->params->t_so;
 		}
 		else
 		{
-			if (cos(player->angle) < 0)
+			if (cos(player->angle) < 0) // change player angle with ray angel
 				tex = player->params->t_ea;
 			else
 				tex = player->params->t_we;
