@@ -1,9 +1,9 @@
 F 220,070,55
 C 225,230,99
 NO ./assets/eagle.png
-EA ./test.png
-SO ./test.png
-WE ./test.png
+EA ./assets/wood.png
+SO ./assets/redbrick.png
+WE ./assets/pillar.png
 
 
 1111111111111111111

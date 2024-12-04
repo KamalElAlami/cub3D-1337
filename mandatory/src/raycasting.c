@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/04 00:44:16 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/04 17:20:16 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void	render_wall(t_player *player, int x)
 	u_int32_t	y_offset;
 	uint16_t position;
 	uint32_t test;
+	mlx_texture_t *tex;
+	
 
 	playerdist = (player->params->w_width / 2) / tan(player->fov / 2);
 	wallheight = (TILE_SIZE * playerdist) / player->ray->distance;
@@ -148,14 +150,28 @@ void	render_wall(t_player *player, int x)
 		x_offset = (int)player->ray->hitx % TILE_SIZE;
 	while (y < bot)
 	{
+		if (player->ray->is_horizontal)
+		{
+			if (sin(player->angle) < 0)
+				tex = player->params->t_no;
+			else
+				tex = player->params->t_so;
+		}
+		else
+		{
+			if (cos(player->angle) < 0)
+				tex = player->params->t_ea;
+			else
+				tex = player->params->t_we;
+		}
 		if (y >= 0 && y < WINDOW_HEIGHT){
 			int y_top = y + (wallheight / 2) - (WINDOW_HEIGHT / 2);
-			y_offset = y_top * ((double)player->params->t_no->height / wallheight);
-			position = (y_offset * player->params->t_no->width * player->params->t_no->bytes_per_pixel) + (x_offset * player->params->t_no->bytes_per_pixel);
-			if (position < 0 || position >= player->params->t_no->width * player->params->t_no->height * 4)
+			y_offset = y_top * ((double)tex->height / wallheight);
+			position = (y_offset * tex->width * tex->bytes_per_pixel) + (x_offset * tex->bytes_per_pixel);
+			if (position < 0 || position >= tex->width * tex->height * 4)
     			test = 0;
 			else
-				test = player->params->t_no->pixels[position] << 24 | player->params->t_no->pixels[position + 1] << 16 | player->params->t_no->pixels[position + 2] << 8 | player->params->t_no->pixels[position + 3];
+				test = tex->pixels[position] << 24 | tex->pixels[position + 1] << 16 | tex->pixels[position + 2] << 8 | tex->pixels[position + 3];
 			mlx_put_pixel(player->params->graph->img, x, y, test);
 		}
 		y++;

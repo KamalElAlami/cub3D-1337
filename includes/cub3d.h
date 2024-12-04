@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/04 00:45:00 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/04 17:11:15 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ typedef struct s_params
 	int			w_height;
 	mlx_texture_t	*t_no;
 	mlx_image_t		*i_no;
+	mlx_texture_t	*t_so;
+	mlx_image_t		*i_so;
+	mlx_texture_t	*t_we;
+	mlx_image_t		*i_we;
+	mlx_texture_t	*t_ea;
+	mlx_image_t		*i_ea;
 	t_graphics	*graph;
 }	t_params;
 
