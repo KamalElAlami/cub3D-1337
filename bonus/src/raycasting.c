@@ -6,23 +6,23 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/17 22:55:29 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/17 23:33:36 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include <../includes/cub3d.h>
 
-double	vertical_distance(t_player *playerr, double rayangle)
+t_rays	*vertical_distance(t_player *playerr, double rayangle)
 {
 	t_looking	direction;
 	double		stepx;
 	double		stepy;
 	double		yinter;
 	double		xinter;
-	int			wallhit;
 	double		xcheck;
+	t_rays		*temp;
 
-	wallhit = 0;
+	temp = malloc(sizeof(t_rays));
 	direction = raydirection(rayangle);
 	xinter = floor(playerr->posx / TILE_SIZE) * TILE_SIZE;
 	if (direction.right)
@@ -49,21 +49,25 @@ double	vertical_distance(t_player *playerr, double rayangle)
 		if (direction.left)
 			xcheck -= 1;
 	}
-	return (sqrt(pow(xinter - playerr->posx, 2)
-			+ pow(yinter - playerr->posy, 2)));
+	temp->hitx = xinter;
+	temp->hity = yinter;
+	temp->is_horizontal = 0;
+	temp->is_vertical = 1;
+	temp->distance = sqrt(pow(xinter - playerr->posx, 2) + pow(yinter - playerr->posy, 2));
+	return (temp);
 }
 
-double	horizontal_distance(t_player *playerr, double rayangle)
+t_rays	*horizontal_distance(t_player *playerr, double rayangle)
 {
 	t_looking	direction;
 	double		stepx;
 	double		stepy;
 	double		yinter;
 	double		xinter;
-	int			wallhit;
 	double		ycheck;
+	t_rays		*temp;
 
-	wallhit = 0;
+	temp = malloc(sizeof(t_rays));
 	direction = raydirection(rayangle);
 	yinter = floor(playerr->posy / TILE_SIZE) * TILE_SIZE;
 	if (direction.down)
@@ -90,33 +94,43 @@ double	horizontal_distance(t_player *playerr, double rayangle)
 		if (direction.up)
 			ycheck -= 1;
 	}
-	return (sqrt(pow(xinter - playerr->posx, 2)
-			+ pow(yinter - playerr->posy, 2)));
+	temp->hitx = xinter;
+	temp->hity = yinter;
+	temp->is_horizontal = 1;
+	temp->is_vertical = 0;
+	temp->distance = sqrt(pow(xinter - playerr->posx, 2) + pow(yinter - playerr->posy, 2));
+	return (temp);
 }
 
-double	raydistance(t_player *playerr, double rayangle)
+t_rays	*raydistance(t_player *playerr, double rayangle)
 {
-	double	vertical;
-	double	horizontal;
+	t_rays	*vertical;
+	t_rays	*horizontal;
 
 	vertical = vertical_distance(playerr, rayangle);
 	horizontal = horizontal_distance(playerr, rayangle);
-	if (horizontal < vertical)
+	if (horizontal->distance < vertical->distance)
 		return (horizontal);
 	else
 		return (vertical);
 }
 
-void	render_wall(t_player *player, double distance, int x)
+void	render_wall(t_player *player, int x)
 {
 	double	playerdist;
 	double	wallheight;
 	double	top;
 	double	bot;
 	int		y;
+	u_int32_t	x_offset;
+	u_int32_t	y_offset;
+	uint16_t position;
+	uint32_t test;
+	mlx_texture_t *tex;
+	
 
 	playerdist = (player->params->w_width / 2) / tan(player->fov / 2);
-	wallheight = (TILE_SIZE * playerdist) / distance;
+	wallheight = (TILE_SIZE * playerdist) / player->ray->distance;
 	top = (WINDOW_HEIGHT - wallheight) / 2;
 	bot = top + wallheight;
 	y = 0;
@@ -130,64 +144,51 @@ void	render_wall(t_player *player, double distance, int x)
 			mlx_put_pixel(player->params->graph->img, x, y, rgb_hex(player->params->ciel[0], player->params->ciel[1], player->params->ciel[2]));
 		y++;
 	}
+	if (player->ray->is_vertical)
+		x_offset = (int)player->ray->hity % TILE_SIZE;
+	else
+		x_offset = (int)player->ray->hitx % TILE_SIZE;
 	while (y < bot)
 	{
-		if (y >= 0 && y < WINDOW_HEIGHT)
-			mlx_put_pixel(player->params->graph->img, x, y, 0x808080FF);
+		if (player->ray->is_horizontal)
+		{
+			if (sin(player->angle) < 0) // change player angle with ray angel
+				tex = player->params->t_no;
+			else
+				tex = player->params->t_so;
+		}
+		else
+		{
+			if (cos(player->angle) < 0) // change player angle with ray angel
+				tex = player->params->t_ea;
+			else
+				tex = player->params->t_we;
+		}
+		if (y >= 0 && y < WINDOW_HEIGHT){
+			int y_top = y + (wallheight / 2) - (WINDOW_HEIGHT / 2);
+			y_offset = y_top * ((double)tex->height / wallheight);
+			position = (y_offset * tex->width * tex->bytes_per_pixel) + (x_offset * tex->bytes_per_pixel);
+			if (position < 0 || position >= tex->width * tex->height * 4)
+    			test = 0;
+			else
+				test = tex->pixels[position] << 24 | tex->pixels[position + 1] << 16 | tex->pixels[position + 2] << 8 | tex->pixels[position + 3];
+			mlx_put_pixel(player->params->graph->img, x, y, test);
+		}
 		y++;
 	}
 	while (y < WINDOW_HEIGHT)
 	{
-		if (y >= 0 && y < WINDOW_HEIGHT)
+		if (y >= 0 && y < WINDOW_HEIGHT){
+			
 			mlx_put_pixel(player->params->graph->img, x, y, rgb_hex(player->params->floor[0], player->params->floor[1], player->params->floor[2]));
+		}
 		y++;
 	}
-}
-void    draw_ray(t_graphics *data, t_player *player, double ray_angle, double distance)
-{
-    // Starting point (player position)
-    double start_x = player->posx;
-    double start_y = player->posy;
-    
-    // Length of the ray (you can adjust this)
-    int ray_length = (int)floor(distance);
-    
-    // Calculate end point using cos and sin
-    double end_x = start_x + (cos(ray_angle) * ray_length);
-    double end_y = start_y + (sin(ray_angle) * ray_length);
-    
-    // Variables for DDA line drawing
-    double dx = end_x - start_x;
-    double dy = end_y - start_y;
-    
-    // Number of steps needed (use the bigger delta)
-    int steps = (fabs(dx) > fabs(dy)) ? fabs(dx) : fabs(dy);
-    
-    // Calculate increment per step
-    double x_inc = dx / (double)steps;
-    double y_inc = dy / (double)steps;
-    
-    // Start drawing from player position
-    double x = start_x;
-    double y = start_y;
-    
-    // Draw the line step by step
-    for (int i = 0; i <= steps; i++)
-    {
-        // Put pixel if it's within window bounds
-        if (x >= 0 && x < player->params->w_width && y >= 0 && y < player->params->w_height)
-            mlx_put_pixel(data->img, (int)x, (int)y, 0xFF0000ff);
-        
-        // Move to next position
-        x += x_inc;
-        y += y_inc;
-    }
 }
 
 void	raycasting(void *playerr)
 {
 	t_player	*player;
-	double		distance;
 	double		rayangle;
 	double		increament;
 	int			i;
@@ -196,12 +197,12 @@ void	raycasting(void *playerr)
 	player = playerr;
 	rayangle = player->angle - (player->fov / 2);
 	increament = player->fov / WINDOW_WIDTH;
+	player->ray = malloc(sizeof(t_rays));
 	while (i < WINDOW_WIDTH)
 	{
 		rayangle = normalize_angle(rayangle);
-		distance = raydistance(player, rayangle);
-		render_wall(player, distance, i);
-		// draw_ray(player->params->graph, player, rayangle, distance);
+		player->ray = raydistance(player, rayangle);
+		render_wall(player, i);
 		rayangle += increament;
 		i++;
 	}

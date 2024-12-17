@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/04 17:28:24 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/17 23:48:48 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_rays	*vertical_distance(t_player *playerr, double rayangle)
 		if (direction.left)
 			xcheck -= 1;
 	}
+	temp->rayangle = rayangle;
 	temp->hitx = xinter;
 	temp->hity = yinter;
 	temp->is_horizontal = 0;
@@ -94,6 +95,7 @@ t_rays	*horizontal_distance(t_player *playerr, double rayangle)
 		if (direction.up)
 			ycheck -= 1;
 	}
+	temp->rayangle = rayangle;
 	temp->hitx = xinter;
 	temp->hity = yinter;
 	temp->is_horizontal = 1;
@@ -152,14 +154,14 @@ void	render_wall(t_player *player, int x)
 	{
 		if (player->ray->is_horizontal)
 		{
-			if (sin(player->angle) < 0) // change player angle with ray angel
+			if (sin(player->ray->rayangle) < 0) // change player angle with ray angel
 				tex = player->params->t_no;
 			else
 				tex = player->params->t_so;
 		}
 		else
 		{
-			if (cos(player->angle) < 0) // change player angle with ray angel
+			if (cos(player->ray->rayangle) < 0) // change player angle with ray angel
 				tex = player->params->t_ea;
 			else
 				tex = player->params->t_we;
@@ -202,6 +204,7 @@ void	raycasting(void *playerr)
 	{
 		rayangle = normalize_angle(rayangle);
 		player->ray = raydistance(player, rayangle);
+		
 		render_wall(player, i);
 		rayangle += increament;
 		i++;

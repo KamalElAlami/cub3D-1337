@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/17 22:42:02 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/17 23:38:07 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdbool.h>
 # include <math.h>
 # include <fcntl.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h" 
 
 # define TILE_SIZE 64
 # define WINDOW_WIDTH 1280
@@ -31,6 +31,7 @@
 
 typedef struct s_rays
 {
+	double rayangle;
 	double distance;
 	double hity;
 	double hitx;
