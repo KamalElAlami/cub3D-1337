@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/04 17:11:15 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/17 22:42:02 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define TILE_SIZE 64
-# define WINDOW_WIDTH 1260
+# define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720
+# define PV_WIDTH 500
+# define PV_HEIGHT 500
 
 
 typedef struct s_rays
@@ -59,7 +61,7 @@ typedef struct s_params
 	char		**map;
 	char		**uni_map;
 	int			w_width;
-	int			w_height;
+	int				w_height;
 	mlx_texture_t	*t_no;
 	mlx_image_t		*i_no;
 	mlx_texture_t	*t_so;
@@ -68,6 +70,7 @@ typedef struct s_params
 	mlx_image_t		*i_we;
 	mlx_texture_t	*t_ea;
 	mlx_image_t		*i_ea;
+	mlx_texture_t	*frames_t[22];
 	t_graphics	*graph;
 }	t_params;
 
@@ -81,6 +84,8 @@ typedef struct s_player
 	double		rotspeed;
 	t_params	*params;
 	t_rays		*ray;
+	mlx_image_t	*pv;
+	int			anim_it;
 }	t_player;
 
 typedef struct s_looking
@@ -117,6 +122,8 @@ void		ft_init_data(t_params *param);
 void		adjust_map_size(t_params *p);
 void		check_map_validity(t_params *p);
 int			ft_is_player(char c, int flag);
+void run_animation(t_player *player);
+int	put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
 // uint32_t	ft_get_pixel(t_player *p, int y, double top);

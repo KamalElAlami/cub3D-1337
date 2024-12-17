@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_control.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/30 16:43:22 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/17 00:20:37 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void mouse_event(void *player)
 {
@@ -102,4 +102,8 @@ void	key_hook(void *player)
 		p->angle += p->rotspeed;
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_ESCAPE))
 		exit(0);
+	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_E) && !p->anim_it)
+		p->anim_it = 1;
+	if (p->anim_it)
+		run_animation(p);
 }
