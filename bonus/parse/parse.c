@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/20 04:37:23 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/20 06:02:10 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	fill_map(t_params *param, int fd, char *line)
 
 	onelinemap = NULL;
 	if (!line)
-		exit (write (2,"map vide\n",9));
+		exit (write (2, "map vide\n", 9));
 	line[ft_strlen(line)] = '\n';// to check it later
 	while (line)
 	{
 		if (line[0] == '\n')
-			exit(write(2,"empty line in map\n",18));
+			exit(write(2, "empty line in map\n", 18));
 		onelinemap = ft_strjoin(onelinemap, line);
 		line = get_next_line(fd);
 	}

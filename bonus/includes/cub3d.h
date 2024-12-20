@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/20 05:28:33 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/20 06:01:23 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@
 # define PV_WIDTH 500
 # define PV_HEIGHT 500
 
-
 typedef struct s_rays
 {
-	double rayangle;
-	double distance;
-	double hity;
-	double hitx;
-	int is_horizontal;
-	int is_vertical;
-} t_rays;
+	double	rayangle;
+	double	distance;
+	double	hity;
+	double	hitx;
+	int		is_horizontal;
+	int		is_vertical;
+}	t_rays;
 
 typedef struct s_graphics
 {
@@ -48,21 +47,21 @@ typedef struct s_graphics
 
 typedef struct s_params
 {
-	char		*north;
-	int			no;
-	char		*south;
-	int			so;
-	char		*west;
-	int			we;
-	char		*east;
-	int			ea;
-	int			f;
-	int			c;
-	int			ciel[3];
-	int			floor[3];
-	char		**map;
-	char		**uni_map;
-	int			w_width;
+	char			*north;
+	int				no;
+	char			*south;
+	int				so;
+	char			*west;
+	int				we;
+	char			*east;
+	int				ea;
+	int				f;
+	int				c;
+	int				ciel[3];
+	int				floor[3];
+	char			**map;
+	char			**uni_map;
+	int				w_width;
 	int				w_height;
 	mlx_texture_t	*t_no;
 	mlx_image_t		*i_no;
@@ -73,7 +72,7 @@ typedef struct s_params
 	mlx_texture_t	*t_ea;
 	mlx_image_t		*i_ea;
 	mlx_texture_t	*frames_t[22];
-	t_graphics	*graph;
+	t_graphics		*graph;
 }	t_params;
 
 typedef struct s_player
@@ -124,8 +123,8 @@ void		ft_init_data(t_params *param);
 void		adjust_map_size(t_params *p);
 void		check_map_validity(t_params *p);
 int			ft_is_player(char c, int flag);
-void run_animation(t_player *player);
-int	put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
+void		run_animation(t_player *player);
+int			put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
 // uint32_t	ft_get_pixel(t_player *p, int y, double top);
@@ -135,7 +134,7 @@ int			*hidenseek(char **map);
 int			*get_size(char **map);
 char		get_player(char **map);
 void		key_hook(void *player);
-void 		mouse_event(void *player);
+void		mouse_event(void *player);
 u_int32_t	rgb_hex(int r, int g, int b);
 
 //raycasting

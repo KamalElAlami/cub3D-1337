@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/20 05:16:17 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/20 06:05:24 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	render_wall(t_player *player, int x)
 	double	wallheight;
 	double	top;
 	double	bot;
+	int		y_top;
 	int		y;
 	u_int32_t	x_offset;
 	u_int32_t	y_offset;
@@ -166,12 +167,13 @@ void	render_wall(t_player *player, int x)
 			else
 				tex = player->params->t_we;
 		}
-		if (y >= 0 && y < WINDOW_HEIGHT){
-			int y_top = y + (wallheight / 2) - (WINDOW_HEIGHT / 2);
+		if (y >= 0 && y < WINDOW_HEIGHT)
+		{
+			y_top = y + (wallheight / 2) - (WINDOW_HEIGHT / 2);
 			y_offset = y_top * ((double)tex->height / wallheight);
 			position = (y_offset * tex->width * tex->bytes_per_pixel) + (x_offset * tex->bytes_per_pixel);
 			if (position < 0 || position >= tex->width * tex->height * 4)
-    			test = 0;
+				test = 0;
 			else
 				test = tex->pixels[position] << 24 | tex->pixels[position + 1] << 16 | tex->pixels[position + 2] << 8 | tex->pixels[position + 3];
 			mlx_put_pixel(player->params->graph->img, x, y, test);
@@ -180,10 +182,8 @@ void	render_wall(t_player *player, int x)
 	}
 	while (y < WINDOW_HEIGHT)
 	{
-		if (y >= 0 && y < WINDOW_HEIGHT){
-			
+		if (y >= 0 && y < WINDOW_HEIGHT)
 			mlx_put_pixel(player->params->graph->img, x, y, rgb_hex(player->params->floor[0], player->params->floor[1], player->params->floor[2]));
-		}
 		y++;
 	}
 }
@@ -204,7 +204,7 @@ void	raycasting(void *playerr)
 	{
 		rayangle = normalize_angle(rayangle);
 		player->ray = raydistance(player, rayangle);
-		player->ray->distance = player->ray->distance * cos(player->angle - player->ray->rayangle); 
+		player->ray->distance = player->ray->distance * cos(player->angle - player->ray->rayangle);
 		render_wall(player, i);
 		rayangle += increament;
 		i++;

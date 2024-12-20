@@ -12,3 +12,4 @@
 [ ] leaks or garbage collector
 [ ] make direction smoother between keys and mouse
 [ ] add bonus file sufix
+[ ] Norminette
