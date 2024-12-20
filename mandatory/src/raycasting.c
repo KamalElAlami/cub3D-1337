@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/17 23:48:48 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/20 05:21:12 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/cub3d.h>
+#include "../includes/cub3d.h"
 
 t_rays	*vertical_distance(t_player *playerr, double rayangle)
 {
@@ -180,10 +180,8 @@ void	render_wall(t_player *player, int x)
 	}
 	while (y < WINDOW_HEIGHT)
 	{
-		if (y >= 0 && y < WINDOW_HEIGHT){
-			
+		if (y >= 0 && y < WINDOW_HEIGHT)
 			mlx_put_pixel(player->params->graph->img, x, y, rgb_hex(player->params->floor[0], player->params->floor[1], player->params->floor[2]));
-		}
 		y++;
 	}
 }
@@ -204,7 +202,7 @@ void	raycasting(void *playerr)
 	{
 		rayangle = normalize_angle(rayangle);
 		player->ray = raydistance(player, rayangle);
-		
+		player->ray->distance = player->ray->distance * cos(player->angle - player->ray->rayangle); 
 		render_wall(player, i);
 		rayangle += increament;
 		i++;

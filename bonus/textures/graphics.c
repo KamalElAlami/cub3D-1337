@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/17 23:34:44 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/20 05:45:42 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	initialize_graphics(t_graphics *graphics, t_params *para)
 {
@@ -21,6 +21,7 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 	para->w_height = size[1] * TILE_SIZE;
 	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "New Window", true);
 	graphics->img = mlx_new_image(graphics->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	graphics->minimap = mlx_new_image(graphics->mlx, 200, 200);
 	para->t_no = mlx_load_png(para->north);
 	if (!para->t_no)
 		exit(1);
@@ -113,7 +114,7 @@ void run_animation(t_player *player)
 		clr_img(player->pv);
 		put_txtr(player->pv, player->params->frames_t[0], player->params->graph->mlx);
 	}
-	if (cnt == 3 && i < 22)
+	if (cnt == 5 && i < 22)
 	{
 		clr_img(player->pv);
 		put_txtr(player->pv, player->params->frames_t[i], player->params->graph->mlx);

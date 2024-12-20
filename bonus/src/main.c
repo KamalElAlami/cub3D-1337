@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/17 00:22:47 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/20 05:48:09 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
+
+void mini_map()
 
 void	init_player(t_params *param, t_player *playerrr)
 {
@@ -60,6 +62,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(graph->mlx, key_hook, playerr);
 	mlx_loop_hook(graph->mlx, mouse_event, playerr);
 	mlx_image_to_window(graph->mlx, graph->img, 0, 0);
+	mlx_image_to_window(graph->mlx, graph->minimap, 0, 0);
 	mlx_image_to_window(graph->mlx, playerr->pv, 350 , 220);
 	put_txtr(playerr->pv, params->frames_t[0], graph->mlx);
 	mlx_set_cursor_mode(graph->mlx, MLX_MOUSE_HIDDEN);

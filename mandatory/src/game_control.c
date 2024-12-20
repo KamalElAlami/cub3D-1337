@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_control.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/17 00:49:25 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/20 05:19:13 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void mouse_event(void *player)
-{
-	t_player	*playerr;
-	int32_t		xmouse;
-	int32_t		ymouse;
-	double 		differnce;
-
-	playerr = (t_player *)player;
-	mlx_get_mouse_pos(playerr->params->graph->mlx, &xmouse, &ymouse);
-	differnce = xmouse - WINDOW_WIDTH / 2;
-	playerr->angle += differnce * playerr->rotspeed;
-	mlx_set_mouse_pos(playerr->params->graph->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-}
 
 int	wall_coal(t_player *player, double x, double y)
 {

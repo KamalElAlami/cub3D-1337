@@ -6,11 +6,17 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 04:58:43 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/29 05:07:24 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/20 04:41:57 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
+
+void ft_perror(char *msg)
+{
+	write(2, &msg, ft_strlen(msg));
+	exit(1);
+}
 
 static	void	collect_taxes(t_collector **taxes)
 {
@@ -36,7 +42,7 @@ static void	appand_taxes(t_collector **taxes, void *ptr)
 
 	new_tax = malloc(sizeof(t_collector));
 	if (!new_tax)
-		return (perror("Malloc :"));
+		return (ft_perror("Malloc :"));
 	new_tax->ptr = ptr;
 	new_tax->next = *taxes;
 	*taxes = new_tax;
@@ -52,7 +58,7 @@ void	*ft_malloc(size_t size, t_malloc flag)
 	{
 		ptr = malloc(size);
 		if (!ptr)
-			return (perror("Malloc :"), NULL);
+			return (ft_perror("Malloc :"), NULL);
 		appand_taxes(&freq_taxes, ptr);
 		return (ptr);
 	}
@@ -60,7 +66,7 @@ void	*ft_malloc(size_t size, t_malloc flag)
 	{
 		ptr = malloc(size);
 		if (!ptr)
-			return (perror("Malloc :"), NULL);
+			return (ft_perror("Malloc :"), NULL);
 		return (appand_taxes(&end_taxes, ptr), ptr);
 	}
 	else if (flag == CLEAR_FREQ)
