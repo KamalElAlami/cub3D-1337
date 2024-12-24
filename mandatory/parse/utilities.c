@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:04:03 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/28 04:32:49 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/24 08:06:48 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	*hidenseek(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				location[0] = i;
-				location[1] = j;
+				location[0] = i + 1;
+				location[1] = j + 1;
 				return (location);
 			}
 			j++;
@@ -77,4 +77,12 @@ char	get_player(char **map)
 uint32_t	rgb_hex(int r, int g, int b)
 {
 	return (0xFF000000 | (r << 16) | (g << 8) | b);
+}
+
+double	normalize_angle(double angle)
+{
+	angle = fmod(angle, 2 * M_PI);
+	if (angle < 0)
+		angle += (2 * M_PI);
+	return (angle);
 }

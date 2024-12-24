@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/20 05:19:13 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/24 08:13:22 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ void	key_hook(void *player)
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_S))
 		stright_movement(p, x, y, 0);
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_D))
-		strafe_movement(p, cos(p->angle + M_PI_2) * p->movespeed, sin(p->angle + M_PI_2) * p->movespeed, 1);
+		strafe_movement(p, cos(p->angle + M_PI_2) * p->movespeed,
+			sin(p->angle + M_PI_2) * p->movespeed, 1);
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_A))
-		strafe_movement(p, cos(p->angle + M_PI_2) * p->movespeed, sin(p->angle + M_PI_2) * p->movespeed, 0);
+		strafe_movement(p, cos(p->angle + M_PI_2) * p->movespeed,
+			sin(p->angle + M_PI_2) * p->movespeed, 0);
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_LEFT))
 		p->angle -= p->rotspeed;
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_RIGHT))

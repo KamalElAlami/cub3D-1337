@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/20 06:06:54 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/24 08:08:44 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@
 # define WINDOW_HEIGHT 720
 # define PV_WIDTH 500
 # define PV_HEIGHT 500
+
+typedef struct s_dda
+{
+	double		stepx;
+	double		stepy;
+	double		yinter;
+	double		xinter;
+	double		xcheck;
+	double		ycheck;
+}	t_dda;
 
 typedef struct s_rays
 {
@@ -124,6 +134,7 @@ void		check_map_validity(t_params *p);
 int			ft_is_player(char c, int flag);
 void		run_animation(t_player *player);
 int			put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
+void		render_wall(t_player *player, int x);
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
 // uint32_t	ft_get_pixel(t_player *p, int y, double top);
@@ -141,5 +152,8 @@ void		raycasting(void *playerr);
 double		normalize_angle(double angle);
 int			is_wall(t_params *params, double x, double y);
 t_looking	raydirection(double angle);
+int			is_out(t_params *params, double x, double y);
+void		init_vertical_dda(t_player *player, t_dda *data, double rayangle);
+void		init_horizontal_dda(t_player *player, t_dda *data, double rayangle);
 
 #endif

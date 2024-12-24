@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/14 18:47:26 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/23 22:13:57 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_player(t_params *param, t_player *playerrr)
 	playerrr->fov = 60 * (M_PI / 180);
 	playerrr->posx = (pos[1] * TILE_SIZE) - TILE_SIZE / 2;
 	playerrr->posy = (pos[0] * TILE_SIZE) - TILE_SIZE / 2;
+	printf("x = %f\ny = %f\n", playerrr->posx, playerrr->posy);
 	playerrr->rotspeed = 0.02;
 	playerrr->movespeed = 4.5;
 	if (p == 'N')

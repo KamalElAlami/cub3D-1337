@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
+#    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/12/17 23:35:29 by sarif            ###   ########.fr        #
+#    Updated: 2024/12/24 08:18:21 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,9 @@ MLX42_LIB = $(MLX42_BUILD)/libmlx42.a
 LIBFT_PATH = ./lib
 LIBFT = $(LIBFT_PATH)/libft.a
 
+HEADER = ./mandatory/includes/cub3d.h
+BHEADER = ./bonus/includes/cub3d_bonus.h
+
 # Includes
 INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 
@@ -31,7 +34,7 @@ INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 SRCS = mandatory/src/main.c mandatory/parse/parse.c mandatory/parse/parse_utilities.c mandatory/textures/graphics.c mandatory/parse/utilities.c mandatory/src/raycasting.c mandatory/src/raycasting_utils.c mandatory/parse/parse_utils1.c mandatory/parse/parse_utils2.c mandatory/src/game_control.c mandatory/textures/textures.c
 
 # Sources
-BSRCS = bonus/src/main.c bonus/parse/parse.c bonus/parse/parse_utilities.c bonus/textures/graphics.c bonus/parse/utilities.c bonus/src/raycasting.c bonus/src/raycasting_utils.c bonus/parse/parse_utils1.c bonus/parse/parse_utils2.c bonus/src/game_control.c
+BSRCS = bonus/src/main.c bonus/parse/parse_bonus.c bonus/parse/parse_utilities_bonus.c bonus/textures/graphics_bonus.c bonus/parse/utilities_bonus.c bonus/src/raycasting_bonus.c bonus/src/raycasting_utils_bonus.c bonus/parse/parse_utils1_bonus.c bonus/parse/parse_utils2_bonus.c bonus/src/game_control_bonus.c bonus/textures/textures_bonus.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)
@@ -42,17 +45,17 @@ BOBJS = $(BSRCS:.c=.o)
 LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
 # LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L /opt/homebrew/Cellar/glfw/3.4/lib/
 
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(MLX42_LIB) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
-bonus: $(BNAME)
+bonus: $(BNAME) $(BHEADER)
 
 $(BNAME): $(MLX42_LIB) $(LIBFT) $(BOBJS)
 	$(CC) $(CFLAGS) $(BOBJS) $(LIBS) -o $(BNAME)
 
-%.o: %.c ./includes/cub3d.h
+%.o: %.c $(HEADER) $(BHEADER)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX42_LIB):

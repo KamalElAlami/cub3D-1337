@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/30 16:10:59 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/24 08:07:46 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ int	is_wall(t_params *params, double x, double y)
 	return (0);
 }
 
-double	normalize_angle(double angle)
-{
-	angle = fmod(angle, 2 * M_PI);
-	if (angle < 0)
-		angle += (2 * M_PI);
-	return (angle);
-}
-
 t_looking	raydirection(double angle)
 {
 	t_looking	direction;
@@ -45,4 +37,55 @@ t_looking	raydirection(double angle)
 	direction.left = (angle > M_PI_2 && angle < 3 * M_PI_2);
 	direction.right = !direction.left;
 	return (direction);
+}
+
+int	is_out(t_params *params, double x, double y)
+{
+	return (x < 0 || y < 0 || x >= params->w_width || y >= params->w_height);
+}
+
+void	init_vertical_dda(t_player *player, t_dda *data, double rayangle)
+{
+	t_looking	direction;
+
+	direction = raydirection(rayangle);
+	data->xinter = floor(player->posx / TILE_SIZE) * TILE_SIZE;
+	if (direction.right)
+		data->xinter += TILE_SIZE;
+	data->yinter = player->posy
+		+ ((data->xinter - player->posx) * tan(rayangle));
+	data->stepx = TILE_SIZE;
+	if ((direction.left && data->stepx > 0)
+		|| (direction.right && data->stepx < 0))
+		data->stepx = -TILE_SIZE;
+	data->stepy = fabs(TILE_SIZE * tan(rayangle));
+	if ((direction.up && data->stepy > 0)
+		|| (direction.down && data->stepy < 0))
+		data->stepy = -data->stepy;
+	data->xcheck = data->xinter;
+	if (direction.left)
+		data->xcheck -= 1;
+}
+
+void	init_horizontal_dda(t_player *player, t_dda *data, double rayangle)
+{
+	t_looking	direction;
+
+	direction = raydirection(rayangle);
+	data->yinter = floor(player->posy / TILE_SIZE) * TILE_SIZE;
+	if (direction.down)
+		data->yinter += TILE_SIZE;
+	data->xinter = player->posx
+		+ ((data->yinter - player->posy) / tan(rayangle));
+	data->stepy = TILE_SIZE;
+	if ((direction.up && data->stepy > 0)
+		|| (direction.down && data->stepy < 0))
+		data->stepy = -TILE_SIZE;
+	data->stepx = fabs(TILE_SIZE / tan(rayangle));
+	if ((direction.left && data->stepx > 0)
+		|| (direction.right && data->stepx < 0))
+		data->stepx = -data->stepx;
+	data->ycheck = data->yinter;
+	if (direction.up)
+		data->ycheck -= 1;
 }

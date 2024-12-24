@@ -6,16 +6,16 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/20 06:02:43 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/24 08:15:14 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
-void mini_map(void *player)
-{
+// void mini_map(void *player)
+// {
 	
-}
+// }
 
 void	init_player(t_params *param, t_player *playerrr)
 {
