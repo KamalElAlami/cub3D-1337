@@ -6,20 +6,33 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 08:10:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/24 21:06:32 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
+t_rays	*fill_ray(t_player *player, double rayangle, t_dda *data, int isvert)
+{
+	t_rays		*temp;
+
+	temp = malloc(sizeof(t_rays));
+	temp->rayangle = rayangle;
+	temp->hitx = data->xinter;
+	temp->hity = data->yinter;
+	temp->is_horizontal = !isvert;
+	temp->is_vertical = isvert;
+	temp->distance = sqrt(pow(data->xinter - player->posx, 2)
+			+ pow(data->yinter - player->posy, 2));
+	return (temp);
+}
+
 t_rays	*vertical_distance(t_player *playerr, double rayangle)
 {
 	t_dda		data;
-	t_rays		*temp;
 	t_looking	direction;
 
 	direction = raydirection(rayangle);
-	temp = malloc(sizeof(t_rays));
 	init_vertical_dda(playerr, &data, rayangle);
 	while (1)
 	{
@@ -32,13 +45,7 @@ t_rays	*vertical_distance(t_player *playerr, double rayangle)
 		if (direction.left)
 			data.xcheck -= 1;
 	}
-	temp->rayangle = rayangle;
-	temp->hitx = data.xinter;
-	temp->hity = data.yinter;
-	temp->is_horizontal = 0;
-	temp->is_vertical = 1;
-	temp->distance = sqrt(pow(data.xinter - playerr->posx, 2) + pow(data.yinter - playerr->posy, 2));
-	return (temp);
+	return (fill_ray(playerr, rayangle, &data, 1));
 }
 
 t_rays	*horizontal_distance(t_player *playerr, double rayangle)
@@ -61,13 +68,7 @@ t_rays	*horizontal_distance(t_player *playerr, double rayangle)
 		if (direction.up)
 			data.ycheck -= 1;
 	}
-	temp->rayangle = rayangle;
-	temp->hitx = data.xinter;
-	temp->hity = data.yinter;
-	temp->is_horizontal = 1;
-	temp->is_vertical = 0;
-	temp->distance = sqrt(pow(data.xinter - playerr->posx, 2) + pow(data.yinter - playerr->posy, 2));
-	return (temp);
+	return (fill_ray(playerr, rayangle, &data, 0));
 }
 
 t_rays	*raydistance(t_player *playerr, double rayangle)

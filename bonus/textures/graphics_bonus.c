@@ -6,11 +6,28 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/23 21:15:01 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/24 22:55:36 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+void	load_pngs(t_params *para)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	while (i < 22)
+	{
+		path = ft_strjoin("./assets/frames/", ft_itoa(i + 1));
+		path = ft_strjoin(path, ".png");
+		para->frames_t[i] = mlx_load_png(path);
+		if (!para->frames_t[i])
+			exit(write(2, "can't load image\n", 17));
+		i++;
+	}
+}
 
 void	initialize_graphics(t_graphics *graphics, t_params *para)
 {
@@ -42,14 +59,7 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 	mlx_resize_image(para->i_we, TILE_SIZE, TILE_SIZE);
 	para->i_ea = mlx_texture_to_image(graphics->mlx, para->t_no);
 	mlx_resize_image(para->i_ea, TILE_SIZE, TILE_SIZE);
-	for(int i = 0; i < 22 ; i++)
-	{
-		char *path = ft_strjoin("./assets/frames/", ft_itoa(i + 1));
-		path = ft_strjoin(path, ".png");
-		para->frames_t[i] = mlx_load_png(path);
-		if (!para->frames_t[i])
-			exit(write(2,"can't load image\n",17));
-	}
+	load_pngs(para);
 }
 
 static uint32_t	get_rgba(int r, int g, int b, int a)
@@ -84,10 +94,10 @@ int	put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx)
 	return (1);
 }
 
-void clr_img(mlx_image_t *img)
+void	clr_img(mlx_image_t *img)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 	uint32_t	color;
 
 	y = -1;

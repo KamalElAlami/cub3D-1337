@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:04:03 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 08:12:11 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/25 16:35:41 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	*get_size(char **map)
 	int	*size;
 
 	size = malloc(sizeof(int) * 3);
-	size[0] = ft_strlen(map[0]) - 1;
+	size[0] = ft_strlen(map[0]) + 1;
 	count = 0;
 	while (map[count])
 		count++;

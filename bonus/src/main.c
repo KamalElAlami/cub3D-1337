@@ -6,16 +6,70 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 08:15:14 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/25 21:35:28 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-// void mini_map(void *player)
-// {
-	
-// }
+unsigned int  whichcolor(t_player *player, int x, int y)
+{
+	if (player->params->map[y][x] == '1')
+		return (0x000000FF);
+	if (player->params->map[y][x] == 'N' || player->params->map[y][x] == 'S'
+		|| player->params->map[y][x] == 'W' || player->params->map[y][x] == 'E')
+		return (0xE7625FFF);
+	else
+		return (0xFEEAD3FF);
+}
+
+void mini_map(void *player)
+{
+	unsigned int color;
+	int mapsize = 200;
+	t_player *p;
+	double startx;
+	double starty;
+	double endx;
+	double endy;
+	int x;
+	int y;
+
+	p = (t_player *)player;
+
+	if (p->posx < mapsize/2)
+		startx = 0;
+	else
+		startx = p->posx - mapsize/2;
+	if (p->posx + mapsize/2 > p->params->w_width)
+		endx = p->params->w_width;
+	else
+		endx = p->posx + mapsize/2;
+	if (p->posy < mapsize/2)
+    	starty = 0;
+	else
+		starty = p->posy - mapsize/2;
+
+	if (p->posy + mapsize/2 > p->params->w_height)
+		endy =  p->params->w_height;
+	else
+		endy = p->posy + mapsize/2;
+	x = startx;
+	y = starty;
+
+	while (y < endy)
+	{
+		x = startx;
+		while (x < endx)
+		{
+			color = whichcolor(p, x / TILE_SIZE, y / TILE_SIZE);
+			mlx_put_pixel(p->params->graph->minimap, x - startx, y - starty, color);
+			x++;	
+		}
+		y++;
+	}
+
+}
 
 void	init_player(t_params *param, t_player *playerrr)
 {
@@ -64,8 +118,9 @@ int	main(int ac, char **av)
 	mlx_loop_hook(graph->mlx, raycasting, playerr);
 	mlx_loop_hook(graph->mlx, key_hook, playerr);
 	mlx_loop_hook(graph->mlx, mouse_event, playerr);
+	mlx_loop_hook(graph->mlx, mini_map, playerr);
 	mlx_image_to_window(graph->mlx, graph->img, 0, 0);
-	mlx_image_to_window(graph->mlx, graph->minimap, 0, 0);
+	mlx_image_to_window(graph->mlx, graph->minimap, 0, 520);
 	mlx_image_to_window(graph->mlx, playerr->pv, 350, 220);
 	put_txtr(playerr->pv, params->frames_t[0], graph->mlx);
 	mlx_set_cursor_mode(graph->mlx, MLX_MOUSE_HIDDEN);
