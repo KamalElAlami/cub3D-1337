@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 08:17:50 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 17:25:51 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/26 23:21:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	render_wall(t_player *player, int x)
 		x_offset = (int)player->ray->hitx % TILE_SIZE;
 	while (y < bot)
 	{
-		if (player->params->is_door == 1)
+		if (player->ray->isdoor == 1)
 		{	
 			tex = player->params->t_door;
 		}
@@ -77,6 +77,7 @@ void	render_wall(t_player *player, int x)
 		}
 		y++;
 	}
+	player->ray->isdoor = 0;
 	while (y < WINDOW_HEIGHT)
 	{
 		if (y >= 0 && y < WINDOW_HEIGHT)

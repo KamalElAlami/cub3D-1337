@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 17:26:00 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/26 23:29:05 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_rays	*fill_ray(t_player *player, double rayangle, t_dda *data, int isvert)
 	temp->hity = data->yinter;
 	temp->is_horizontal = !isvert;
 	temp->is_vertical = isvert;
+	temp->isdoor = data->isdoor;
 	temp->distance = sqrt(pow(data->xinter - player->posx, 2)
 			+ pow(data->yinter - player->posy, 2));
 	return (temp);
@@ -33,10 +34,11 @@ t_rays	*vertical_distance(t_player *playerr, double rayangle)
 	t_looking	direction;
 
 	direction = raydirection(rayangle);
+	data.isdoor = 0;
 	init_vertical_dda(playerr, &data, rayangle);
 	while (1)
 	{
-		if (is_wall(playerr->params, data.xcheck, data.yinter)
+		if (is_wall(playerr, &data, 1)
 			|| is_out(playerr->params, data.xinter, data.yinter))
 			break ;
 		data.xinter += data.stepx;
@@ -52,14 +54,13 @@ t_rays	*horizontal_distance(t_player *playerr, double rayangle)
 {
 	t_looking	direction;
 	t_dda		data;
-	t_rays		*temp;
 
-	temp = malloc(sizeof(t_rays));
 	direction = raydirection(rayangle);
+	data.isdoor = 0;
 	init_horizontal_dda(playerr, &data, rayangle);
 	while (1)
 	{
-		if (is_wall(playerr->params, data.xinter, data.ycheck)
+		if (is_wall(playerr, &data, 0)
 			|| is_out(playerr->params, data.xinter, data.yinter))
 			break ;
 		data.xinter += data.stepx;
@@ -104,7 +105,6 @@ void	raycasting(void *playerr)
 			* cos(player->angle - player->ray->rayangle);
 		render_wall(player, i);
 		rayangle += increament;
-		player->params->is_door = 0;
 		i++;
 	}
 }

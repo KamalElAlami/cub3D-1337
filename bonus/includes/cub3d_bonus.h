@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 16:49:42 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/26 23:51:03 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_dda
 	double		xinter;
 	double		xcheck;
 	double		ycheck;
+	int			isdoor;
 }	t_dda;
 
 typedef struct s_rays
@@ -46,6 +47,7 @@ typedef struct s_rays
 	double	hitx;
 	int		is_horizontal;
 	int		is_vertical;
+	int		isdoor;
 }	t_rays;
 
 typedef struct s_graphics
@@ -86,8 +88,6 @@ typedef struct s_params
 	int				is_door;
 	mlx_texture_t	*t_door;
 	mlx_image_t		*i_door;
-	
-	
 }	t_params;
 
 typedef struct s_player
@@ -158,7 +158,7 @@ u_int32_t	rgb_hex(int r, int g, int b);
 void		init_player(t_params *param, t_player *playerrr);
 void		raycasting(void *playerr);
 double		normalize_angle(double angle);
-int			is_wall(t_params *params, double x, double y);
+int			is_wall(t_player *player, t_dda *data, int isvert);
 t_looking	raydirection(double angle);
 int			is_out(t_params *params, double x, double y);
 void		init_vertical_dda(t_player *player, t_dda *data, double rayangle);

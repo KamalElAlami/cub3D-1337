@@ -6,13 +6,13 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 17:08:40 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/26 23:28:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-int	is_wall(t_params *params, double x, double y)
+void	ft_is_door(t_params *params, double x, double y)
 {
 	int	gridx;
 	int	gridy;
@@ -22,11 +22,34 @@ int	is_wall(t_params *params, double x, double y)
 	if (gridx < 0 || gridy < 0
 		|| gridx >= (params->w_width / TILE_SIZE)
 		|| gridy >= (params->w_height / TILE_SIZE))
-		return (1);
-	if (params->map[gridy][gridx] == '1')
-		return (1);
+		return ;
 	if (params->map[gridy][gridx] == 'D')
-		return (params->is_door = 1, 1);
+		params->is_door = 1;
+}
+
+int	is_wall(t_player *player, t_dda *data, int isvert)
+{
+	int	gridx;
+	int	gridy;
+	
+	if (isvert)
+	{
+		gridx = (int)floor(data->xcheck / TILE_SIZE);
+		gridy = (int)floor(data->yinter / TILE_SIZE);
+	}
+	else
+	{
+		gridx = (int)floor(data->xinter / TILE_SIZE);
+		gridy = (int)floor(data->ycheck / TILE_SIZE);
+	}
+	if (gridx < 0 || gridy < 0
+		|| gridx >= (player->params->w_width / TILE_SIZE)
+		|| gridy >= (player->params->w_height / TILE_SIZE))
+		return (1);
+	if (player->params->map[gridy][gridx] == '1')
+		return (1);
+	if (player->params->map[gridy][gridx] == 'D')
+		return (data->isdoor = 1, 1);
 	return (0);
 }
 

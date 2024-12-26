@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 15:55:13 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/26 23:33:57 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	wall_coal(t_player *player, double x, double y)
 
 	i = floor(player->posx + x);
 	j = floor(player->posy + y);
-	radius = 3;
+	radius = 10;
 	if (i < 0 || j < 0 || i >= player->params->w_width
 		|| j >= player->params->w_height)
 		return (1);
