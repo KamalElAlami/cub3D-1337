@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/25 21:35:28 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/26 16:46:37 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	init_player(t_params *param, t_player *playerrr)
 	playerrr->posy = (pos[0] * TILE_SIZE) - TILE_SIZE / 2;
 	playerrr->rotspeed = 0.02;
 	playerrr->movespeed = 4.5;
+	param->is_door = 0;
 	if (p == 'N')
 		playerrr->angle = 3 * M_PI / 2;
 	else if (p == 'S')

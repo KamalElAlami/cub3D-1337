@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 08:11:45 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/26 17:08:40 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_wall(t_params *params, double x, double y)
 		return (1);
 	if (params->map[gridy][gridx] == '1')
 		return (1);
+	if (params->map[gridy][gridx] == 'D')
+		return (params->is_door = 1, 1);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 08:19:13 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/26 16:49:42 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ typedef struct s_params
 	mlx_image_t		*i_ea;
 	mlx_texture_t	*frames_t[22];
 	t_graphics		*graph;
+	int				is_door;
+	mlx_texture_t	*t_door;
+	mlx_image_t		*i_door;
+	
+	
 }	t_params;
 
 typedef struct s_player
@@ -136,6 +141,7 @@ int			ft_is_player(char c, int flag);
 void		run_animation(t_player *player);
 int			put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
 void		render_wall(t_player *player, int x);
+void		check_doors_validity(t_params *p);
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
 // uint32_t	ft_get_pixel(t_player *p, int y, double top);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 22:55:36 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/26 16:52:06 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 	para->t_we = mlx_load_png(para->west);
 	if (!para->t_we)
 		exit(1);
+	para->t_door = mlx_load_png("./assets/door.png");
+	if (!para->t_door)
+		exit(1);
+	para->i_door = mlx_texture_to_image(graphics->mlx, para->t_door);
+	mlx_resize_image(para->i_door, TILE_SIZE, TILE_SIZE);
 	para->i_no = mlx_texture_to_image(graphics->mlx, para->t_no);
 	mlx_resize_image(para->i_no, TILE_SIZE, TILE_SIZE);
 	para->i_so = mlx_texture_to_image(graphics->mlx, para->t_no);
@@ -124,7 +129,7 @@ void run_animation(t_player *player)
 		clr_img(player->pv);
 		put_txtr(player->pv, player->params->frames_t[0], player->params->graph->mlx);
 	}
-	if (cnt == 3 && i < 22)
+	if (cnt == 6 && i < 22)
 	{
 		clr_img(player->pv);
 		put_txtr(player->pv, player->params->frames_t[i], player->params->graph->mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 21:06:32 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/26 17:26:00 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	raycasting(void *playerr)
 			* cos(player->angle - player->ray->rayangle);
 		render_wall(player, i);
 		rayangle += increament;
+		player->params->is_door = 0;
 		i++;
 	}
 }

@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 03:20:19 by sarif             #+#    #+#             */
-/*   Updated: 2024/12/23 21:14:41 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/26 16:11:28 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+void	check_doors_validity(t_params *p)
+{
+	char **map;
+	int	i;
+	int	j;
+
+	map = p->map;
+	j = -1;
+	while (map[++j])
+	{
+		i = -1;
+		while (map[j][++i])
+		{
+			if (map[j][i] == 'D')
+			{
+				if (!((i > 0 && i < (int)ft_strlen(map[j]) - 1 && map[j][i - 1] == '1' && map[j][i + 1] == '1') ||
+					  (j > 0 && map[j - 1][i] == '1' && map[j + 1] && map[j + 1][i] == '1')))
+				{
+					exit(write(2, "not a valid door\n", 17));
+				}
+			}
+		}
+	}
+}
 
 int	ft_is_player(char c, int flag)
 {
@@ -25,10 +50,8 @@ int	ft_is_player(char c, int flag)
 			else
 				return (1);
 		}
-		else if (c != '1' && c != '0' && c != ' ')
-		{
+		else if (c != '1' && c != '0' && c != ' ' && c != 'D')
 			exit (write(2, "forbidden charchter\n", 20));
-		}
 		else
 			return (0);
 	}
@@ -74,4 +97,5 @@ void	check_map_validity(t_params *p)
 		}
 	}
 	ft_is_player(0, 0);
+	check_doors_validity(p);
 }

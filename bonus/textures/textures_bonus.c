@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 08:17:50 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 08:19:27 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/26 17:25:51 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ void	render_wall(t_player *player, int x)
 		x_offset = (int)player->ray->hitx % TILE_SIZE;
 	while (y < bot)
 	{
-		if (player->ray->is_horizontal)
+		if (player->params->is_door == 1)
+		{	
+			tex = player->params->t_door;
+		}
+		else if (player->ray->is_horizontal)
 		{
+
 			if (sin(player->ray->rayangle) < 0) // change player angle with ray angel
 				tex = player->params->t_no;
 			else
