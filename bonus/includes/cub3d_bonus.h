@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/28 23:24:56 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/29 04:19:17 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,22 @@
 # define WINDOW_HEIGHT 720
 # define PV_WIDTH 500
 # define PV_HEIGHT 500
+# define MINI_SCALE 30
+# define MINI_MAP 200	
+
+
+typedef struct s_minimap
+{
+	double startx;
+	double starty;
+	double endx;
+	double endy;
+	double w_width;
+	double w_height;
+	double posx;
+	double posy;
+	
+}	t_minimap;
 
 typedef struct s_dda
 {
@@ -144,6 +160,7 @@ void		run_animation(t_player *player);
 int			put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
 void		render_wall(t_player *player, int x);
 void		check_doors_validity(t_params *p);
+void		clr_img(mlx_image_t *img, int width, int height);
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
 // uint32_t	ft_get_pixel(t_player *p, int y, double top);

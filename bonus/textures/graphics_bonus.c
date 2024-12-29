@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 16:52:06 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/29 04:14:51 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,17 @@ int	put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx)
 	return (1);
 }
 
-void	clr_img(mlx_image_t *img)
+void	clr_img(mlx_image_t *img, int width, int height)
 {
 	int			x;
 	int			y;
 	uint32_t	color;
 
 	y = -1;
-	while (++y < WINDOW_HEIGHT)
+	while (++y < height)
 	{
 		x = -1;
-		while (++x < WINDOW_WIDTH)
+		while (++x < width)
 		{
 			color = get_rgba(255, 255, 255, 0);
 			mlx_put_pixel(img, x, y, color);
@@ -126,12 +126,12 @@ void run_animation(t_player *player)
 	{
 		i = 0;
 		player->anim_it = 0;
-		clr_img(player->pv);
+		clr_img(player->pv, WINDOW_WIDTH, WINDOW_HEIGHT);
 		put_txtr(player->pv, player->params->frames_t[0], player->params->graph->mlx);
 	}
 	if (cnt == 6 && i < 22)
 	{
-		clr_img(player->pv);
+		clr_img(player->pv, WINDOW_WIDTH, WINDOW_HEIGHT);
 		put_txtr(player->pv, player->params->frames_t[i], player->params->graph->mlx);
 		i++;
 		cnt = 0;

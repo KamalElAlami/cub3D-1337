@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/28 23:42:39 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/29 04:15:30 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,59 +65,79 @@ unsigned int  whichcolor(t_player *player, int x, int y)
 {
 	if (player->params->map[y][x] == '1')
 		return (0x000000FF);
-	if (player->params->map[y][x] == 'N' || player->params->map[y][x] == 'S'
-		|| player->params->map[y][x] == 'W' || player->params->map[y][x] == 'E')
-		return (0xE7625FFF);
 	else
 		return (0xFEEAD3FF);
 }
 
-void mini_map(void *player)
+void draw_player(t_player *p, t_minimap *mini)
 {
-	unsigned int color;
-	int mapsize = 200;
-	t_player *p;
-	double startx;
-	double starty;
-	double endx;
-	double endy;
+	int radius;
 	int x;
 	int y;
 
-	p = (t_player *)player;
-
-	if (p->posx < mapsize/2)
-		startx = 0;
-	else
-		startx = p->posx - mapsize/2;
-	if (p->posx + mapsize/2 > p->params->w_width)
-		endx = p->params->w_width;
-	else
-		endx = p->posx + mapsize/2;
-	if (p->posy < mapsize/2)
-		starty = 0;
-	else
-		starty = p->posy - mapsize/2;
-
-	if (p->posy + mapsize/2 > p->params->w_height)
-		endy =  p->params->w_height;
-	else
-		endy = p->posy + mapsize/2;
-	x = startx;
-	y = starty;
-
-	while (y < endy)
+	x = 0;
+	radius = 10;
+	while (x <= radius)
 	{
-		x = startx;
-		while (x < endx)
+		y = 0;
+		while (y <= radius)
 		{
-			color = whichcolor(p, x / TILE_SIZE, y / TILE_SIZE);
-			mlx_put_pixel(p->params->graph->minimap, x - startx, y - starty, color);
+			mlx_put_pixel(p->params->graph->minimap, (mini->posx - mini->startx) + x, (mini->posy - mini->starty) + y, 0xFF0000FF);
+			y++;
+		}
+		x++;
+	}
+}
+
+void init_minimap(t_minimap *mini, t_player *player)
+{
+    mini->w_width = player->params->w_width * ((float)MINI_SCALE / TILE_SIZE);
+    mini->w_height = player->params->w_height * ((float)MINI_SCALE / TILE_SIZE);
+    mini->posx = player->posx * ((float)MINI_SCALE / TILE_SIZE);
+    mini->posy = player->posy * ((float)MINI_SCALE / TILE_SIZE);
+	if (mini->posx < (MINI_MAP / 2))
+		mini->startx = 0;
+	else
+		mini->startx = mini->posx - (MINI_MAP / 2);
+	if (mini->posx + (MINI_MAP / 2) > mini->w_width)
+		mini->endx = mini->w_width;
+	else
+		mini->endx = mini->posx + (MINI_MAP / 2);
+	if (mini->posy < (MINI_MAP / 2))
+    	mini->starty = 0;
+	else
+		mini->starty = mini->posy - (MINI_MAP / 2);
+	if (mini->posy + (MINI_MAP / 2) > mini->w_height)
+		mini->endy =  mini->w_height;
+	else
+		mini->endy = mini->posy + (MINI_MAP / 2);
+}
+
+void mini_map(void *player)
+{
+	t_minimap *mini;
+	unsigned int color;
+	t_player *p;
+	int x;
+	int y;
+
+	p = (t_player *)player; 
+	mini = malloc(sizeof(t_minimap));
+	init_minimap(mini, p);
+	y = mini->starty;
+	clr_img(p->params->graph->minimap, MINI_MAP, MINI_MAP);
+	while (y < mini->endy)
+	{
+		x = mini->startx;
+		while (x < mini->endx)
+		{
+			color = whichcolor(p, x / MINI_SCALE, y / MINI_SCALE);
+			mlx_put_pixel(p->params->graph->minimap, x - mini->startx, y - mini->starty, color);
 			x++;	
 		}
 		y++;
 	}
-
+	draw_player(p, mini);
 }
 
 void	init_player(t_params *param, t_player *playerrr)
