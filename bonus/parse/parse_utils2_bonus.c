@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 03:20:19 by sarif             #+#    #+#             */
-/*   Updated: 2024/12/26 16:11:28 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/30 00:12:21 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_doors_validity(t_params *p)
 {
-	char **map;
-	int	i;
-	int	j;
+	char	**map;
+	int		i;
+	int		j;
 
 	map = p->map;
 	j = -1;
@@ -27,8 +27,10 @@ void	check_doors_validity(t_params *p)
 		{
 			if (map[j][i] == 'D')
 			{
-				if (!((i > 0 && i < (int)ft_strlen(map[j]) - 1 && map[j][i - 1] == '1' && map[j][i + 1] == '1') ||
-					  (j > 0 && map[j - 1][i] == '1' && map[j + 1] && map[j + 1][i] == '1')))
+				if (!((i > 0 && i < (int)ft_strlen(map[j]) - 1
+							&& map[j][i - 1] == '1' && map[j][i + 1] == '1')
+					|| (j > 0 && map[j - 1][i] == '1' && map[j + 1]
+					&& map[j + 1][i] == '1')))
 				{
 					exit(write(2, "not a valid door\n", 17));
 				}
