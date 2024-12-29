@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 23:51:03 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/28 23:24:56 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_params
 	int				ciel[3];
 	int				floor[3];
 	char			**map;
+	int				map_width;
+	int				map_height;
 	char			**uni_map;
 	int				w_width;
 	int				w_height;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 21:03:18 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:47:51 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ t_rays	*horizontal_distance(t_player *playerr, double rayangle)
 {
 	t_looking	direction;
 	t_dda		data;
-	t_rays		*temp;
 
-	temp = malloc(sizeof(t_rays));
 	direction = raydirection(rayangle);
 	init_horizontal_dda(playerr, &data, rayangle);
 	while (1)

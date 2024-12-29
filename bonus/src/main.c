@@ -3,14 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 21:16:29 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/28 23:42:39 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+void	close_door(t_player *player, int player_y, int player_x)
+{
+	t_player	*p;
+	int			i;
+	int			j;
+	float		close_distance;
+	float		distance;
+
+	(1) && (i = -1, close_distance = 2.0, p = (t_player *)player);
+
+	while (++i < p->params->map_height)
+	{
+		j = -1;
+		while (++j < p->params->map_width)
+		{
+			if (p->params->map[i][j] == 'O')
+			{
+				distance = sqrt(pow(player_x - j, 2) + pow(player_y - i, 2));
+				if (distance > close_distance)
+					p->params->map[i][j] = 'D';
+			}
+		}
+	}
+}
+
+void	open_close_door(void *player)
+{
+	int			i;
+	int			j;
+	t_player	*p;
+
+	p = (t_player *)player;
+	i = p->posy / TILE_SIZE;
+	j = p->posx / TILE_SIZE;
+
+	if (j > 0 && p->params->map[i][j - 1] == 'D')
+		p->params->map[i][j - 1] = 'O';
+
+	if (j < p->params->map_width - 1 && p->params->map[i][j + 1] == 'D')
+		p->params->map[i][j + 1] = 'O';
+
+	if (i > 0 && p->params->map[i - 1][j] == 'D')
+		p->params->map[i - 1][j] = 'O';
+
+	if (i < p->params->map_height - 1 && p->params->map[i + 1][j] == 'D')
+		p->params->map[i + 1][j] = 'O';
+	close_door(player, i, j);
+}
 
 unsigned int  whichcolor(t_player *player, int x, int y)
 {
@@ -46,7 +95,7 @@ void mini_map(void *player)
 	else
 		endx = p->posx + mapsize/2;
 	if (p->posy < mapsize/2)
-    	starty = 0;
+		starty = 0;
 	else
 		starty = p->posy - mapsize/2;
 
@@ -86,6 +135,8 @@ void	init_player(t_params *param, t_player *playerrr)
 	playerrr->posy = (pos[0] * TILE_SIZE) - TILE_SIZE / 2;
 	playerrr->rotspeed = 0.02;
 	playerrr->movespeed = 4.5;
+	param->map_width = ft_strlen(param->map[0]);
+	param->map_height = map_size(param->map);
 	if (p == 'N')
 		playerrr->angle = 3 * M_PI / 2;
 	else if (p == 'S')
@@ -119,6 +170,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(graph->mlx, key_hook, playerr);
 	mlx_loop_hook(graph->mlx, mouse_event, playerr);
 	mlx_loop_hook(graph->mlx, mini_map, playerr);
+	mlx_loop_hook(graph->mlx, open_close_door, playerr) ;
 	mlx_image_to_window(graph->mlx, graph->img, 0, 0);
 	mlx_image_to_window(graph->mlx, graph->minimap, 0, 520);
 	mlx_image_to_window(graph->mlx, playerr->pv, 350, 220);
