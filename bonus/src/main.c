@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/29 04:15:30 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:46:04 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,22 +95,18 @@ void init_minimap(t_minimap *mini, t_player *player)
     mini->w_height = player->params->w_height * ((float)MINI_SCALE / TILE_SIZE);
     mini->posx = player->posx * ((float)MINI_SCALE / TILE_SIZE);
     mini->posy = player->posy * ((float)MINI_SCALE / TILE_SIZE);
-	if (mini->posx < (MINI_MAP / 2))
-		mini->startx = 0;
-	else
-		mini->startx = mini->posx - (MINI_MAP / 2);
-	if (mini->posx + (MINI_MAP / 2) > mini->w_width)
-		mini->endx = mini->w_width;
-	else
-		mini->endx = mini->posx + (MINI_MAP / 2);
-	if (mini->posy < (MINI_MAP / 2))
-    	mini->starty = 0;
-	else
-		mini->starty = mini->posy - (MINI_MAP / 2);
-	if (mini->posy + (MINI_MAP / 2) > mini->w_height)
-		mini->endy =  mini->w_height;
-	else
-		mini->endy = mini->posy + (MINI_MAP / 2);
+    mini->startx = fmax(0, mini->posx - (MINI_MAP / 2));
+    mini->endx = fmin(mini->w_width, mini->posx + (MINI_MAP / 2));
+    mini->starty = fmax(0, mini->posy - (MINI_MAP / 2));
+    mini->endy = fmin(mini->w_height, mini->posy + (MINI_MAP / 2));
+    if (mini->endx == mini->w_width)
+        mini->startx = mini->endx - MINI_MAP;
+    if (mini->endy == mini->w_height)
+        mini->starty =mini->endy - MINI_MAP;
+    if (mini->startx == 0)
+        mini->endx = mini->w_width;
+    if (mini->starty == 0)
+        mini->endy =mini->w_height;
 }
 
 void mini_map(void *player)
