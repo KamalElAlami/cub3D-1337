@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/29 23:46:04 by kael-ala         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:47:44 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void mini_map(void *player)
 	int y;
 
 	p = (t_player *)player; 
-	mini = malloc(sizeof(t_minimap));
+	mini = ft_malloc(sizeof(t_minimap), END);
 	init_minimap(mini, p);
 	y = mini->starty;
 	clr_img(p->params->graph->minimap, MINI_MAP, MINI_MAP);
@@ -143,7 +143,7 @@ void	init_player(t_params *param, t_player *playerrr)
 
 	playerrr->pv = mlx_new_image(param->graph->mlx, PV_HEIGHT, PV_WIDTH);
 	if (!playerrr->pv)
-		exit(1); // TODO : free and exit
+		clear_prog(param, 1, "can't load image\n");
 	p = get_player(param->map);
 	pos = hidenseek(param->map);
 	playerrr->fov = 60 * (M_PI / 180);
@@ -169,9 +169,10 @@ int	main(int ac, char **av)
 	t_graphics	*graph;
 	t_player	*playerr;
 
-	params = malloc(sizeof(t_params));
-	graph = malloc(sizeof(t_graphics));
-	playerr = malloc(sizeof(t_player));
+	params = ft_malloc(sizeof(t_params), END);
+	graph = ft_malloc(sizeof(t_graphics), END);
+	playerr = ft_malloc(sizeof(t_player), END);
+	params->player = playerr;
 	if (ac != 2 || check_path(av[1]))
 		return (write(2, "map extention error\n", 20), 1);
 	ft_init_data(params);
@@ -190,7 +191,7 @@ int	main(int ac, char **av)
 	mlx_image_to_window(graph->mlx, graph->img, 0, 0);
 	mlx_image_to_window(graph->mlx, graph->minimap, 0, 520);
 	mlx_image_to_window(graph->mlx, playerr->pv, 350, 220);
-	put_txtr(playerr->pv, params->frames_t[0], graph->mlx);
+	put_txtr(playerr->pv, params->frames_t[0]);
 	mlx_set_cursor_mode(graph->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(graph->mlx);
 }

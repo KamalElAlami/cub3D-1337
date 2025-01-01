@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/25 16:32:53 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/31 20:56:07 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ int	main(int ac, char **av)
 	t_graphics	*graph;
 	t_player	*playerr;
 
-	params = malloc(sizeof(t_params));
-	graph = malloc(sizeof(t_graphics));
-	playerr = malloc(sizeof(t_player));
+	params = ft_malloc(sizeof(t_params), END);
+	graph = ft_malloc(sizeof(t_graphics), END);
+	playerr = ft_malloc(sizeof(t_player), END);
+	params->player = playerr;
 	if (ac != 2 || check_path(av[1]))
 		return (write(2, "map extention error\n", 20), 1);
 	ft_init_data(params);

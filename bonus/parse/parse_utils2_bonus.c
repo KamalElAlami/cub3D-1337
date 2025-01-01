@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 03:20:19 by sarif             #+#    #+#             */
-/*   Updated: 2024/12/30 00:12:21 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/01 17:48:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ void	check_doors_validity(t_params *p)
 							&& map[j][i - 1] == '1' && map[j][i + 1] == '1')
 					|| (j > 0 && map[j - 1][i] == '1' && map[j + 1]
 					&& map[j + 1][i] == '1')))
-				{
-					exit(write(2, "not a valid door\n", 17));
-				}
+					clear_prog(p, 1, "not a valid door\n");
 			}
 		}
 	}
 }
 
-int	ft_is_player(char c, int flag)
+int	is_player(t_params *p, char c, int flag)
 {
 	static int	i;
 
@@ -48,18 +46,18 @@ int	ft_is_player(char c, int flag)
 		if ((c == 'N' || c == 'W' || c == 'S' || c == 'E') && ++i)
 		{
 			if (i > 4)
-				exit(write(2, "more than 1 player\n", 19));
+				clear_prog(p, 1, "more than 1 player\n");
 			else
 				return (1);
 		}
 		else if (c != '1' && c != '0' && c != ' ' && c != 'D')
-			exit (write(2, "forbidden charchter\n", 20));
+			clear_prog(p, 1, "forbidden charchter\n");
 		else
 			return (0);
 	}
 	else
 		if (i == 0)
-			exit(write(2, "player missing\n", 16));
+			clear_prog(p, 1, "player missing\n");
 	return (0);
 }
 
@@ -79,25 +77,25 @@ void	check_map_validity(t_params *p)
 	int	j;
 
 	j = -1;
-	while (p->uni_map[++j])
+	while (p->u_map[++j])
 	{
 		i = -1;
-		while (p->uni_map[j][++i])
+		while (p->u_map[j][++i])
 		{
-			if ((p->uni_map[j][i] == '0' || ft_is_player(p->uni_map[j][i], 1)) &&
-				(p->uni_map[j][i + 1] == 32 || p->uni_map[j][i + 1] == 0)) // right
-				exit(write(2, "ERROR\n", 6));
-			else if ((p->uni_map[j][i] == '0' || ft_is_player(p->uni_map[j][i], 1)) &&
-				(i == 0 || p->uni_map[j][i - 1] == 32)) // left
-				exit(write(2, "ERROR\n", 6));
-			else if ((p->uni_map[j][i] == '0' || ft_is_player(p->uni_map[j][i], 1)) &&
-				(j == 0 || p->uni_map[j - 1][i] == 32)) // up
-				exit(write(2, "ERROR\n", 6));
-			else if ((p->uni_map[j][i] == '0' || ft_is_player(p->uni_map[j][i], 1)) &&
-				(j == map_size(p->uni_map) - 1 || p->uni_map[j + 1][i] == 32)) // down
-				exit(write(2, "ERROR\n", 6));
+			if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1)) &&
+				(p->u_map[j][i + 1] == 32 || p->u_map[j][i + 1] == 0))
+				clear_prog(p, 1, "map invalid\n");
+			else if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1))
+				&& (i == 0 || p->u_map[j][i - 1] == 32))
+				clear_prog(p, 1, "map invalid\n");
+			else if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1))
+				&& (j == 0 || p->u_map[j - 1][i] == 32))
+				clear_prog(p, 1, "map invalid\n");
+			else if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1))
+				&& (j == map_size(p->u_map) - 1 || p->u_map[j + 1][i] == 32))
+				clear_prog(p, 1, "map invalid\n");
 		}
 	}
-	ft_is_player(0, 0);
+	is_player(p, 0, 0);
 	check_doors_validity(p);
 }

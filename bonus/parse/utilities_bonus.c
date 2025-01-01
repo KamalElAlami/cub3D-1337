@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilities_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:04:03 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/25 16:35:41 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/31 11:54:35 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	*get_size(char **map)
 	int	count;
 	int	*size;
 
-	size = malloc(sizeof(int) * 3);
+	size = ft_malloc(sizeof(int) * 3, END);
 	size[0] = ft_strlen(map[0]) + 1;
 	count = 0;
 	while (map[count])
@@ -33,7 +33,7 @@ int	*hidenseek(char **map)
 	int	*location;
 
 	i = 0;
-	location = malloc(sizeof(int) * 3);
+	location = ft_malloc(sizeof(int) * 3, END);
 	while (map[i])
 	{
 		j = 0;

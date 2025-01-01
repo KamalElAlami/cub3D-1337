@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/30 00:03:31 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/31 22:00:09 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,30 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "New Window", true);
 	graphics->img = mlx_new_image(graphics->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	para->t_no = mlx_load_png(para->north);
-	if (!para->t_no)
-		exit(1);
 	para->t_so = mlx_load_png(para->south);
-	if (!para->t_so)
-		exit(1);
 	para->t_ea = mlx_load_png(para->east);
-	if (!para->t_ea)
-		exit(1);
 	para->t_we = mlx_load_png(para->west);
-	if (!para->t_we)
-		exit(1);
-	para->i_no = mlx_texture_to_image(graphics->mlx, para->t_no);
-	mlx_resize_image(para->i_no, TILE_SIZE, TILE_SIZE);
-	para->i_so = mlx_texture_to_image(graphics->mlx, para->t_no);
-	mlx_resize_image(para->i_so, TILE_SIZE, TILE_SIZE);
-	para->i_we = mlx_texture_to_image(graphics->mlx, para->t_no);
-	mlx_resize_image(para->i_we, TILE_SIZE, TILE_SIZE);
-	para->i_ea = mlx_texture_to_image(graphics->mlx, para->t_no);
-	mlx_resize_image(para->i_ea, TILE_SIZE, TILE_SIZE);
+	if (!para->t_no || !para->t_so || !para->t_ea || !para->t_we)
+		clear_prog(para, 1, "can't load texture\n");
+}
+
+void	clear_prog(t_params *p, int status, char *err)
+{
+
+	if (err)
+		write(2, err, ft_strlen(err));
+	if (p->t_no)
+		mlx_delete_texture(p->t_no);
+	if (p->t_so)
+		mlx_delete_texture(p->t_so);
+	if (p->t_we)
+		mlx_delete_texture(p->t_we);
+	if (p->t_ea)
+		mlx_delete_texture(p->t_ea);
+	if (p->graph->img)
+		mlx_delete_image(p->graph->mlx, p->graph->img);
+	if (p->graph->mlx)
+		mlx_close_window(p->graph->mlx);
+	ft_malloc(0, CLEAR_END);
+	exit (status);
 }

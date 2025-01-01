@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utilities.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/28 04:26:57 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/31 21:44:23 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_store_rgb_norm(char **degits)
+void	ft_store_rgb_norm(char **degits, t_params *p)
 {
 	int	i;
 
 	i = 0;
 	while (degits[i])
 		if (check_rgb(degits[i++], 1))
-			exit(write(2, "rgb error 1 \n", 13));
+			clear_prog(p, 1, "rgb color error\n");
 	if (i != 3)
-		exit(write(2, "rgb error 2 \n", 13));
+		clear_prog(p, 1, "rgb color error\n");
 }
 
 void	ft_store_rgb(t_params *p, char *line)
@@ -31,18 +31,18 @@ void	ft_store_rgb(t_params *p, char *line)
 	if (!ft_strncmp(line, "C ", 2) && ++p->c == 1)
 	{
 		if (check_rgb(line + ft_avoid(line + 2) - 1, 0))
-			exit (write(2, "rgb error 0 \n", 13));
+			clear_prog(p, 1, "rgb color error\n");
 		degits = ft_split(line + ft_avoid(line + 3), ',');
-		ft_store_rgb_norm(degits);
+		ft_store_rgb_norm(degits, p);
 		(1) && (p->ciel[0] = ft_atoi(degits[0]),
 		p->ciel[1] = ft_atoi(degits[1]), p->ciel[2] = ft_atoi(degits[2]));
 	}
 	else if (!ft_strncmp(line, "F ", 2) && ++p->f == 1)
 	{
 		if (check_rgb(line + ft_avoid(line + 2) - 1, 0))
-			exit (write(2, "rgb error 0 \n", 13));
+			clear_prog(p, 1, "rgb color error\n");
 		degits = ft_split(line + ft_avoid(line + 2) - 1, ',');
-		ft_store_rgb_norm(degits);
+		ft_store_rgb_norm(degits, p);
 		(1) && (p->floor[0] = ft_atoi(degits[0]),
 		p->floor[1] = ft_atoi(degits[1]), p->floor[2] = ft_atoi(degits[2]));
 	}
@@ -71,6 +71,8 @@ void	ft_init_data(t_params *param)
 	param->c = 0, param->f = 0);
 	(1) && (param->floor[0] = -1, param->floor[1] = -1, param->floor[2] = -1,
 	param->ciel[0] = -1, param->ciel[1] = -1, param->ciel[2] = -1);
+	(1) && (param->t_no = NULL, param->t_so = NULL, param->t_ea = NULL,
+	param->t_we = NULL);
 }
 
 int	check_path(char *path)

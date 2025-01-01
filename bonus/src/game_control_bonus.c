@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_control_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 23:33:57 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/01 17:48:02 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	key_hook(void *player)
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_RIGHT))
 		p->angle += p->rotspeed;
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_ESCAPE))
-		exit(0);
+		clear_prog(p->params, 0, NULL);
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_E) && !p->anim_it)
 		p->anim_it = 1;
 	if (p->anim_it == 1)

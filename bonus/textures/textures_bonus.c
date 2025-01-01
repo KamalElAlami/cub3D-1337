@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 08:17:50 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/29 00:14:45 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/01 17:29:06 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,36 @@ void	render_wall(t_player *player, int x)
 			mlx_put_pixel(player->params->graph->img, x, y, rgb_hex(player->params->floor[0], player->params->floor[1], player->params->floor[2]));
 		y++;
 	}
+}
+
+void	clear_prog(t_params *p, int status, char *err)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 22)
+		if (p->frames_t[i])
+			mlx_delete_texture(p->frames_t[i]);
+	if (err)
+		write(2, err, ft_strlen(err));
+	if (p->t_no)
+		mlx_delete_texture(p->t_no);
+	if (p->t_so)
+		mlx_delete_texture(p->t_so);
+	if (p->t_we)
+		mlx_delete_texture(p->t_we);
+	if (p->t_ea)
+		mlx_delete_texture(p->t_ea);
+	if (p->t_door)
+		mlx_delete_texture(p->t_door);
+	if (p->player->pv)
+		mlx_delete_image(p->graph->mlx, p->player->pv);
+	if (p->graph->minimap)
+		mlx_delete_image(p->graph->mlx, p->graph->minimap);
+	if (p->graph->img)
+		mlx_delete_image(p->graph->mlx, p->graph->img);
+	if (p->graph->mlx)
+		mlx_close_window(p->graph->mlx);
+	ft_malloc(0, CLEAR_END);
+	exit (status);
 }

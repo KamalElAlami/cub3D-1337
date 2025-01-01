@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/23 21:14:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:51:13 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_add_spaces(char *line, int size)
 	char	*result;
 	int		i;
 
-	result = malloc(size + 1);
+	result = ft_malloc(size + 1, END);
 	i = 0;
 	while (i < size)
 	{
@@ -45,14 +45,14 @@ void	adjust_map_size(t_params *p)
 			max = len;
 		i++;
 	}
-	p->uni_map = malloc (sizeof (char *) * (i + 1));
+	p->u_map = ft_malloc (sizeof (char *) * (i + 1), END);
 	i = 0;
 	while (p->map[i])
 	{
 		line = ft_add_spaces(p->map[i], max);
-		p->uni_map[i++] = ft_strdup(line);
+		p->u_map[i++] = ft_strdup(line);
 	}
-	p->uni_map[i] = NULL;
+	p->u_map[i] = NULL;
 }
 
 int	fill_map(t_params *param, int fd, char *line)
@@ -61,12 +61,12 @@ int	fill_map(t_params *param, int fd, char *line)
 
 	onelinemap = NULL;
 	if (!line)
-		exit (write (2, "map vide\n", 9));
+		clear_prog(param, 1, "empty map\n");
 	line[ft_strlen(line)] = '\n';// to check it later
 	while (line)
 	{
 		if (line[0] == '\n')
-			exit(write(2, "empty line in map\n", 18));
+			clear_prog(param, 1, "empty line in map\n");
 		onelinemap = ft_strjoin(onelinemap, line);
 		line = get_next_line(fd);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 23:29:05 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/31 11:55:48 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_rays	*fill_ray(t_player *player, double rayangle, t_dda *data, int isvert)
 {
 	t_rays		*temp;
 
-	temp = malloc(sizeof(t_rays));
+	temp = ft_malloc(sizeof(t_rays), END);
 	temp->rayangle = rayangle;
 	temp->hitx = data->xinter;
 	temp->hity = data->yinter;
@@ -96,7 +96,7 @@ void	raycasting(void *playerr)
 	player = playerr;
 	rayangle = player->angle - (player->fov / 2);
 	increament = player->fov / WINDOW_WIDTH;
-	player->ray = malloc(sizeof(t_rays));
+	player->ray = ft_malloc(sizeof(t_rays), END);
 	while (i < WINDOW_WIDTH)
 	{
 		rayangle = normalize_angle(rayangle);

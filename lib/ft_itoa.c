@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 04:03:26 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/30 16:53:33 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/31 11:56:31 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_itoa(int n)
 		n *= -1;
 		extra = 2;
 	}
-	buffer = malloc(sizeof(char) * (int_count(n) + extra));
+	buffer = ft_malloc(sizeof(char) * (int_count(n) + extra), END);
 	if (!buffer)
 		return (NULL);
 	set_char(buffer, n, extra);

@@ -13,3 +13,5 @@
 [ ] Norminette
 [ ] Mini map
 [ ] protections and error handling
+
+ft_strdup + ft_strjoin + ft_substr (not included the garbage collector)

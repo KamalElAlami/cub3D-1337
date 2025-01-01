@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tax_collector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 04:58:43 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/20 04:41:57 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/31 12:49:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ static	void	collect_taxes(t_collector **taxes)
 	{
 		temp = current;
 		current = current->next;
-		free(temp->ptr);
-		free(temp);
+		if (temp->ptr)
+			free(temp->ptr);
+		if (temp)
+			free(temp);
 	}
 	*taxes = NULL;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 03:31:30 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/11/27 03:34:13 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/12/31 11:56:13 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char *ft_itoa_base(int value, int base)
         temp /= base;
         i++;
     }
-    str = malloc(sizeof(char) * (i + neg + 1));
+    str = ft_malloc(sizeof(char) * (i + neg + 1), END);
     str[i + neg] = '\0';
     while (i--)
     {

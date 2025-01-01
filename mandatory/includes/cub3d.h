@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/30 00:08:55 by sarif            ###   ########.fr       */
+/*   Updated: 2024/12/31 22:05:54 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_graphics
 	mlx_image_t	*img;
 }	t_graphics;
 
+typedef struct s_player	t_player;
+
 typedef struct s_params
 {
 	char			*north;
@@ -69,22 +71,18 @@ typedef struct s_params
 	int				ciel[3];
 	int				floor[3];
 	char			**map;
-	char			**uni_map;
+	char			**u_map;
 	int				w_width;
 	int				w_height;
 	mlx_texture_t	*t_no;
-	mlx_image_t		*i_no;
 	mlx_texture_t	*t_so;
-	mlx_image_t		*i_so;
 	mlx_texture_t	*t_we;
-	mlx_image_t		*i_we;
 	mlx_texture_t	*t_ea;
-	mlx_image_t		*i_ea;
-	mlx_texture_t	*frames_t[22];
 	t_graphics		*graph;
+	t_player		*player; 
 }	t_params;
 
-typedef struct s_player
+struct s_player
 {
 	double		fov;
 	double		angle;
@@ -94,9 +92,7 @@ typedef struct s_player
 	double		rotspeed;
 	t_params	*params;
 	t_rays		*ray;
-	mlx_image_t	*pv;
-	int			anim_it;
-}	t_player;
+};
 
 typedef struct s_looking
 {
@@ -121,7 +117,7 @@ void		ft_store_data(t_params *param, char *line);
 void		ft_init_data(t_params *param);
 void		ft_store_rgb(t_params *p, char *line);
 int			check_rgb(char *line, int flag);
-void		ft_store_rgb_norm(char **degits);
+void		ft_store_rgb_norm(char **degits, t_params *p);
 int			ft_isblank(char c);
 int			ft_avoid(char *line);
 int			is_map_ready(char *line);
@@ -131,10 +127,11 @@ int			fill_map(t_params *param, int fd, char *line);
 void		ft_init_data(t_params *param);
 void		adjust_map_size(t_params *p);
 void		check_map_validity(t_params *p);
-int			ft_is_player(char c, int flag);
+int			is_player(char c, int flag, t_params *p);
 void		run_animation(t_player *player);
 int			put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
 void		render_wall(t_player *player, int x);
+void		clear_prog(t_params *p, int status, char *err);
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
 // uint32_t	ft_get_pixel(t_player *p, int y, double top);
