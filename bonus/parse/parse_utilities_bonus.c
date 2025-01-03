@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utilities_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 00:58:29 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 21:47:07 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,24 @@ void	ft_store_data(t_params *p, char *line)
 
 void	ft_init_data(t_params *param)
 {
+	int	i;
+
+	i = -1;
+	param->player->anim_it = 0;
 	(1) && (param->north = NULL, param->east = NULL, param->south = NULL,
 	param->west = NULL, param->map = NULL);
 	(1) && (param->no = 0, param->ea = 0, param->so = 0, param->we = 0,
 	param->c = 0, param->f = 0);
 	(1) && (param->floor[0] = -1, param->floor[1] = -1, param->floor[2] = -1,
 	param->ciel[0] = -1, param->ciel[1] = -1, param->ciel[2] = -1);
+	(1) && (param->t_no = NULL, param->t_so = NULL, param->t_we = NULL,
+	param->t_ea = NULL, param->t_door = NULL);
+	while (++i < 22)
+		param->frames_t[i] = NULL;
+	param->player->pv = NULL;
+	param->graph->img = NULL;
+	param->graph->minimap = NULL;
+	param->graph->mlx = NULL;
 }
 
 int	check_path(char *path)

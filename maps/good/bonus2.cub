@@ -1,18 +1,16 @@
-   WE                            textures/wolfenstein/grey_stone.xpm
-NO      textures/wolfenstein/purple_stone.xpm
-
-D textures/wolfenstein/door.xpm
+WE                            ./assets/eagle.png
+NO      ./assets/eagle.png
 
 
-SO textures/wolfenstein/red_brick.xpm
+SO ./assets/eagle.png
 
-F      17,    38,     64
+F      17,38,64
 
 
 
 
-C 218, 234, 255
-EA textures/wolfenstein/wood.xpm
+C 218,234,255
+EA ./assets/eagle.png
 11111
 1E0D01
 11111

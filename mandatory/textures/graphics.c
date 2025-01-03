@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 01:03:29 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 22:01:38 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	clear_prog(t_params *p, int status, char *err)
 		mlx_delete_texture(p->t_we);
 	if (p->t_ea)
 		mlx_delete_texture(p->t_ea);
-	// if (p->graph && p->graph->img) segv here i don't know why 
-	// 	mlx_delete_image(p->graph->mlx, p->graph->img);
-	// if (p->graph->mlx)
-	// 	mlx_close_window(p->graph->mlx);
+	if (p->graph->img)
+		mlx_delete_image(p->graph->mlx, p->graph->img);
+	if (p->graph->mlx)
+		mlx_close_window(p->graph->mlx);
 	ft_malloc(0, CLEAR_END);
 	exit (status);
 }

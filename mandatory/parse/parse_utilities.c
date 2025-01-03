@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utilities.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 00:59:08 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 22:00:53 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	ft_init_data(t_params *param)
 	param->ciel[0] = -1, param->ciel[1] = -1, param->ciel[2] = -1);
 	(1) && (param->t_no = NULL, param->t_so = NULL, param->t_ea = NULL,
 	param->t_we = NULL);
+	param->graph->img = NULL;
+	param->graph->mlx = NULL;
 }
 
 int	check_path(char *path)

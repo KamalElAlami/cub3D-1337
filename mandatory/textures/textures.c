@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 03:40:14 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 00:20:51 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 22:02:50 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	render_wall(t_player *player, int x)
 	double	bot;
 	int		y;
 
-	playerdist = (player->params->w_width / 2) / tan(player->fov / 2);
+	playerdist = (player->params->w_width / 2) / tan(player->fov / 2) / 1.5;
 	wallheight = (TILE_SIZE * playerdist) / player->ray->distance;
 	top = (WINDOW_HEIGHT - wallheight) / 2;
 	bot = top + wallheight;

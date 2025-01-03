@@ -1,15 +1,15 @@
-   WE                            textures/wolfenstein/grey_stone.xpm
-NO      textures/wolfenstein/purple_stone.xpm
+   WE                            ./assets/eagle.png
+NO      ./assets/eagle.png
 
 
 
-SO textures/wolfenstein/red_brick.xpm
+SO ./assets/eagle.png
 
 F      17,    38,     64
 
-EA textures/wolfenstein/wood.xpm
+EA ./assets/eagle.png
 
-D textures/wolfenstein/door.xpm
+# D textures/wolfenstein/door.xpm
 
 C 218, 234, 235
 

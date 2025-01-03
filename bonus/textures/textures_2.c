@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:23:41 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/03 00:49:37 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 21:53:35 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	run_animation(t_player *player)
 		clr_img(player->pv, WINDOW_WIDTH, WINDOW_HEIGHT);
 		put_txtr(player->pv, player->params->frames_t[0]);
 	}
-	if (cnt == 6 && i < 22)
+	if (cnt == 3 && i < 22)
 	{
 		clr_img(player->pv, WINDOW_WIDTH, WINDOW_HEIGHT);
 		put_txtr(player->pv, player->params->frames_t[i]);

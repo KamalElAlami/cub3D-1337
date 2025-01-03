@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/31 20:56:07 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 21:59:55 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ int	main(int ac, char **av)
 	graph = ft_malloc(sizeof(t_graphics), END);
 	playerr = ft_malloc(sizeof(t_player), END);
 	params->player = playerr;
+	params->graph = graph;
+	playerr->params = params;
+	ft_init_data(params);
 	if (ac != 2 || check_path(av[1]))
 		return (write(2, "map extention error\n", 20), 1);
-	ft_init_data(params);
 	if (check_sheet(av[1], params))
 		return (1);
 	initialize_graphics(graph, params);
 	init_player(params, playerr);
-	params->graph = graph;
-	playerr->params = params;
 	mlx_loop_hook(graph->mlx, raycasting, playerr);
 	mlx_loop_hook(graph->mlx, key_hook, playerr);
 	mlx_image_to_window(graph->mlx, graph->img, 0, 0);

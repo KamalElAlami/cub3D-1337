@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+         #
+#    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2025/01/03 01:13:19 by sarif            ###   ########.fr        #
+#    Updated: 2025/01/03 22:12:42 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 BNAME = cub3D_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 # MLX42
 MLX42_PATH = ./MLX42
@@ -42,8 +42,8 @@ OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 
 # Libraries
-# LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
-LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L /opt/homebrew/Cellar/glfw/3.4/lib/
+LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
+#LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L /opt/homebrew/Cellar/glfw/3.4/lib/
 
 all: $(NAME) 
 

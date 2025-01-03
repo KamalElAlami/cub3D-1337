@@ -2,9 +2,9 @@ F 76,76,76
 C 99,99,99
 
 NO ./assets/eagle.png
-EA ./assets/wood.png
-SO ./assets/redbrick.png
-WE ./assets/purplestone.png
+EA ./assets/eagle.png
+SO ./assets/eagle.png
+WE ./assets/eagle.png
 
 1111111111111111111
 1001001001001000001

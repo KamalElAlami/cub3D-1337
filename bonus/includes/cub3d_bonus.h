@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 01:15:55 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 21:37:25 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ typedef struct s_params
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
 	mlx_texture_t	*frames_t[22];
+	mlx_texture_t	*t_door;
 	t_graphics		*graph;
 	t_player		*player;
 	int				is_door;
-	mlx_texture_t	*t_door;
 }	t_params;
 
 struct s_player
