@@ -6,11 +6,33 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 03:40:14 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/30 00:09:02 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 00:20:51 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	draw_ciel(int *y, double top, int x, t_params *params)
+{
+	while (*y < top)
+	{
+		if (*y >= 0 && *y < WINDOW_HEIGHT)
+			mlx_put_pixel(params->graph->img, x, *y,
+				rgb_hex(params->ciel[0], params->ciel[1], params->ciel[2]));
+		(*y)++;
+	}
+}
+
+void	draw_floor(int *y, int x, t_params *params)
+{
+	while (*y < WINDOW_HEIGHT)
+	{
+		if (*y >= 0 && *y < WINDOW_HEIGHT)
+			mlx_put_pixel(params->graph->img, x, *y,
+				rgb_hex(params->floor[0], params->floor[1], params->floor[2]));
+		(*y)++;
+	}
+}
 
 static mlx_texture_t	*which_texture(t_player *player)
 {
@@ -79,12 +101,7 @@ void	render_wall(t_player *player, int x)
 		top = 0;
 	if (bot > WINDOW_HEIGHT)
 		bot = WINDOW_HEIGHT;
-	while (y < top)
-	{
-		if (y >= 0 && y < WINDOW_HEIGHT)
-			mlx_put_pixel(player->params->graph->img, x, y, rgb_hex(player->params->ciel[0], player->params->ciel[1], player->params->ciel[2]));
-		y++;
-	}
+	draw_ciel(&y, top, x, player->params);
 	while (y < bot)
 	{
 		if (y >= 0 && y < WINDOW_HEIGHT)
@@ -92,10 +109,5 @@ void	render_wall(t_player *player, int x)
 				get_color_tex(player, which_texture(player), wallheight, y));
 		y++;
 	}
-	while (y < WINDOW_HEIGHT)
-	{
-		if (y >= 0 && y < WINDOW_HEIGHT)
-			mlx_put_pixel(player->params->graph->img, x, y, rgb_hex(player->params->floor[0], player->params->floor[1], player->params->floor[2]));
-		y++;
-	}
+	draw_floor(&y, x, player->params);
 }

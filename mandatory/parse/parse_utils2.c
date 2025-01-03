@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 03:20:19 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/01 17:47:01 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 00:06:55 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_player(char c, int flag, t_params *p)
 		if ((c == 'N' || c == 'W' || c == 'S' || c == 'E') && ++i)
 		{
 			if (i > 4)
-				clear_prog(p, 1,  "more than 1 player\n");
+				clear_prog(p, 1, "more than 1 player\n");
 			else
 				return (1);
 		}

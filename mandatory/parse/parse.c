@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/31 21:37:50 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 01:16:30 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	adjust_map_size(t_params *p)
 	while (p->map[i])
 	{
 		line = ft_add_spaces(p->map[i], max);
-		p->u_map[i++] = ft_strdup(line);
+		p->u_map[i++] = ft_strdup_gb(line);
 	}
 	p->u_map[i] = NULL;
 }
@@ -62,12 +62,12 @@ int	fill_map(t_params *param, int fd, char *line)
 	onelinemap = NULL;
 	if (!line)
 		clear_prog(param, 1, "map vide\n");
-	line[ft_strlen(line)] = '\n';// to check it later
+	line[ft_strlen(line)] = '\n';
 	while (line)
 	{
 		if (line[0] == '\n')
 			clear_prog(param, 1, "empty line in map\n");
-		onelinemap = ft_strjoin(onelinemap, line);
+		onelinemap = ft_strjoin_gb(onelinemap, line);
 		line = get_next_line(fd);
 	}
 	param->map = ft_split(onelinemap, '\n');

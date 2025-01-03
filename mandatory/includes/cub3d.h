@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/31 22:05:54 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 01:15:48 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_params
 	mlx_texture_t	*t_we;
 	mlx_texture_t	*t_ea;
 	t_graphics		*graph;
-	t_player		*player; 
+	t_player		*player;
 }	t_params;
 
 struct s_player
@@ -132,6 +132,9 @@ void		run_animation(t_player *player);
 int			put_txtr(mlx_image_t *img, mlx_texture_t *txtr, mlx_t *mlx);
 void		render_wall(t_player *player, int x);
 void		clear_prog(t_params *p, int status, char *err);
+void		draw_ciel(int *y, double top, int x, t_params *params);
+void		draw_floor(int *y, int x, t_params *params);
+
 // graph 
 void		initialize_graphics(t_graphics *graphics, t_params *para);
 // uint32_t	ft_get_pixel(t_player *p, int y, double top);
@@ -152,5 +155,9 @@ t_looking	raydirection(double angle);
 int			is_out(t_params *params, double x, double y);
 void		init_vertical_dda(t_player *player, t_dda *data, double rayangle);
 void		init_horizontal_dda(t_player *player, t_dda *data, double rayangle);
+
+//utils
+char	*ft_strdup_gb(const char *s1);
+char	*ft_strjoin_gb(char const *s1, char const *s2);
 
 #endif

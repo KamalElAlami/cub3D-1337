@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/01 17:50:09 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 01:15:55 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define PV_HEIGHT 500
 # define MINI_SCALE 30
 # define MINI_MAP 200	
-
 
 typedef struct s_minimap
 {
@@ -159,11 +158,14 @@ void		render_wall(t_player *player, int x);
 void		check_doors_validity(t_params *p);
 void		clr_img(mlx_image_t *img, int width, int height);
 void		clear_prog(t_params *p, int status, char *err);
-// graph 
-void		initialize_graphics(t_graphics *graphics, t_params *para);
-// uint32_t	ft_get_pixel(t_player *p, int y, double top);
+void		draw_ciel(int *y, double top, int x, t_params *params);
+void		draw_floor(int *y, int x, t_params *params);
+void		open_close_door(void *player);
+void		close_door(t_player *player, int player_y, int player_x);
 
-// utils 
+// graph 
+
+// utils
 int			*hidenseek(char **map);
 int			*get_size(char **map);
 char		get_player(char **map);
@@ -180,5 +182,16 @@ t_looking	raydirection(double angle);
 int			is_out(t_params *params, double x, double y);
 void		init_vertical_dda(t_player *player, t_dda *data, double rayangle);
 void		init_horizontal_dda(t_player *player, t_dda *data, double rayangle);
+// minimap
+void		mini_map(void *player);
+void		init_minimap(t_minimap *mini, t_player *player);
+void		draw_player(t_player *p, t_minimap *mini);
+void		initialize_graphics(t_graphics *graphics, t_params *para);
+// colors
+unsigned	int	whichcolor(t_player *player, int x, int y);
+unsigned	int	get_rgba(int r, int g, int b, int a);
 
+//utils
+char	*ft_strdup_gb(const char *s1);
+char	*ft_strjoin_gb(char const *s1, char const *s2);
 #endif

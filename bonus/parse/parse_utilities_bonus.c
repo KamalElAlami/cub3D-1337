@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/01 17:50:20 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 00:58:29 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ void	ft_store_rgb(t_params *p, char *line)
 
 void	ft_store_data(t_params *p, char *line)
 {
-	line = ft_strtrim(line, " ");// leak
+	line = ft_strtrim(line, " ");
 	if (!ft_strncmp(line, "NO ", 3) && ++p->no == 1)
-		p->north = ft_strdup(line + ft_avoid(line + 3));
+		p->north = ft_strdup_gb(line + ft_avoid(line + 3));
 	else if (!ft_strncmp(line, "SO ", 3) && ++p->so)
-		p->south = ft_strdup(line + ft_avoid(line + 3));
+		p->south = ft_strdup_gb(line + ft_avoid(line + 3));
 	else if (!ft_strncmp(line, "WE ", 3) && ++p->we)
-		p->west = ft_strdup(line + ft_avoid(line + 3));
+		p->west = ft_strdup_gb(line + ft_avoid(line + 3));
 	else if (!ft_strncmp(line, "EA ", 3) && ++p->ea)
-		p->east = ft_strdup(line + ft_avoid(line + 3));
+		p->east = ft_strdup_gb(line + ft_avoid(line + 3));
 	else
 		ft_store_rgb(p, line);
 }

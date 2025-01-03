@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/01 17:48:02 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 00:36:43 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,4 @@ void	key_hook(void *player)
 		p->angle += p->rotspeed;
 	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_ESCAPE))
 		clear_prog(p->params, 0, NULL);
-	if (mlx_is_key_down(p->params->graph->mlx, MLX_KEY_E) && !p->anim_it)
-		p->anim_it = 1;
-	if (p->anim_it == 1)
-		run_animation(p);
 }

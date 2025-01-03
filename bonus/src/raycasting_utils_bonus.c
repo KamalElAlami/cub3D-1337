@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/26 23:28:45 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 00:48:56 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_wall(t_player *player, t_dda *data, int isvert)
 {
 	int	gridx;
 	int	gridy;
-	
+
 	if (isvert)
 	{
 		gridx = (int)floor(data->xcheck / TILE_SIZE);
@@ -62,11 +62,6 @@ t_looking	raydirection(double angle)
 	direction.left = (angle > M_PI_2 && angle < 3 * M_PI_2);
 	direction.right = !direction.left;
 	return (direction);
-}
-
-int	is_out(t_params *params, double x, double y)
-{
-	return (x < 0 || y < 0 || x >= params->w_width || y >= params->w_height);
 }
 
 void	init_vertical_dda(t_player *player, t_dda *data, double rayangle)

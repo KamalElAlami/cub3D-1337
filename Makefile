@@ -6,7 +6,7 @@
 #    By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2024/12/31 21:14:10 by sarif            ###   ########.fr        #
+#    Updated: 2025/01/03 01:13:19 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,10 @@ BHEADER = ./bonus/includes/cub3d_bonus.h
 INCLUDES = -I./includes -I$(MLX42_PATH)/include -I$(LIBFT_PATH)
 
 # Sources
-SRCS = mandatory/src/main.c mandatory/parse/parse.c mandatory/parse/parse_utilities.c mandatory/textures/graphics.c mandatory/parse/utilities.c mandatory/src/raycasting.c mandatory/src/raycasting_utils.c mandatory/parse/parse_utils1.c mandatory/parse/parse_utils2.c mandatory/src/game_control.c mandatory/textures/textures.c
+SRCS = mandatory/src/main.c mandatory/parse/parse.c mandatory/parse/parse_utilities.c mandatory/textures/graphics.c mandatory/parse/utilities.c mandatory/src/raycasting.c mandatory/src/raycasting_utils.c mandatory/parse/parse_utils1.c mandatory/parse/parse_utils2.c mandatory/src/game_control.c mandatory/textures/textures.c mandatory/src/utils.c
 
 # Sources
-BSRCS = bonus/src/main.c bonus/parse/parse_bonus.c bonus/parse/parse_utilities_bonus.c bonus/textures/graphics_bonus.c bonus/parse/utilities_bonus.c bonus/src/raycasting_bonus.c bonus/src/raycasting_utils_bonus.c bonus/parse/parse_utils1_bonus.c bonus/parse/parse_utils2_bonus.c bonus/src/game_control_bonus.c bonus/textures/textures_bonus.c
+BSRCS = bonus/src/main.c bonus/parse/parse_bonus.c bonus/parse/parse_utilities_bonus.c bonus/textures/graphics_bonus.c bonus/parse/utilities_bonus.c bonus/src/raycasting_bonus.c bonus/src/raycasting_utils_bonus.c bonus/parse/parse_utils1_bonus.c bonus/parse/parse_utils2_bonus.c bonus/src/game_control_bonus.c bonus/textures/textures_bonus.c bonus/src/utils.c bonus/textures/textures_2.c bonus/src/mini_map.c
 
 # Objects
 OBJS = $(SRCS:.c=.o)

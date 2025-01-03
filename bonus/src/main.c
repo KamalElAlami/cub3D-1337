@@ -6,135 +6,11 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/01 17:47:44 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 00:48:10 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-
-void	close_door(t_player *player, int player_y, int player_x)
-{
-	t_player	*p;
-	int			i;
-	int			j;
-	float		close_distance;
-	float		distance;
-
-	(1) && (i = -1, close_distance = 2.0, p = (t_player *)player);
-
-	while (++i < p->params->map_height)
-	{
-		j = -1;
-		while (++j < p->params->map_width)
-		{
-			if (p->params->map[i][j] == 'O')
-			{
-				distance = sqrt(pow(player_x - j, 2) + pow(player_y - i, 2));
-				if (distance > close_distance)
-					p->params->map[i][j] = 'D';
-			}
-		}
-	}
-}
-
-void	open_close_door(void *player)
-{
-	int			i;
-	int			j;
-	t_player	*p;
-
-	p = (t_player *)player;
-	i = p->posy / TILE_SIZE;
-	j = p->posx / TILE_SIZE;
-
-	if (j > 0 && p->params->map[i][j - 1] == 'D')
-		p->params->map[i][j - 1] = 'O';
-
-	if (j < p->params->map_width - 1 && p->params->map[i][j + 1] == 'D')
-		p->params->map[i][j + 1] = 'O';
-
-	if (i > 0 && p->params->map[i - 1][j] == 'D')
-		p->params->map[i - 1][j] = 'O';
-
-	if (i < p->params->map_height - 1 && p->params->map[i + 1][j] == 'D')
-		p->params->map[i + 1][j] = 'O';
-	close_door(player, i, j);
-}
-
-unsigned int  whichcolor(t_player *player, int x, int y)
-{
-	if (player->params->map[y][x] == '1')
-		return (0x000000FF);
-	else
-		return (0xFEEAD3FF);
-}
-
-void draw_player(t_player *p, t_minimap *mini)
-{
-	int radius;
-	int x;
-	int y;
-
-	x = 0;
-	radius = 10;
-	while (x <= radius)
-	{
-		y = 0;
-		while (y <= radius)
-		{
-			mlx_put_pixel(p->params->graph->minimap, (mini->posx - mini->startx) + x, (mini->posy - mini->starty) + y, 0xFF0000FF);
-			y++;
-		}
-		x++;
-	}
-}
-
-void init_minimap(t_minimap *mini, t_player *player)
-{
-    mini->w_width = player->params->w_width * ((float)MINI_SCALE / TILE_SIZE);
-    mini->w_height = player->params->w_height * ((float)MINI_SCALE / TILE_SIZE);
-    mini->posx = player->posx * ((float)MINI_SCALE / TILE_SIZE);
-    mini->posy = player->posy * ((float)MINI_SCALE / TILE_SIZE);
-    mini->startx = fmax(0, mini->posx - (MINI_MAP / 2));
-    mini->endx = fmin(mini->w_width, mini->posx + (MINI_MAP / 2));
-    mini->starty = fmax(0, mini->posy - (MINI_MAP / 2));
-    mini->endy = fmin(mini->w_height, mini->posy + (MINI_MAP / 2));
-    if (mini->endx == mini->w_width)
-        mini->startx = mini->endx - MINI_MAP;
-    if (mini->endy == mini->w_height)
-        mini->starty =mini->endy - MINI_MAP;
-    if (mini->startx == 0)
-        mini->endx = mini->w_width;
-    if (mini->starty == 0)
-        mini->endy =mini->w_height;
-}
-
-void mini_map(void *player)
-{
-	t_minimap *mini;
-	unsigned int color;
-	t_player *p;
-	int x;
-	int y;
-
-	p = (t_player *)player; 
-	mini = ft_malloc(sizeof(t_minimap), END);
-	init_minimap(mini, p);
-	y = mini->starty;
-	clr_img(p->params->graph->minimap, MINI_MAP, MINI_MAP);
-	while (y < mini->endy)
-	{
-		x = mini->startx;
-		while (x < mini->endx)
-		{
-			color = whichcolor(p, x / MINI_SCALE, y / MINI_SCALE);
-			mlx_put_pixel(p->params->graph->minimap, x - mini->startx, y - mini->starty, color);
-			x++;	
-		}
-		y++;
-	}
-	draw_player(p, mini);
-}
 
 void	init_player(t_params *param, t_player *playerrr)
 {
@@ -163,6 +39,15 @@ void	init_player(t_params *param, t_player *playerrr)
 		playerrr->angle = 0;
 }
 
+void	ft_loop_hook(mlx_t *mlx, t_player *player)
+{
+	mlx_loop_hook(mlx, raycasting, player);
+	mlx_loop_hook(mlx, key_hook, player);
+	mlx_loop_hook(mlx, mouse_event, player);
+	mlx_loop_hook(mlx, mini_map, player);
+	mlx_loop_hook(mlx, open_close_door, player);
+}
+
 int	main(int ac, char **av)
 {
 	t_params	*params;
@@ -183,11 +68,7 @@ int	main(int ac, char **av)
 	params->graph = graph;
 	playerr->params = params;
 	init_player(params, playerr);
-	mlx_loop_hook(graph->mlx, raycasting, playerr);
-	mlx_loop_hook(graph->mlx, key_hook, playerr);
-	mlx_loop_hook(graph->mlx, mouse_event, playerr);
-	mlx_loop_hook(graph->mlx, mini_map, playerr);
-	mlx_loop_hook(graph->mlx, open_close_door, playerr) ;
+	ft_loop_hook(graph->mlx, playerr);
 	mlx_image_to_window(graph->mlx, graph->img, 0, 0);
 	mlx_image_to_window(graph->mlx, graph->minimap, 0, 520);
 	mlx_image_to_window(graph->mlx, playerr->pv, 350, 220);
