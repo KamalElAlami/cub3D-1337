@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:42:42 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/03 23:02:27 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 13:12:57 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,28 @@ void	init_minimap(t_minimap *mini, t_player *player)
 	mini->w_height = player->params->w_height * ((float)MINI_SCALE / TILE_SIZE);
 	mini->posx = player->posx * ((float)MINI_SCALE / TILE_SIZE);
 	mini->posy = player->posy * ((float)MINI_SCALE / TILE_SIZE);
-	mini->startx = fmax(0, mini->posx - (MINI_MAP / 2));
-	mini->endx = fmin(mini->w_width, mini->posx + (MINI_MAP / 2));
-	mini->starty = fmax(0, mini->posy - (MINI_MAP / 2));
-	mini->endy = fmin(mini->w_height, mini->posy + (MINI_MAP / 2));
-	if (mini->endx == mini->w_width)
-		mini->startx = mini->endx - MINI_MAP;
-	if (mini->endy == mini->w_height)
-		mini->starty = mini->endy - MINI_MAP;
-	if (mini->startx == 0)
+	if (mini->w_width > MINI_MAP || mini->w_height > MINI_MAP)
+	{
+		mini->startx = fmax(0, mini->posx - (MINI_MAP / 2));
+		mini->endx = fmin(mini->w_width, mini->posx + (MINI_MAP / 2));
+		mini->starty = fmax(0, mini->posy - (MINI_MAP / 2));
+		mini->endy = fmin(mini->w_height, mini->posy + (MINI_MAP / 2));
+		if (mini->endx == mini->w_width)
+			mini->startx = mini->endx - MINI_MAP;
+		if (mini->endy == mini->w_height)
+			mini->starty = mini->endy - MINI_MAP;
+		if (mini->startx == 0)
+			mini->endx = mini->w_width;
+		if (mini->starty == 0)
+			mini->endy = mini->w_height;
+	}
+	else
+	{
+		mini->startx = 0;
+		mini->starty = 0;
 		mini->endx = mini->w_width;
-	if (mini->starty == 0)
 		mini->endy = mini->w_height;
+	}
 }
 
 void	mini_map(void *player)

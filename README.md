@@ -9,9 +9,9 @@
 [x] player slide from the direction angle
 [x] make direction smoother between keys and mouse
 [x] add bonus file sufix
-[ ] leaks or garbage collector
-[ ] Norminette
-[ ] Mini map
-[ ] protections and error handling
+[-] leaks or garbage collector
+[x] Norminette
+[x] Mini map
+[-] protections and error handling
 
 ft_strdup + ft_strjoin + ft_substr (not included the garbage collector)
