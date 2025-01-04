@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:42:42 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/03 00:43:09 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 23:02:27 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 unsigned int	whichcolor(t_player *player, int x, int y)
 {
-	if (player->params->map[y][x] == '1')
+	if (player->params->u_map[y][x] == '1')
 		return (0x000000FF);
 	else
 		return (0xFEEAD3FF);

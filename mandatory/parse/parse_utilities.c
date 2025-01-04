@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utilities.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 22:00:53 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 00:56:42 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_store_rgb_norm(char **degits, t_params *p)
 
 	i = 0;
 	while (degits[i])
-		if (check_rgb(degits[i++], 1))
-			clear_prog(p, 1, "rgb color error\n");
+		if (check_rgb(ft_strtrim(degits[i++], " "), 1))
+			clear_prog(p, 1, "rgb color error2\n");
 	if (i != 3)
 		clear_prog(p, 1, "rgb color error\n");
 }
@@ -31,7 +31,7 @@ void	ft_store_rgb(t_params *p, char *line)
 	if (!ft_strncmp(line, "C ", 2) && ++p->c == 1)
 	{
 		if (check_rgb(line + ft_avoid(line + 2) - 1, 0))
-			clear_prog(p, 1, "rgb color error\n");
+			clear_prog(p, 1, "rgb color error1\n");
 		degits = ft_split(line + ft_avoid(line + 3), ',');
 		ft_store_rgb_norm(degits, p);
 		(1) && (p->ciel[0] = ft_atoi(degits[0]),
@@ -50,7 +50,6 @@ void	ft_store_rgb(t_params *p, char *line)
 
 void	ft_store_data(t_params *p, char *line)
 {
-	line = ft_strtrim(line, " ");
 	if (!ft_strncmp(line, "NO ", 3) && ++p->no == 1)
 		p->north = ft_strdup_gb(line + ft_avoid(line + 3));
 	else if (!ft_strncmp(line, "SO ", 3) && ++p->so)

@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:27:05 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/03 01:15:43 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 01:30:28 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	clear_prog_norm(t_params *p)
 		mlx_delete_texture(p->t_door);
 }
 
-void	clear_prog(t_params *p, int status, char *err) // segv must initialize data
+void	clear_prog(t_params *p, int status, char *err)
 {
 	int	i;
 

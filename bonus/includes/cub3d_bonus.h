@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 21:37:25 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 01:30:18 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,6 @@ unsigned	int	whichcolor(t_player *player, int x, int y);
 unsigned	int	get_rgba(int r, int g, int b, int a);
 
 //utils
-char	*ft_strdup_gb(const char *s1);
-char	*ft_strjoin_gb(char const *s1, char const *s2);
+char		*ft_strdup_gb(const char *s1);
+char		*ft_strjoin_gb(char const *s1, char const *s2);
 #endif

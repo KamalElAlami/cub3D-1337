@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:50:26 by sarif             #+#    #+#             */
-/*   Updated: 2024/11/28 04:26:42 by kael-ala         ###   ########.fr       */
+/*   Updated: 2025/01/04 00:56:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	is_map_ready(char *line)
 {
 	if (!line[0] || is_all_blank(line))
 		return (0);
+	line = ft_strtrim(line, " ");
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3)
 		|| !ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))

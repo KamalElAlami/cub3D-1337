@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 01:15:48 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 01:30:04 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void		init_vertical_dda(t_player *player, t_dda *data, double rayangle);
 void		init_horizontal_dda(t_player *player, t_dda *data, double rayangle);
 
 //utils
-char	*ft_strdup_gb(const char *s1);
-char	*ft_strjoin_gb(char const *s1, char const *s2);
+char		*ft_strdup_gb(const char *s1);
+char		*ft_strjoin_gb(char const *s1, char const *s2);
 
 #endif

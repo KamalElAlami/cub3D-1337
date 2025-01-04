@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 22:06:38 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 01:30:53 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	init_player(t_params *param, t_player *playerrr)
 	playerrr->pv = mlx_new_image(param->graph->mlx, PV_HEIGHT, PV_WIDTH);
 	if (!playerrr->pv)
 		clear_prog(param, 1, "can't load image\n");
-	p = get_player(param->map);
-	pos = hidenseek(param->map);
+	p = get_player(param->u_map);
+	pos = hidenseek(param->u_map);
 	playerrr->fov = 60 * (M_PI / 180);
 	playerrr->posx = (pos[1] * TILE_SIZE) - TILE_SIZE / 2;
 	playerrr->posy = (pos[0] * TILE_SIZE) - TILE_SIZE / 2;
 	playerrr->rotspeed = 0.02;
 	playerrr->movespeed = 4.5;
-	param->map_width = ft_strlen(param->map[0]);
-	param->map_height = map_size(param->map);
+	param->map_width = ft_strlen(param->u_map[0]);
+	param->map_height = map_size(param->u_map);
 	if (p == 'N')
 		playerrr->angle = 3 * M_PI / 2;
 	else if (p == 'S')
@@ -74,5 +74,4 @@ int	main(int ac, char **av)
 	put_txtr(playerr->pv, params->frames_t[0]);
 	mlx_set_cursor_mode(graph->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(graph->mlx);
-	// exit(0);
 }

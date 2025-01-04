@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 00:48:56 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 23:03:08 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_is_door(t_params *params, double x, double y)
 		|| gridx >= (params->w_width / TILE_SIZE)
 		|| gridy >= (params->w_height / TILE_SIZE))
 		return ;
-	if (params->map[gridy][gridx] == 'D')
+	if (params->u_map[gridy][gridx] == 'D')
 		params->is_door = 1;
 }
 
@@ -46,9 +46,9 @@ int	is_wall(t_player *player, t_dda *data, int isvert)
 		|| gridx >= (player->params->w_width / TILE_SIZE)
 		|| gridy >= (player->params->w_height / TILE_SIZE))
 		return (1);
-	if (player->params->map[gridy][gridx] == '1')
+	if (player->params->u_map[gridy][gridx] == '1')
 		return (1);
-	if (player->params->map[gridy][gridx] == 'D')
+	if (player->params->u_map[gridy][gridx] == 'D')
 		return (data->isdoor = 1, 1);
 	return (0);
 }

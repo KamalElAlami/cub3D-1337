@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 01:16:11 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 01:28:37 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_sheet(char *path, t_params *param)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		ft_store_data(param, line);
+		ft_store_data(param, ft_strtrim(line, " "));
 		if (is_map_ready(line))
 			break ;
 		line = get_next_line(fd);

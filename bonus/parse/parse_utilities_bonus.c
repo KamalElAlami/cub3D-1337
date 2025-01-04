@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utilities_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 21:47:07 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 01:10:24 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_store_rgb_norm(t_params *p, char **degits)
 
 	i = 0;
 	while (degits[i])
-		if (check_rgb(degits[i++], 1))
+		if (check_rgb(ft_strtrim(degits[i++], " "), 1))
 			clear_prog(p, 1, "rgb error\n");
 	if (i != 3)
 		clear_prog(p, 1, "rgb error\n");

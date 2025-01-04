@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 00:36:43 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/03 23:00:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	wall_coal(t_player *player, double x, double y)
 	if (i < 0 || j < 0 || i >= player->params->w_width
 		|| j >= player->params->w_height)
 		return (1);
-	if (player->params->map[j / TILE_SIZE][i / TILE_SIZE] == '1'
-		|| player->params->map[(j + radius) / TILE_SIZE]
+	if (player->params->u_map[j / TILE_SIZE][i / TILE_SIZE] == '1'
+		|| player->params->u_map[(j + radius) / TILE_SIZE]
 		[(i + radius) / TILE_SIZE] == '1'
-		|| player->params->map[(j + radius) / TILE_SIZE]
+		|| player->params->u_map[(j + radius) / TILE_SIZE]
 		[(i - radius) / TILE_SIZE] == '1'
-		|| player->params->map[(j - radius) / TILE_SIZE]
+		|| player->params->u_map[(j - radius) / TILE_SIZE]
 		[(i + radius) / TILE_SIZE] == '1'
-		|| player->params->map[(j - radius) / TILE_SIZE]
+		|| player->params->u_map[(j - radius) / TILE_SIZE]
 		[(i - radius) / TILE_SIZE] == '1')
 		return (1);
 	return (0);
