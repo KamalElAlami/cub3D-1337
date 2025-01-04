@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:42:42 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/04 13:12:57 by kael-ala         ###   ########.fr       */
+/*   Updated: 2025/01/04 22:39:48 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ unsigned int	whichcolor(t_player *player, int x, int y)
 		return (0x000000FF);
 	else
 		return (0xFEEAD3FF);
+}
+
+static void ft_mlx_put_pixel(mlx_image_t *image, int x, int y, uint32_t color)
+{
+	if (x > MINI_MAP || y > MINI_MAP)
+		return ;
+	mlx_put_pixel(image, x , y, color);
 }
 
 void	draw_player(t_player *p, t_minimap *mini)
@@ -33,7 +40,7 @@ void	draw_player(t_player *p, t_minimap *mini)
 		y = 0;
 		while (y <= radius)
 		{
-			mlx_put_pixel(p->params->graph->minimap, (mini->posx - mini->startx)
+			ft_mlx_put_pixel(p->params->graph->minimap, (mini->posx - mini->startx)
 				+ x, (mini->posy - mini->starty) + y, 0xFF0000FF);
 			y++;
 		}
@@ -71,10 +78,11 @@ void	init_minimap(t_minimap *mini, t_player *player)
 	}
 }
 
+
 void	mini_map(void *player)
 {
 	t_minimap		*mini;
-	unsigned int	color;
+	unsigned int	color = 0;
 	t_player		*p;
 	int				x;
 	int				y;
@@ -90,7 +98,7 @@ void	mini_map(void *player)
 		while (x < mini->endx)
 		{
 			color = whichcolor(p, x / MINI_SCALE, y / MINI_SCALE);
-			mlx_put_pixel(p->params->graph->minimap,
+			ft_mlx_put_pixel(p->params->graph->minimap,
 				x - mini->startx, y - mini->starty, color);
 			x++;
 		}

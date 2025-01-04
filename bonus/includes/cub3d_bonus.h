@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 01:30:18 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 22:33:30 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define WINDOW_HEIGHT 720
 # define PV_WIDTH 500
 # define PV_HEIGHT 500
-# define MINI_SCALE 30
+# define MINI_SCALE 40
 # define MINI_MAP 200	
 
 typedef struct s_minimap
@@ -88,8 +88,6 @@ typedef struct s_params
 	int				ciel[3];
 	int				floor[3];
 	char			**map;
-	int				map_width;
-	int				map_height;
 	char			**u_map;
 	int				w_width;
 	int				w_height;

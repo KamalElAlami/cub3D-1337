@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 22:19:10 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/31 12:44:46 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 17:41:49 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**free2darray(char **strs)
-{
-	int	i;
+// static char	**free2darray(char **strs)
+// {
+// 	int	i;
 
-	i = 0;
-	while (strs[i])
-		free(strs[i++]);
-	free(strs);
-	return (NULL);
-}
+// 	i = 0;
+// 	while (strs[i++])
+// 		// free(strs[i++]);
+// 	// free(strs);
+// 	return (NULL);
+// }
 
 static int	count_words(char const *s, char c)
 {
@@ -62,7 +62,7 @@ static char	**spl_stuck(char const *s, char c, char **strs)
 		{
 			strs[k] = ft_substr(s, j, i - j);
 			if (!strs[k])
-				return (free2darray(strs));
+				return (/*free2darray(strs)*/NULL);
 			k++;
 		}
 	}

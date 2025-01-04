@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 00:39:42 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 17:10:35 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ int	ft_check_data(t_params *p)
 {
 	if (p->c != 1 || p->f != 1 || p->no != 1
 		|| p->ea != 1 || p->we != 1 || p->so != 1)
-		return (write(2, "map data error\n", 15), 1);
+		clear_prog(p, 1, "map data error\n");
 	if (!p->north || !p->so || !p->east || !p->west)
-		return (write(2, "textures needed\n", 16), 1);
+		clear_prog(p, 1, "textures needed\n");
 	if (p->ciel[0] < 0 || p->ciel[0] > 255 || p->ciel[1] < 0
 		|| p->ciel[1] > 255 || p->ciel[2] < 0 || p->ciel[2] > 255)
-		return (write(1, "Something is wrong with ciel RGB Colors\n", 42), 1);
+		clear_prog(p, 1, "Something is wrong with ciel RGB Colors\n");
 	if (p->floor[0] < 0 || p->floor[0] > 255 || p->floor[1] < 0
 		|| p->floor[1] > 255 || p->floor[2] < 0 || p->floor[2] > 255)
-		return (write(1, "Something is wrong with Floor RGB Colors\n", 42), 1);
+		clear_prog(p, 1, "Something is wrong with Floor RGB Colors\n");
 	return (0);
 }
 
@@ -99,7 +99,7 @@ int	check_sheet(char *path, t_params *param)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (write(2, "fail to open fd", 15), 1);
+		clear_prog(param, 1, "fail to open fd");
 	line = get_next_line(fd);
 	while (line)
 	{

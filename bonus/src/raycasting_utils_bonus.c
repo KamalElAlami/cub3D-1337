@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 23:03:08 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 22:30:36 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_is_door(t_params *params, double x, double y)
 		|| gridx >= (params->w_width / TILE_SIZE)
 		|| gridy >= (params->w_height / TILE_SIZE))
 		return ;
-	if (params->u_map[gridy][gridx] == 'D')
+	if (params->map[gridy][gridx] == 'D')
 		params->is_door = 1;
 }
 

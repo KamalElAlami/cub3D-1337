@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:32:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/24 08:07:46 by kael-ala         ###   ########.fr       */
+/*   Updated: 2025/01/04 22:40:11 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_wall(t_params *params, double x, double y)
 		|| gridx >= (params->w_width / TILE_SIZE)
 		|| gridy >= (params->w_height / TILE_SIZE))
 		return (1);
-	if (params->map[gridy][gridx] == '1')
+	if (params->u_map[gridy][gridx] == '1')
 		return (1);
 	return (0);
 }

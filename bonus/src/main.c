@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 01:30:53 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/04 22:34:36 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ void	init_player(t_params *param, t_player *playerrr)
 	playerrr->pv = mlx_new_image(param->graph->mlx, PV_HEIGHT, PV_WIDTH);
 	if (!playerrr->pv)
 		clear_prog(param, 1, "can't load image\n");
-	p = get_player(param->u_map);
-	pos = hidenseek(param->u_map);
+	p = get_player(param->map);
+	pos = hidenseek(param->map);
 	playerrr->fov = 60 * (M_PI / 180);
 	playerrr->posx = (pos[1] * TILE_SIZE) - TILE_SIZE / 2;
 	playerrr->posy = (pos[0] * TILE_SIZE) - TILE_SIZE / 2;
 	playerrr->rotspeed = 0.02;
 	playerrr->movespeed = 4.5;
-	param->map_width = ft_strlen(param->u_map[0]);
-	param->map_height = map_size(param->u_map);
 	if (p == 'N')
 		playerrr->angle = 3 * M_PI / 2;
 	else if (p == 'S')
