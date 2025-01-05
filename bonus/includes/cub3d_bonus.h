@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 22:33:30 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:54:10 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_player	t_player;
 
 typedef struct s_params
 {
+	int				fd;
 	char			*north;
 	int				no;
 	char			*south;

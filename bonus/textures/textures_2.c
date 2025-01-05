@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:23:41 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/04 22:39:24 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:43:52 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ void	open_close_door(void *player)
 	j = p->posx / TILE_SIZE;
 	if (j > 0 && p->params->map[i][j - 1] == 'D')
 		p->params->map[i][j - 1] = 'O';
-	if (j < (p->params->w_width  / TILE_SIZE) - 1 && p->params->map[i][j + 1] == 'D')
+	if (j < (p->params->w_width / TILE_SIZE)
+		- 1 && p->params->map[i][j + 1] == 'D')
 		p->params->map[i][j + 1] = 'O';
 	if (i > 0 && p->params->map[i - 1][j] == 'D')
 		p->params->map[i - 1][j] = 'O';
-	if (i < (p->params->w_height / TILE_SIZE) - 1 && p->params->map[i + 1][j] == 'D')
+	if (i < (p->params->w_height / TILE_SIZE)
+		- 1 && p->params->map[i + 1][j] == 'D')
 		p->params->map[i + 1][j] = 'O';
 	close_door(player, i, j);
 }

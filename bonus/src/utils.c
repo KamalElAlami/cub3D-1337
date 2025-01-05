@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:27:05 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/04 21:13:24 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:55:15 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	clear_prog(t_params *p, int status, char *err)
 		mlx_delete_image(p->graph->mlx, p->graph->img);
 	if (p->graph->mlx)
 		mlx_close_window(p->graph->mlx);
+	close(p->fd);
 	ft_malloc(0, CLEAR_END);
 	exit (status);
 }

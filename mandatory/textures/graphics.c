@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 17:33:26 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:52:50 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 {
 	int	*size;
 
-	size = get_size(para->map);
+	size = get_size(para->u_map);
 	para->w_width = size[0] * TILE_SIZE;
 	para->w_height = size[1] * TILE_SIZE;
 	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "New Window", true);
@@ -45,6 +45,7 @@ void	clear_prog(t_params *p, int status, char *err)
 		mlx_delete_image(p->graph->mlx, p->graph->img);
 	if (p->graph->mlx)
 		mlx_close_window(p->graph->mlx);
+	close(p->fd);
 	ft_malloc(0, CLEAR_END);
 	exit (status);
 }

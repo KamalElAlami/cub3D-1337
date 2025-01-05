@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:42:42 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/04 22:39:48 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:44:55 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ unsigned int	whichcolor(t_player *player, int x, int y)
 		return (0xFEEAD3FF);
 }
 
-static void ft_mlx_put_pixel(mlx_image_t *image, int x, int y, uint32_t color)
+static void	ft_mlx_put_pixel(mlx_image_t *image, int x, int y, uint32_t color)
 {
 	if (x > MINI_MAP || y > MINI_MAP)
 		return ;
-	mlx_put_pixel(image, x , y, color);
+	mlx_put_pixel(image, x, y, color);
 }
 
 void	draw_player(t_player *p, t_minimap *mini)
@@ -40,8 +40,9 @@ void	draw_player(t_player *p, t_minimap *mini)
 		y = 0;
 		while (y <= radius)
 		{
-			ft_mlx_put_pixel(p->params->graph->minimap, (mini->posx - mini->startx)
-				+ x, (mini->posy - mini->starty) + y, 0xFF0000FF);
+			ft_mlx_put_pixel(p->params->graph->minimap,
+				(mini->posx - mini->startx) + x,
+				(mini->posy - mini->starty) + y, 0xFF0000FF);
 			y++;
 		}
 		x++;
@@ -71,22 +72,21 @@ void	init_minimap(t_minimap *mini, t_player *player)
 	}
 	else
 	{
-		mini->startx = 0;
-		mini->starty = 0;
+		(1) && (mini->startx = 0, mini->starty = 0);
 		mini->endx = mini->w_width;
 		mini->endy = mini->w_height;
 	}
 }
 
-
 void	mini_map(void *player)
 {
 	t_minimap		*mini;
-	unsigned int	color = 0;
+	unsigned int	color;
 	t_player		*p;
 	int				x;
 	int				y;
 
+	color = 0;
 	p = (t_player *)player;
 	mini = ft_malloc(sizeof(t_minimap), END);
 	init_minimap(mini, p);

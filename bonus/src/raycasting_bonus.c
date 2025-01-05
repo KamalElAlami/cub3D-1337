@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 13:30:38 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 20:47:06 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 16:06:34 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_rays	*fill_ray(t_player *player, double rayangle, t_dda *data, int isvert)
 {
 	t_rays		*temp;
 
-	temp = malloc(sizeof(t_rays));
+	temp = ft_malloc(sizeof(t_rays), END);
 	temp->rayangle = rayangle;
 	temp->hitx = data->xinter;
 	temp->hity = data->yinter;

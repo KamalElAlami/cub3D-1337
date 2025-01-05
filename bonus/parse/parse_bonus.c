@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 03:29:40 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 17:07:18 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:54:44 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,12 @@ int	ft_check_data(t_params *p)
 
 int	check_sheet(char *path, t_params *param)
 {
-	int		fd;
 	char	*line;
 
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
+	param->fd = open(path, O_RDONLY);
+	if (param->fd == -1)
 		clear_prog(param, 1, "fail to open fd\n");
-	line = get_next_line(fd);
+	line = get_next_line(param->fd);
 	while (line)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -108,11 +107,11 @@ int	check_sheet(char *path, t_params *param)
 		ft_store_data(param, ft_strtrim(line, " "));
 		if (is_map_ready(line))
 			break ;
-		line = get_next_line(fd);
+		line = get_next_line(param->fd);
 	}
 	if (ft_check_data(param))
 		return (1);
-	if (fill_map(param, fd, line))
+	if (fill_map(param, param->fd, line))
 		return (1);
 	return (0);
 }

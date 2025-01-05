@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_control.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:00:20 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/12/31 21:31:59 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:36:29 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	wall_coal(t_player *player, double x, double y)
 		|| j >= player->params->w_height)
 		return (1);
 	if (player->params->map[j / TILE_SIZE][i / TILE_SIZE] == '1'
-		|| player->params->map[(j + radius) / TILE_SIZE]
+		|| player->params->u_map[(j + radius) / TILE_SIZE]
 		[(i + radius) / TILE_SIZE] == '1'
-		|| player->params->map[(j + radius) / TILE_SIZE]
+		|| player->params->u_map[(j + radius) / TILE_SIZE]
 		[(i - radius) / TILE_SIZE] == '1'
-		|| player->params->map[(j - radius) / TILE_SIZE]
+		|| player->params->u_map[(j - radius) / TILE_SIZE]
 		[(i + radius) / TILE_SIZE] == '1'
-		|| player->params->map[(j - radius) / TILE_SIZE]
+		|| player->params->u_map[(j - radius) / TILE_SIZE]
 		[(i - radius) / TILE_SIZE] == '1')
 		return (1);
 	return (0);

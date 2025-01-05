@@ -6,14 +6,14 @@
 #    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2025/01/04 22:04:22 by sarif            ###   ########.fr        #
+#    Updated: 2025/01/05 15:48:00 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 BNAME = cub3D_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 # MLX42
 MLX42_PATH = ./MLX42

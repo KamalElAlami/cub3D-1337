@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 17:10:09 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:47:47 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@ void	init_player(t_params *param, t_player *playerrr)
 	else if (p == 'E')
 		playerrr->angle = 0;
 }
-
+void f()
+{
+	system("leaks cub3D");
+}
 int	main(int ac, char **av)
 {
 	t_params	*params;
 	t_graphics	*graph;
 	t_player	*playerr;
 
+	atexit(f);
 	params = ft_malloc(sizeof(t_params), END);
 	graph = ft_malloc(sizeof(t_graphics), END);
 	playerr = ft_malloc(sizeof(t_player), END);
