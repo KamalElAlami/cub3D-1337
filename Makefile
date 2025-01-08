@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarif <sarif@student.42.fr>                +#+  +:+       +#+         #
+#    By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2025/01/05 15:48:00 by sarif            ###   ########.fr        #
+#    Updated: 2025/01/07 23:15:26 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 
 # Libraries
-LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
-#LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L /opt/homebrew/Cellar/glfw/3.4/lib/
+# LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
+LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L /opt/homebrew/Cellar/glfw/3.4/lib/
 
 all: $(NAME) 
 

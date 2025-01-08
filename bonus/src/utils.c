@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:27:05 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/05 15:55:15 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/08 01:07:13 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	clear_prog(t_params *p, int status, char *err)
 		if (*p->frames_t && p->frames_t[i])
 			mlx_delete_texture(p->frames_t[i]);
 	if (err)
+	{
+		write(2, "Error\n", 6);
 		write(2, err, ft_strlen(err));
+	}
 	clear_prog_norm(p);
 	if (p->player->pv)
 		mlx_delete_image(p->graph->mlx, p->player->pv);

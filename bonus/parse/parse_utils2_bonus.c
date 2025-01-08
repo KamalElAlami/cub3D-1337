@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 03:20:19 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/01 17:48:45 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/08 01:21:20 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ int	map_size(char **map)
 	return (i);
 }
 
+static int	check_d(int j, int i, t_params *p)
+{
+	if (p->u_map[j][i] == '0' || p->u_map[j][i] == 'D')
+		return (1);
+	return (0);
+}
+
 void	check_map_validity(t_params *p)
 {
 	int	i;
@@ -82,16 +89,16 @@ void	check_map_validity(t_params *p)
 		i = -1;
 		while (p->u_map[j][++i])
 		{
-			if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1)) &&
-				(p->u_map[j][i + 1] == 32 || p->u_map[j][i + 1] == 0))
+			if ((check_d(j, i, p) || is_player(p, p->u_map[j][i], 1))
+				&& (p->u_map[j][i + 1] == 32 || p->u_map[j][i + 1] == 0))
 				clear_prog(p, 1, "map invalid\n");
-			else if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1))
+			else if ((check_d(j, i, p) || is_player(p, p->u_map[j][i], 1))
 				&& (i == 0 || p->u_map[j][i - 1] == 32))
 				clear_prog(p, 1, "map invalid\n");
-			else if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1))
+			else if ((check_d(j, i, p) || is_player(p, p->u_map[j][i], 1))
 				&& (j == 0 || p->u_map[j - 1][i] == 32))
 				clear_prog(p, 1, "map invalid\n");
-			else if ((p->u_map[j][i] == '0' || is_player(p, p->u_map[j][i], 1))
+			else if ((check_d(j, i, p) || is_player(p, p->u_map[j][i], 1))
 				&& (j == map_size(p->u_map) - 1 || p->u_map[j + 1][i] == 32))
 				clear_prog(p, 1, "map invalid\n");
 		}

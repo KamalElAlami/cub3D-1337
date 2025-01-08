@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/05 16:04:56 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/07 23:12:32 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,13 @@ void	ft_loop_hook(mlx_t *mlx, t_player *player)
 	mlx_loop_hook(mlx, mini_map, player);
 	mlx_loop_hook(mlx, open_close_door, player);
 }
-void f()
-{
-	system("leaks cub3D_bonus > out");
-}
+
 int	main(int ac, char **av)
 {
 	t_params	*params;
 	t_graphics	*graph;
 	t_player	*playerr;
 
-	atexit(f);
 	params = ft_malloc(sizeof(t_params), END);
 	graph = ft_malloc(sizeof(t_graphics), END);
 	playerr = ft_malloc(sizeof(t_player), END);

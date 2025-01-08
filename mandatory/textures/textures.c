@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 03:40:14 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/03 22:02:50 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/08 01:12:07 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static mlx_texture_t	*which_texture(t_player *player)
 	}
 	else
 	{
-		if (cos(player->ray->rayangle) < 0)
+		if (cos(player->ray->rayangle) > 0)
 			tex = player->params->t_ea;
 		else
 			tex = player->params->t_we;
@@ -62,25 +62,23 @@ static unsigned int	get_color_tex(t_player *player, mlx_texture_t *tex,
 	unsigned int	y_offset;
 	unsigned int	position;
 	unsigned int	test;
-	int				y_top;
+	int				scal_x;
 
+	scal_x = tex->width / TILE_SIZE;
 	if (player->ray->is_vertical)
-		x_offset = (int)player->ray->hity % TILE_SIZE;
+		x_offset = ((int)player->ray->hity % TILE_SIZE) * scal_x;
 	else
-		x_offset = (int)player->ray->hitx % TILE_SIZE;
+		x_offset = ((int)player->ray->hitx % TILE_SIZE) * scal_x;
 	test = 0;
-	if (y >= 0 && y < WINDOW_HEIGHT)
-	{
-		y_top = y + (wallheight / 2) - (WINDOW_HEIGHT / 2);
-		y_offset = y_top * ((double)tex->height / wallheight);
-		position = (y_offset * tex->width * tex->bytes_per_pixel)
-			+ (x_offset * tex->bytes_per_pixel);
-		if (position < 0 || position >= tex->width * tex->height * 4)
-			test = 0;
-		else
-			test = tex->pixels[position] << 24 | tex->pixels[position + 1] << 16
-				| tex->pixels[position + 2] << 8 | tex->pixels[position + 3];
-	}
+	y_offset = ((y + ((double)wallheight / 2.0) - (WINDOW_HEIGHT / 2.0))
+			* ((double)tex->height / wallheight));
+	position = (y_offset * tex->width * tex->bytes_per_pixel)
+		+ (x_offset * tex->bytes_per_pixel);
+	if (position < 0 || position >= tex->width * tex->height * 4)
+		test = 0;
+	else
+		test = tex->pixels[position] << 24 | tex->pixels[position + 1] << 16
+			| tex->pixels[position + 2] << 8 | tex->pixels[position + 3];
 	return (test);
 }
 

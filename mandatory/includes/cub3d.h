@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/05 15:51:56 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/08 00:59:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int			check_map(char **map);
 int			validate_inputs(t_params *params);
 int			check_sheet(char *path, t_params *param);
 //soufiix
-void		ft_store_data(t_params *param, char *line);
+void		ft_store_data(t_params *param, char *line, int len);
 void		ft_init_data(t_params *param);
 void		ft_store_rgb(t_params *p, char *line);
 int			check_rgb(char *line, int flag);

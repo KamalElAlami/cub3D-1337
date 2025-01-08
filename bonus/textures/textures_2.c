@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 00:23:41 by sarif             #+#    #+#             */
-/*   Updated: 2025/01/05 15:43:52 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/06 21:14:29 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ void	close_door(t_player *player, int player_y, int player_x)
 	float		distance;
 
 	(1) && (i = -1, close_distance = 2.0, p = (t_player *)player);
-	while (p->params->map[++i])
+	while (p->params->u_map[++i])
 	{
 		j = -1;
-		while (p->params->map[i][++j])
+		while (p->params->u_map[i][++j])
 		{
-			if (p->params->map[i][j] == 'O')
+			if (p->params->u_map[i][j] == 'O')
 			{
 				distance = sqrt(pow(player_x - j, 2) + pow(player_y - i, 2));
 				if (distance > close_distance)
-					p->params->map[i][j] = 'D';
+					p->params->u_map[i][j] = 'D';
 			}
 		}
 	}
@@ -67,15 +67,15 @@ void	open_close_door(void *player)
 	p = (t_player *)player;
 	i = p->posy / TILE_SIZE;
 	j = p->posx / TILE_SIZE;
-	if (j > 0 && p->params->map[i][j - 1] == 'D')
-		p->params->map[i][j - 1] = 'O';
+	if (j > 0 && p->params->u_map[i][j - 1] == 'D')
+		p->params->u_map[i][j - 1] = 'O';
 	if (j < (p->params->w_width / TILE_SIZE)
-		- 1 && p->params->map[i][j + 1] == 'D')
-		p->params->map[i][j + 1] = 'O';
-	if (i > 0 && p->params->map[i - 1][j] == 'D')
-		p->params->map[i - 1][j] = 'O';
+		- 1 && p->params->u_map[i][j + 1] == 'D')
+		p->params->u_map[i][j + 1] = 'O';
+	if (i > 0 && p->params->u_map[i - 1][j] == 'D')
+		p->params->u_map[i - 1][j] = 'O';
 	if (i < (p->params->w_height / TILE_SIZE)
-		- 1 && p->params->map[i + 1][j] == 'D')
-		p->params->map[i + 1][j] = 'O';
+		- 1 && p->params->u_map[i + 1][j] == 'D')
+		p->params->u_map[i + 1][j] = 'O';
 	close_door(player, i, j);
 }

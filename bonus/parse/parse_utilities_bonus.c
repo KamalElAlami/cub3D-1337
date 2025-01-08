@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 21:06:51 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 01:10:24 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/08 01:06:37 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ void	ft_store_rgb(t_params *p, char *line)
 	}
 }
 
-void	ft_store_data(t_params *p, char *line)
+void	ft_store_data(t_params *p, char *line, int len)
 {
-	line = ft_strtrim(line, " ");
+	if (len > 0 && ft_strlen(line) == 0)
+		clear_prog(p, 1, "no empty line between map data\n");
 	if (!ft_strncmp(line, "NO ", 3) && ++p->no == 1)
 		p->north = ft_strdup_gb(line + ft_avoid(line + 3));
 	else if (!ft_strncmp(line, "SO ", 3) && ++p->so)

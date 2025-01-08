@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/05 15:52:50 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/08 01:03:40 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 void	clear_prog(t_params *p, int status, char *err)
 {
 	if (err)
+	{
+		write(2, "Error\n", 6);
 		write(2, err, ft_strlen(err));
+	}
 	if (p->t_no)
 		mlx_delete_texture(p->t_no);
 	if (p->t_so)
