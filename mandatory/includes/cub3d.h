@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 02:26:06 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/08 00:59:45 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:34:19 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,7 @@ typedef struct s_looking
 
 // parse 
 int			check_path(char *path);
-int			is_map(char *line);
-int			get_map_size(char *path);
-void		stock_map(char *path, t_params **parameters);
-int			check_player(char *line, int *player);
 int			map_size(char **map);
-int			check_map(char **map);
-int			validate_inputs(t_params *params);
 int			check_sheet(char *path, t_params *param);
 //soufiix
 void		ft_store_data(t_params *param, char *line, int len);

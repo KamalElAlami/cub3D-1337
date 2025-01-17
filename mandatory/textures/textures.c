@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 03:40:14 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/08 01:12:07 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:27:03 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	render_wall(t_player *player, int x)
 	double	bot;
 	int		y;
 
-	playerdist = (player->params->w_width / 2) / tan(player->fov / 2) / 1.5;
+	playerdist = 1000;
 	wallheight = (TILE_SIZE * playerdist) / player->ray->distance;
 	top = (WINDOW_HEIGHT - wallheight) / 2;
 	bot = top + wallheight;
