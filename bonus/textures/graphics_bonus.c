@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarif <sarif@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/04 22:16:43 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:41:45 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 	size = get_size(para->u_map);
 	para->w_width = size[0] * TILE_SIZE;
 	para->w_height = size[1] * TILE_SIZE;
-	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "New Window", true);
+	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D_Bonus", true);
 	graphics->img = mlx_new_image(graphics->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	graphics->minimap = mlx_new_image(graphics->mlx, 200, 200);
 	(1) && (para->t_no = NULL, para->t_so = NULL, para->t_ea = NULL,

@@ -6,7 +6,7 @@
 /*   By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 21:57:37 by kael-ala          #+#    #+#             */
-/*   Updated: 2025/01/08 01:03:40 by sarif            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:41:29 by sarif            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	initialize_graphics(t_graphics *graphics, t_params *para)
 	size = get_size(para->u_map);
 	para->w_width = size[0] * TILE_SIZE;
 	para->w_height = size[1] * TILE_SIZE;
-	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "New Window", true);
+	graphics->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
 	graphics->img = mlx_new_image(graphics->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	para->t_no = mlx_load_png(para->north);
 	para->t_so = mlx_load_png(para->south);
