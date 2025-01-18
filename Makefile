@@ -6,14 +6,14 @@
 #    By: sarif <sarif@student.1337.ma>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 03:44:02 by kael-ala          #+#    #+#              #
-#    Updated: 2025/01/07 23:15:26 by sarif            ###   ########.fr        #
+#    Updated: 2025/01/18 17:37:04 by sarif            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 BNAME = cub3D_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 # MLX42
 MLX42_PATH = ./MLX42
@@ -45,7 +45,7 @@ BOBJS = $(BSRCS:.c=.o)
 # LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L ~/.brew/Cellar/glfw/3.4/lib/
 LIBS = $(MLX42_LIB) $(LIBFT) -lglfw -L /opt/homebrew/Cellar/glfw/3.4/lib/
 
-all: $(NAME) 
+all: $(NAME) $(LIBFT)
 
 $(NAME): $(MLX42_LIB) $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
